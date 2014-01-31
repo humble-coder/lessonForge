@@ -1,5 +1,5 @@
 # For more information see: http://emberjs.com/guides/routing/
 
-LessonForge.Router.map ()->
+App.Router.map ()->
   # @resource('posts')
 
