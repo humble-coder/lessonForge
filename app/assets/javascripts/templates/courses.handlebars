@@ -1,0 +1,11 @@
+<h1>Courses</h1>
+
+<ul>
+  {{#each controller}}
+    <li>{{#link-to "course" this}}{{name}}{{/link-to}}</li>
+  {{else}}
+    <li>There are no courses.</li>
+  {{/each}}
+</ul>
+
+{{outlet}}
