@@ -1,4 +1,5 @@
 class Api::V1::CoursesController < ApplicationController
+	respond_to :json
 
 	def index
 		render json: Course.all, each_serializer: CourseSerializer
@@ -9,7 +10,7 @@ class Api::V1::CoursesController < ApplicationController
 	end
 
 	def create
-		respond_with Course.create(course_params)
+		render json: Course.create(course_params)
 	end
 
 	def update

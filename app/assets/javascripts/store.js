@@ -1,10 +1,11 @@
 // http://emberjs.com/guides/models/using-the-store/
-
-DS.RESTAdapter.reopen({
+DS.ActiveModelAdapter.reopen({
 	namespace: "api/v1"
 });
 
-App.ApplicationAdapter = DS.RESTAdapter;
+App.Store = DS.Store.extend({
+
+	adapter: '-active-model'
+});
   // Override the default adapter with the `DS.ActiveModelAdapter` which
   // is built to work nicely with the ActiveModel::Serializers gem.
-  adapter: '_ams'

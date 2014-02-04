@@ -2,5 +2,6 @@
 App.Router.map(function() {
 	this.resource("courses", function() {
 		this.resource("course", { path: ":course_id" });
+		this.route('new');
 	});
 });

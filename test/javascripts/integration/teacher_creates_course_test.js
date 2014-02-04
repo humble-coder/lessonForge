@@ -8,7 +8,7 @@ test("successfully", function(){
 	expect(3);
 
 	visit('/').then(function() {
-		ok(exists("Create Course"), "The create-course button was found.");
+		ok(exists("Create Course"), "The create-course link was found.");
 		return click("Create Course");
 	}).then(function() {
 		fillIn("Course Name", "A new course");
