@@ -1,6 +1,11 @@
 LessonForge::Application.routes.draw do
-  root :to => 'assets#index'
-  get "assets/index"
+  namespace :api do
+    namespace :v1 do
+      resources :courses
+    end
+  end
+
+  root "assets#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -56,3 +61,4 @@ LessonForge::Application.routes.draw do
   #     resources :products
   #   end
 end
+

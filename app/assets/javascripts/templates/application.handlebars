@@ -1,1 +1,13 @@
+<header id="header">
+  <h2>{{#link-to "index"}}Home{{/link-to}}</h2>
 
+  <nav>
+    <ul>
+      {{#link-to "courses" id="courses"}}Courses{{/link-to}}
+    </ul>
+  </nav>
+</header>
+
+<div id="content">
+  {{outlet}}
+</div>
