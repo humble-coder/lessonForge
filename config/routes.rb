@@ -1,9 +1,5 @@
 LessonForge::Application.routes.draw do
-  namespace :api do
-    namespace :v1 do
-      resources :courses
-    end
-  end
+  resources :courses
 
   root "assets#index"
   # The priority is based upon order of creation: first created -> highest priority.
