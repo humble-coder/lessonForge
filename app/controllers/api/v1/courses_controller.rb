@@ -15,13 +15,19 @@ class Api::V1::CoursesController < ApplicationController
 		if course.save
 			render json: course
 		else
-			render json: {errors: course.errors.messages}, status: 422
+			render json: course.errors, status: 422
 		end
-		#render json: Course.create(course_params)
 	end
 
 	def update
-		render json: Course.find(params[:id])
+		course = Course.find(params[:id])
+
+		if course.update_attributes(course_params)
+			render json: course, status: :ok
+		else
+			render json: course.errors, status: 422
+		end
+
 	end
 
 	def destroy
@@ -33,5 +39,4 @@ class Api::V1::CoursesController < ApplicationController
 	def course_params
 		params.require(:course).permit(:name)
 	end
-
 end

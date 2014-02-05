@@ -33,7 +33,8 @@ group :doc do
 end
 
 group :development, :test do
-	gem "qunit-rails"
+	gem 'qunit-rails'
+	gem 'database_cleaner'
 end
 
 
