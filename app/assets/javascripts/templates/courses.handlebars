@@ -2,12 +2,14 @@
 
 <ul>
   {{#each controller}}
-    <li>{{#link-to "course" this}}{{name}}{{/link-to}}</li>
+  	{{#if name}}
+    	<li class="course-link">{{#link-to "course" this}}{{name}}{{/link-to}}</li>
+  	{{/if}}
   {{else}}
     <li>There are no courses.</li>
   {{/each}}
 </ul>
 
-{{#link-to "courses.new"}}Create a Course{{/link-to}}
+{{#link-to "courses.new" id="new-course"}}Create a Course{{/link-to}}
 
 {{outlet}}

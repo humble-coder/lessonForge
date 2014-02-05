@@ -4,7 +4,6 @@ DS.ActiveModelAdapter.reopen({
 });
 
 App.Store = DS.Store.extend({
-
 	adapter: '-active-model'
 });
   // Override the default adapter with the `DS.ActiveModelAdapter` which

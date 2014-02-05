@@ -10,11 +10,18 @@ class Api::V1::CoursesController < ApplicationController
 	end
 
 	def create
-		render json: Course.create(course_params)
+		course = Course.new(course_params)
+
+		if course.save
+			render json: course
+		else
+			render json: {errors: course.errors.messages}, status: 422
+		end
+		#render json: Course.create(course_params)
 	end
 
 	def update
-		respond_with Course.update(params[:id], course_params)
+		render json: Course.find(params[:id])
 	end
 
 	def destroy

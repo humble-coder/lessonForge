@@ -5,16 +5,30 @@ module("Teacher creates course", {
 });
 
 test("successfully", function(){
-	expect(3);
+	expect(5);
 
 	visit('/').then(function() {
-		ok(exists("Create Course"), "The create-course link was found.");
-		return click("Create Course");
-	}).then(function() {
-		fillIn("Course Name", "A new course");
-		equal(find("Course Name").val(), "A new course", "Found Course Name field");
-		return click("Save Course");
-	}).then(function() {
-		ok(exists("h1:contains('A new course')"), "Name of course is displayed.");
-	})
+		ok(exists("#courses"), "The courses link was found");
+		click("#courses");
+		andThen(function() {
+			ok(exists("#new-course"), "The new-course link was found.");
+			click("#new-course");
+			andThen(function() {
+				fillIn("#new-course-name", "A new course");
+				equal(find("#new-course-name").val(), "A new course", "Found and filled Course name field.");
+				click("#save-course");
+				andThen(function() {
+					ok(exists(".course-link"), "New course added.");
+					ok(find("a:contains('A new course')").length, "A link to the course should display.");
+				});
+			});
+		});
+	});
 });
+
+// test("without a name", function(){
+
+// 	visit('/').then(function() {
+// 		ok(exists)
+// 	})
+// })
