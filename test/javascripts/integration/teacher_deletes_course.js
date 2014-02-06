@@ -9,7 +9,7 @@ module("Teacher deletes course", {
 });
 
 test("successfully", function(){
-	expect(3);
+	expect(2);
 
 	visit('/').then(function() {
 		click("#courses");
@@ -21,11 +21,10 @@ test("successfully", function(){
 				andThen(function() {
 					click("a:contains('Course to Delete')");
 					andThen(function() {
-						ok(exists(".delete-course"), "Course has delete-course link.");
-						click(".delete-course");
+						ok(exists("#delete-course"), "Course has delete-course link.");
+						click("#delete-course");
 						andThen(function() {
-							click(".ok-alert-box");
-							ok(!exists("a:contains('Course to Delete'"), "Course has no link.");
+							ok(!exists("a:contains('Course to Delete')"), "Course has no link.");
 						});
 					});
 				});	

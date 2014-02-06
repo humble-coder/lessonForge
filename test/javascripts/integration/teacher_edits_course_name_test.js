@@ -15,19 +15,19 @@ test("successfully", function(){
 		click("#courses");
 		andThen(function() {
 			click("#new-course");
-			fillIn("#new-course-name", "Another course");
+			fillIn("#new-course-name", "Course to Edit");
 			click("#save-course");
 			andThen(function() {
-				click("a:contains('Another course')");
+				click("a:contains('Course to Edit')");
 				andThen(function() {
 					ok(exists(".edit-course"), "Course has edit-course link.");
 					click(".edit-course");
 					andThen(function() {
-						fillIn("#edit-course-name", "Changed");
+						fillIn("#edit-course-name", "Edited Course");
 						click("#update-course");
 						andThen(function() {
-							ok(find("a:contains('Changed')").length, "Edited course has new link.");
-							ok(find("h1:contains('Changed')").length, "Edited course has new header.");
+							ok(find("a:contains('Edited Course')").length, "Edited course has new link.");
+							ok(find("h1:contains('Edited Course')").length, "Edited course has new header.");
 						});
 					});
 				});	
