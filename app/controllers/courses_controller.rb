@@ -27,11 +27,17 @@ class CoursesController < ApplicationController
 		else
 			render json: course.errors, status: 422
 		end
-
 	end
 
 	def destroy
-		respond_with Course.destroy(params[:id])
+		course = Course.find(params[:id])
+
+		if course.destroy
+			render json: nil, status: :ok
+		else
+			render json: course.errors, status: 422
+		end
+
 	end
 
 	private

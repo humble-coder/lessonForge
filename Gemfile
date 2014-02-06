@@ -35,6 +35,8 @@ end
 group :development, :test do
 	gem 'qunit-rails'
 	gem 'database_cleaner'
+	gem 'rspec-rails'
+  gem 'factory_girl_rails', '~> 4.0'
 end
 
 
@@ -51,6 +53,6 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem "active_model_serializers"
-gem "ember-rails", "~>0.14"
-gem "ember-source", "~>1.1"
+gem "ember-rails" 
+gem "ember-source", "~>1.3.0"
 gem 'sprockets-rails', :require => 'sprockets/railtie'

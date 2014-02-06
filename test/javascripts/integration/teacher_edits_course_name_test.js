@@ -2,6 +2,10 @@ module("Teacher edits course name", {
 	setup: function() {
 		App.reset();
 	}
+
+	// teardown: function() {
+	// 	Ember.run(App, 'destroy');
+	// }
 });
 
 test("successfully", function(){
