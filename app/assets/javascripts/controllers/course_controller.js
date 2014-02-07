@@ -10,4 +10,4 @@ App.CourseController = Ember.ObjectController.extend({
 			}
 		}
 	}
-})
+});

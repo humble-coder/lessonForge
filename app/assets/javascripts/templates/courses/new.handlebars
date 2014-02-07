@@ -2,4 +2,13 @@
 
 {{input type="text" value=name id="new-course-name"}}
 
-<button {{action "save"}} id="save-course">Create</button>
+<button {{action "save" this}} id="save-course">Create</button>
+<br>
+
+{{#if errors.messages}}
+	<div id="name-error">
+	  {{errors.messages}}
+	</div>
+{{/if}}
+
+{{outlet}}
