@@ -30,18 +30,18 @@ test("successfully", function(){
 	});
 });
 
-test("without a name", function(){
+// test("without a name", function(){
 
-	visit('/').then(function() {
-		click("#courses");
-		andThen(function() {
-			click("#new-course");
-			andThen(function() {
-				click("save-course");
-				andThen(function() {
-					ok(exists("#name-error"), "View has
-				})
-			})
-		})
-	})
-})
+// 	visit('/').then(function() {
+// 		click("#courses");
+// 		andThen(function() {
+// 			click("#new-course");
+// 			andThen(function() {
+// 				click("save-course");
+// 				andThen(function() {
+// 					ok(exists("#name-error"), "View has
+// 				})
+// 			})
+// 		})
+// 	})
+// })
