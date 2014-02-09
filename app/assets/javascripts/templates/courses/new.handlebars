@@ -6,11 +6,11 @@
     <br/>
     {{error-field name}}
   {{/input}}
+  {{#if name}}
+  	<button {{action "submit" this}} id="save-course">Create</button>
+  {{/if}}
+  <button {{action "cancel" this}} id="cancel-new">Cancel</button>
 {{/form-for}}
 <br/>
-
-{{#if this.name}}
-	<button {{action "save" this}} id="save-course">Create</button>
-{{/if}}
 
 {{outlet}}

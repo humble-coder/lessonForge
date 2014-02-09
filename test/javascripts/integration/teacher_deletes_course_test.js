@@ -2,10 +2,6 @@ module("Teacher deletes course", {
 	setup: function() {
 		App.reset();
 	}
-
-	// teardown: function() {
-	// 	Ember.run(App, 'destroy');
-	// }
 });
 
 test("successfully", function(){

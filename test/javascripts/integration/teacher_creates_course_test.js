@@ -2,10 +2,6 @@ module("Teacher creates course", {
 	setup: function() {
 		App.reset();
 	}
-
-	// teardown: function() {
-	// 	Ember.run(App, 'destroy');
-	// }
 });
 
 test("successfully", function(){
@@ -30,18 +26,15 @@ test("successfully", function(){
 	});
 });
 
-// test("without a name", function(){
+test("without a name (unsuccessfully)", function(){
 
-// 	visit('/').then(function() {
-// 		click("#courses");
-// 		andThen(function() {
-// 			click("#new-course");
-// 			andThen(function() {
-// 				click("save-course");
-// 				andThen(function() {
-// 					ok(exists("#name-error"), "View has
-// 				})
-// 			})
-// 		})
-// 	})
-// })
+	visit('/').then(function() {
+		click("#courses");
+		andThen(function() {
+			click("#new-course");
+			andThen(function() {
+				ok(!exists("#save-course"), "Save action has no button.");
+			});
+		});
+	});
+});

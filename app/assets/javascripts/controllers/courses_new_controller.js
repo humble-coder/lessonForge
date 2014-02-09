@@ -2,16 +2,21 @@ App.CoursesNewController = Ember.ObjectController.extend(Ember.Validations.Mixin
 
 	validations: {
 		name: {
-			presence: { message: "A course must have a name." }
+			presence: { message: "Please enter a name for your course." }
 		}
 	},
 
 	actions: {
-		save: function(course) {
+		submit: function(course) {
 			course.save();
 			Ember.run.later(this, (function() {
 				this.transitionToRoute('course', course);
 			}), 150);
+		},
+
+		cancel: function(course) {
+			course.deleteRecord();
+			this.transitionToRoute('courses');
 		}
 	}
 });
