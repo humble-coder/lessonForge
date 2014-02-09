@@ -1,7 +1,6 @@
 <h1>{{name}}</h1>
 
-{{#link-to "course.edit" class="edit-course"}}Edit{{/link-to}}
+{{#link-to "course.edit" model class="edit-course"}}Edit{{/link-to}}
 <button {{action "delete" this}} id="delete-course">Delete</button>
 
 {{outlet}}
-

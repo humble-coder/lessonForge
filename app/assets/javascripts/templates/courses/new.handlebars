@@ -1,12 +1,16 @@
 <h1>Create a Course</h1>
 
-{{input type="text" value=name id="new-course-name"}}
+{{#form-for this}}
+  {{#input name}}
+    {{input-field name id="new-course-name"}}{{label-field "Course name"}}
+    <br/>
+    {{error-field name}}
+  {{/input}}
+{{/form-for}}
+<br/>
 
-<button {{action "save" this}} id="save-course">Create</button>
-<br>
-
-{{#if errors.messages}}
-  {{errors.messages}}
+{{#if this.name}}
+	<button {{action "save" this}} id="save-course">Create</button>
 {{/if}}
 
 {{outlet}}

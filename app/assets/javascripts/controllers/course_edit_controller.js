@@ -1,6 +1,6 @@
 App.CourseEditController = Ember.ObjectController.extend({
 	actions: {
-		save: function(course) {
+		update: function(course) {
 			course.save();
 			this.transitionToRoute('course', course);
 		}
