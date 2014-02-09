@@ -32,4 +32,25 @@ test("successfully", function(){
 	});
 });
 
-test("but then cancels")
+test("without saving the changes (cancelling)", function() {
+
+	visit('/').then(function() {
+		click("#courses");
+		andThen(function() {
+			click("#new-course");
+			fillIn("#new-course-name", "Will not Change");
+			click("#save-course");
+			andThen(function() {
+				click("a:contains('Will not Change')");
+				andThen(function() {
+					click(".edit-course");
+					fillIn("#edit-course-name", "Changed");
+					click("#cancel-update");
+					andThen(function() {
+						ok(find("a:contains('Will not Change')").length, "Course has same name.");
+					})
+				})
+			})
+		})
+	})
+});
