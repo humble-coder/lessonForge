@@ -8,6 +8,8 @@
   {{/input}}
   {{#if name}}
   	<button {{action "submit" this}} id="save-course">Create</button>
+  {{else}}
+  	<button disabled="true">Create</button>
   {{/if}}
   <button {{action "cancel" this}} id="cancel-new">Cancel</button>
 {{/form-for}}
