@@ -16,8 +16,8 @@ test("successfully", function(){
 			andThen(function() {
 				click("a:contains('Course to Edit')");
 				andThen(function() {
-					ok(exists(".edit-course"), "Course has edit-course link.");
-					click(".edit-course");
+					ok(exists("#edit-course"), "Course has edit-course link.");
+					click("#edit-course");
 					andThen(function() {
 						fillIn("#edit-course-name", "Edited Course");
 						click("#update-course");

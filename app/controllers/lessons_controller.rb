@@ -13,7 +13,8 @@ class LessonsController < ApplicationController
 
   def create
   	course = Course.find(params[:course_id])
-  	lesson = Lesson.new
+  	lesson = Lesson.new(lesson_params)
+  	lesson.course = course
 
   	if lesson.save
   		render json: lesson
@@ -24,4 +25,14 @@ class LessonsController < ApplicationController
 
   def edit
   end
+
+  def update
+  end
+
+  private
+
+  def lesson_params
+		params.require(:lesson).permit(:name)
+	end
+
 end

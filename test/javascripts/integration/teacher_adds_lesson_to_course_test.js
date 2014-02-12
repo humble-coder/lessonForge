@@ -16,7 +16,7 @@ test("successfully", function(){
 				andThen(function() {
 					click("a:contains('Course Needing a Lesson')");
 					andThen(function() {
-						ok(exists("new-lesson"), "Course has new-lesson link.")
+						ok(exists("#new-lesson"), "Course has new-lesson button.")
 						click("#new-lesson");
 						fillIn("#new-lesson-name", "New Lesson");
 						equal(find("new-lesson-name").val(), "New Lesson", "New-lesson-name field has string 'New Lesson'");
