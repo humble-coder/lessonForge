@@ -4,7 +4,7 @@ App.Router.map(function() {
 		this.resource("course", { path: ":course_id" }, function() {
 			this.route('edit');
 			this.resource("lessons", function() {
-				this.resource("lesson", { path: "lesson_id"}, function() {
+				this.resource("lesson", { path: ":lesson_id"}, function() {
 					this.route('edit');
 				});
 				this.route('new');

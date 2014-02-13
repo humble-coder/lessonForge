@@ -1,9 +1,9 @@
-class LessonsController < ApplicationController
+class Courses::LessonsController < ApplicationController
 	respond_to :json
 
   def create
+    course = Course.find(params[:course_id])
     lesson = Lesson.new(lesson_params)
-    binding.pry
 
     if lesson.save
       render json: lesson
@@ -20,7 +20,7 @@ class LessonsController < ApplicationController
   private
 
   def lesson_params
-		params.require(:lesson).permit(:name)
+		params.require(:lesson).permit(:name, :course_id)
 	end
 
 end

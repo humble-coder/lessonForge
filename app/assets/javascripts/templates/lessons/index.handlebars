@@ -6,6 +6,10 @@
     	<li class="course-link">{{#link-to "lesson" this}}{{name}}{{/link-to}}</li>
   	{{/if}}
   {{else}}
-    <li>There are no lessons.</li>
+    There are no lessons.
   {{/each}}
 </ul>
+
+<button {{action "new"}}>Create a Lesson</button>
+
+{{outlet}}

@@ -1,7 +1,8 @@
 <h1>{{name}}</h1>
 
+
 <button {{action "edit" this}} id="edit-course">Edit</button>
 <button {{action "delete" this}} id="delete-course">Delete</button>
-<button {{action "viewLessons"}} id="view-lessons">View Lessons</button>
+<button {{action "addLesson" this}} id="new-lesson">Add Lesson</button>
 
 {{outlet}}

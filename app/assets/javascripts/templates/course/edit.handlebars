@@ -1,6 +1,9 @@
 <h1>Edit Course</h1>
 
+<h2>Update Course Name</h2>
 {{input type="text" value=name id="edit-course-name" placeholder=this.name}}
 
 <button {{action "update" this}} id="update-course">Update</button>
 <button {{action "cancel" this}} id="cancel-update">Cancel</button>
+
+{{outlet}}
