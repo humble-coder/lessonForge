@@ -2,7 +2,7 @@ class LessonsController < ApplicationController
 	respond_to :json
 
   def index
-    lessons = Lesson.all
+    lessons = Lesson.where("course_id = ?", params[:course_id])
     
     render json: lessons, each_serializer: LessonSerializer
   end
@@ -15,6 +15,10 @@ class LessonsController < ApplicationController
     else
       render json: { errors: lesson.errors.messages }, status: 422
     end
+  end
+
+  def show
+    respond_with Lesson.where("course_id = ? AND id = ?", params[:course_id], params[:id])
   end
 
   def update

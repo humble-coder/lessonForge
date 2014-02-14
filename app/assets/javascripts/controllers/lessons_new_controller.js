@@ -17,12 +17,7 @@ App.LessonsNewController = Ember.ObjectController.extend(Ember.Validations.Mixin
 		},
 
 		submit: function(lesson) {
-			var course = this.get('course');
-			lesson.save().then(function() {
-				course.get('lessons').pushObject(lesson);
-				course.save();
-			});
-			
+			lesson.save();
 			this.transitionToRoute('lessons.index');
 		}
 	}

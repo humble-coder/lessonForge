@@ -1,9 +1,7 @@
 LessonForge::Application.routes.draw do
   resources :courses do
-    resources :lessons, controller: "courses/lessons"
+    resources :lessons, shallow: true
   end
-
-  resources :lessons
  
   root "assets#index"
   # The priority is based upon order of creation: first created -> highest priority.
