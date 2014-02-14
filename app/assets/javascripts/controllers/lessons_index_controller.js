@@ -1,7 +1,6 @@
 App.LessonsIndexController = Ember.ArrayController.extend({
-
 	actions: {
-		new: function() {
+		newLesson: function() {
 			this.transitionToRoute('lessons.new');
 		}
 	}

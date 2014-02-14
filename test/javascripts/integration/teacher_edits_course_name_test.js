@@ -43,14 +43,17 @@ test("without saving the changes (cancelling)", function() {
 			andThen(function() {
 				click("a:contains('Will not Change')");
 				andThen(function() {
-					click(".edit-course");
-					fillIn("#edit-course-name", "Changed");
-					click("#cancel-update");
+					ok(exists("#edit-course"), "Course has edit-course link.");
+					click("#edit-course");
 					andThen(function() {
-						ok(find("a:contains('Will not Change')").length, "Course has same name.");
-					})
-				})
-			})
-		})
-	})
+						fillIn("#edit-course-name", "Changed");
+						click("#cancel-update");
+						andThen(function() {
+							ok(find("a:contains('Will not Change')").length, "Course has same name.");
+						});
+					});
+				});
+			});
+		});
+	});
 });

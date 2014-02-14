@@ -13,18 +13,17 @@ App.LessonsNewController = Ember.ObjectController.extend(Ember.Validations.Mixin
 	actions: {
 		cancel: function(lesson) {
 			lesson.deleteRecord();
-			this.transitionToRoute('lessons.index');
+			this.transitionToRoute('course', this.get('course'));
 		},
 
 		submit: function(lesson) {
 			var course = this.get('course');
 			lesson.save().then(function() {
 				course.get('lessons').pushObject(lesson);
+				course.save();
 			});
 			
-			Ember.run.later(this, (function() {
-				this.transitionToRoute('course', course)
-			}), 150);
+			this.transitionToRoute('lessons.index');
 		}
 	}
 });

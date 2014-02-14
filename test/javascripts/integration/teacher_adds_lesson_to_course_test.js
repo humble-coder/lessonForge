@@ -16,14 +16,20 @@ test("successfully", function(){
 				andThen(function() {
 					click("a:contains('Course Needing a Lesson')");
 					andThen(function() {
-						ok(exists("#new-lesson"), "Course has new-lesson button.")
-						click("#new-lesson");
-						fillIn("#new-lesson-name", "New Lesson");
-						equal(find("new-lesson-name").val(), "New Lesson", "New-lesson-name field has string 'New Lesson'");
-						click("#save-lesson");
+						ok(exists("#view-lessons"), "Course has view-lessons button.")
+						click("#view-lessons");
 						andThen(function() {
-							ok(exists("a:contains('New Lesson')"), "Course has new-lesson link.");
-							ok(find("h2:contains('New Lesson')"), "Lesson has header containing 'New Lesson.'");
+							ok(exists("#new-lesson"), "Course has new-lesson button.")
+							click("#new-lesson");
+							andThen(function() {
+								ok(exists("#new-lesson-name"), "New lesson form has input field for lesson name.");
+								fillIn("#new-lesson-name", "New Lesson");
+								equal(find("#new-lesson-name").val(), "New Lesson", "New-lesson-name field has string 'New Lesson'");
+								click("#save-lesson");
+								andThen(function() {
+									ok(exists("a:contains('New Lesson')"), "List of lessons has new lesson.");
+								});
+							});
 						});
 					});
 				});

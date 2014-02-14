@@ -2,7 +2,9 @@ class LessonsController < ApplicationController
 	respond_to :json
 
   def index
-    render json: Lesson.all
+    lessons = Lesson.all
+    
+    render json: lessons, each_serializer: LessonSerializer
   end
 
   def create
@@ -24,10 +26,6 @@ class LessonsController < ApplicationController
       render json: { errors: lesson.errors.messages }, status: 422
     end
   end
-  # def show
-  # 	lesson = Lesson.find(params[:id])
-  # 	render json: lesson
-  # end
 
   private
 
