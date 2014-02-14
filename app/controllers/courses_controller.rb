@@ -1,6 +1,4 @@
 class CoursesController < ApplicationController
-	respond_to :json
-
 	def index
 		render json: Course.all, each_serializer: CourseSerializer
 	end
@@ -13,7 +11,7 @@ class CoursesController < ApplicationController
 		course = Course.new(course_params)
 
 		if course.save
-			render json: course
+			 render json: course
 		else
 			render json: { errors: course.errors.messages }, status: 422
 		end

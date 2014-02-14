@@ -1,9 +1,9 @@
 class Courses::LessonsController < ApplicationController
-	respond_to :json
 
   def create
     course = Course.find(params[:course_id])
     lesson = Lesson.new(lesson_params)
+    lesson.course = course
 
     if lesson.save
       render json: lesson

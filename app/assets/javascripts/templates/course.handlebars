@@ -3,6 +3,10 @@
 
 <button {{action "edit" this}} id="edit-course">Edit</button>
 <button {{action "delete" this}} id="delete-course">Delete</button>
-<button {{action "addLesson" this}} id="new-lesson">Add Lesson</button>
+{{#if this.lessons}}
+	<button {{action "viewLessons" this}} id="view-lessons">View Lessons</button>
+{{/if}}
+<button {{action "newLesson" this}} class="new-lesson">Add Lesson</button>
+
 
 {{outlet}}

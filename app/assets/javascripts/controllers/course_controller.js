@@ -15,7 +15,11 @@ App.CourseController = Ember.ObjectController.extend(Ember.Validations.Mixin, {
 			this.transitionToRoute('course.edit', course);
 		},
 
-		addLesson: function() {
+		viewLessons: function() {
+			this.transitionToRoute('lessons.index');
+		},
+
+		newLesson: function() {
 			this.transitionToRoute('lessons.new');
 		}
 	}
