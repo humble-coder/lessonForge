@@ -18,7 +18,6 @@ class LessonsController < ApplicationController
   end
 
   def show
-    #respond_with Lesson.find(params[:id])
     render json: Lesson.find(params[:id])
   end
 
