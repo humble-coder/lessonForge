@@ -10,7 +10,9 @@ App.LessonsNewController = Ember.ObjectController.extend(Ember.Validations.Mixin
 
 	actions: {
 		cancel: function(lesson) {
-			this.transitionToRoute('course', this.get('course'));
+			var course = this.get('controllers.course').get('model');
+			lesson.deleteRecord();
+			this.transitionToRoute('course', course);
 		},
 
 		submit: function() {
@@ -21,7 +23,9 @@ App.LessonsNewController = Ember.ObjectController.extend(Ember.Validations.Mixin
 				data: { "lesson": { "name": this.get('name') } },
 				dataType: "json"
 			});
-			this.transitionToRoute('lessons.index');
+			Ember.run.later(this, (function() {
+				this.transitionToRoute('lessons.index');
+			}), 150);
 		}
 	}
 });

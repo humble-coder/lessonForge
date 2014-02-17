@@ -4,6 +4,7 @@ LessonForge::Application.routes.draw do
   end
 
   get '/lessons', to: redirect { |params, req| "/courses/#{req.query_string[-1]}/lessons" }
+  post '/lessons', to: redirect { |params, req| "/courses/#{params[:course_id]}/lessons" }
  
   root "assets#index"
   # The priority is based upon order of creation: first created -> highest priority.
