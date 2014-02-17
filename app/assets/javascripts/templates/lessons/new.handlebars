@@ -7,7 +7,7 @@
     {{error-field name}}
   {{/input}}
   {{#if name}}
-    <button {{action "submit"}} id="save-lesson">Create</button>
+    <button {{action "submit" this}} id="save-lesson">Create</button>
   {{else}}
     <button disabled="true">Create</button>
   {{/if}}

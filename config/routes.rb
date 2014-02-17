@@ -1,10 +1,6 @@
 LessonForge::Application.routes.draw do
-  resources :courses do
-    resources :lessons, shallow: true
-  end
-
-  get '/lessons', to: redirect { |params, req| "/courses/#{req.query_string[-1]}/lessons" }
-  post '/lessons', to: redirect { |params, req| "/courses/#{params[:course_id]}/lessons" }
+  resources :courses
+  resources :lessons, except: [:index]
  
   root "assets#index"
   # The priority is based upon order of creation: first created -> highest priority.

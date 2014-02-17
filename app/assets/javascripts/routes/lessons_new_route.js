@@ -1,6 +1,11 @@
 App.LessonsNewRoute = Ember.Route.extend({
 	model: function() {
-		course_id = this.modelFor('course').id;
-		return this.store.createRecord('lesson', { course_id: course_id });
+		var course_id = this.modelFor('course').id;
+		var lesson = this.store.createRecord('lesson');
+		this.store.find('course', course_id).then(function(course) {
+			lesson.set('course_id', course_id);
+			lesson.set('course', course);
+		});
+		return lesson;
 	}
 });

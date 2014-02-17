@@ -1,12 +1,6 @@
 class LessonsController < ApplicationController
 	respond_to :json
 
-  def index
-    lessons = Lesson.where(course_id: params[:course_id])
-    
-    render json: lessons, each_serializer: LessonSerializer
-  end
-
   def new
     lesson = Lesson.new(lesson_params)
 
@@ -14,9 +8,7 @@ class LessonsController < ApplicationController
   end
 
   def create
-    course = Course.find(params[:course_id])
     lesson = Lesson.new(lesson_params)
-    lesson.course = course
     
     if lesson.save
       render json: lesson
