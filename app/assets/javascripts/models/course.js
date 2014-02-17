@@ -3,14 +3,9 @@ App.Course = DS.Model.extend({
 	lessons: DS.hasMany('lesson', {async: true})
 });
 
-// App.CourseSerializer = DS.RESTSerializer.extend({
-// 	extractSingle: function(store, type, payload, id, requestType) {
-// 		var lessons = payload.course.lessons,
-// 		    lessonIds = lessons.mapProperty('id');
+App.CourseSerializer = DS.ActiveModelSerializer.extend(DS.EmbeddedRecordsMixin, {
+  attrs: {
+    lessons: {embedded: 'always'}
+  }
+});
 
-// 		payload.lessons = lessons;
-// 		payload.course.lessons = lessonIds;
-
-// 		return this._super.apply(this, arguments);
-// 	}
-// });

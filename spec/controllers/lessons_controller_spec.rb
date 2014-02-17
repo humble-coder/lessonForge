@@ -8,7 +8,7 @@ describe LessonsController do
   #   end
   # end
 
-  describe "POST /lessons" do
+  describe "lessons#create" do
     it "returns http success" do
       course = Course.create( name: 'Some Course' )
       post :create, course_id: course.id, lesson: { name: 'New Lesson' }, format: :json

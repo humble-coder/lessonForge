@@ -2,14 +2,22 @@ class LessonsController < ApplicationController
 	respond_to :json
 
   def index
-    lessons = Lesson.where("course_id = ?", params[:course_id])
+    lessons = Lesson.where(course_id: params[:course_id])
     
     render json: lessons, each_serializer: LessonSerializer
   end
 
-  def create
+  def new
     lesson = Lesson.new(lesson_params)
 
+    respond_with lesson
+  end
+
+  def create
+    course = Course.find(params[:course_id])
+    lesson = Lesson.new(lesson_params)
+    lesson.course = course
+    
     if lesson.save
       render json: lesson
     else
@@ -18,7 +26,8 @@ class LessonsController < ApplicationController
   end
 
   def show
-    respond_with Lesson.where("course_id = ? AND id = ?", params[:course_id], params[:id])
+    #respond_with Lesson.find(params[:id])
+    render json: Lesson.find(params[:id])
   end
 
   def update
@@ -34,7 +43,7 @@ class LessonsController < ApplicationController
   private
 
   def lesson_params
-		params.require(:lesson).permit(:name, :course_id)
+		params.require(:lesson).permit(:name, :course_id) if params[:lesson]
 	end
 
 end

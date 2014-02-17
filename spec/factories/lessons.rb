@@ -3,5 +3,6 @@
 FactoryGirl.define do
   factory :lesson do
     name "MyString"
+    course
   end
 end

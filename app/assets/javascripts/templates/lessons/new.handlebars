@@ -7,10 +7,12 @@
     {{error-field name}}
   {{/input}}
   {{#if name}}
-  	<button {{action "submit" this}} id="save-lesson">Create</button>
+    <button {{action "submit"}} id="save-lesson">Create</button>
   {{else}}
-  	<button disabled="true">Create</button>
+    <button disabled="true">Create</button>
   {{/if}}
-  <button {{action "cancel" this}} id="cancel-new">Cancel</button>
+    <button {{action "cancel"}} id="cancel-new">Cancel</button>
 {{/form-for}}
 <br/>
+
+{{outlet}}

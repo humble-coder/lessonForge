@@ -1,15 +1,15 @@
 <h2>Lessons</h2>
 
 <ul>
-  {{#each controller}}
+	{{#each model}}
   	{{#if name}}
-    	<li class="course-link">{{#link-to "lesson" this}}{{name}}{{/link-to}}</li>
+    	<li class="course-link">{{#link-to "lesson.index" this}}{{name}}{{/link-to}}</li>
   	{{/if}}
   {{else}}
-    There are no lessons.
+  	There are no lessons for this course.
   {{/each}}
 </ul>
 
-<button {{action newLesson}} id="new-lesson">Create a Lesson</button>
+<button {{action "new"}} id="new-lesson">Create a Lesson</button>
 
 {{outlet}}
