@@ -1,0 +1,1 @@
+App.CoursesIndexController = Ember.ArrayController.extend();

@@ -1,4 +1,4 @@
-App.CourseController = Ember.ObjectController.extend(Ember.Validations.Mixin, {
+App.CourseIndexController = Ember.ObjectController.extend(Ember.Validations.Mixin, {
 
 	actions: {
 		delete: function(course) {

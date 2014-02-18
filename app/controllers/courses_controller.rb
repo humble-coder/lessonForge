@@ -44,7 +44,7 @@ class CoursesController < ApplicationController
 	
 	def course_params
 		cp = params.require(:course).permit(:name, :lessons)
-		cp[:lessons] = []
+		cp[:lessons] = [] unless cp[:lessons]
 		cp
 	end
 end
