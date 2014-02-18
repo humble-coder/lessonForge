@@ -1,6 +1,8 @@
 LessonForge::Application.routes.draw do
   resources :courses
   resources :lessons, except: [:index]
+  resources :questions, except: [:index]
+  resources :answers, except: [:index]
  
   root "assets#index"
   # The priority is based upon order of creation: first created -> highest priority.

@@ -29,4 +29,37 @@ describe "Lesson routing" do
 			)
 		end
 	end
+
+	describe "PATCH /lessons/:id" do
+		it "routes to lessons#update" do
+			FactoryGirl.create :lesson
+			expect(:patch => "/lessons/#{Lesson.first.id}").to route_to(
+				:controller => "lessons",
+				:action => "update",
+				:id => Lesson.first.id.to_s
+			)
+		end
+	end
+
+	describe "PUT /lessons/:id" do
+		it "routes to lessons#update" do
+			FactoryGirl.create :lesson
+			expect(:put => "/lessons/#{Lesson.first.id}").to route_to(
+				:controller => "lessons",
+				:action => "update",
+				:id => Lesson.first.id.to_s
+			)
+		end
+	end
+
+	describe "DELETE /lessons/:id" do
+		it "routes to lessons#destroy" do
+			FactoryGirl.create :lesson
+			expect(:delete => "/lessons/#{Lesson.first.id}").to route_to(
+				:controller => "lessons",
+				:action => "destroy",
+				:id => Lesson.first.id.to_s
+			)
+		end
+	end
 end

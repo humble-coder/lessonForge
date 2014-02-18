@@ -27,7 +27,7 @@ describe CoursesController do
 
 	describe "PATCH update" do
 		it "has a 200 status code and updates course attributes" do
-			course = Course.create( name: 'Some Course' )
+			course = FactoryGirl.create :course
 			patch :update, id: course.id, course: attributes_for(:course, name: "Changed")
 			course.reload
 
@@ -38,7 +38,7 @@ describe CoursesController do
 
 	describe "DELETE destroy" do
 		it "has a 200 status code" do
-			course = Course.create( name: 'Some Course' )
+			course = FactoryGirl.create :course
 			
 			expect { delete :destroy, id: course.id }.to change(Course, :count).by(-1)
 			expect(response.status).to eq(200)
