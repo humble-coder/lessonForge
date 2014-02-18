@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :answer do
-    content "MyText"
-    question nil
+    content "Some answer"
+    question
   end
 end

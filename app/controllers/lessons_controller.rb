@@ -31,6 +31,9 @@ class LessonsController < ApplicationController
     end
   end
 
+  def destroy
+  end
+
   private
 
   def lesson_params

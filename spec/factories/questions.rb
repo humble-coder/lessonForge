@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :question do
-    title "MyString"
-    lesson nil
+    content "Some question"
+    lesson
   end
 end

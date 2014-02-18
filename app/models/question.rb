@@ -1,6 +1,6 @@
 class Question < ActiveRecord::Base
-  validates :title, presence: true
+  validates :content, presence: true
   belongs_to :lesson
-  has_many :answers
+  has_many :answers, dependent: :destroy
   accepts_nested_attributes_for :answers
 end
