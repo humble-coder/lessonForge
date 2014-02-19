@@ -5,7 +5,7 @@ module("Teacher creates course", {
 });
 
 test("successfully", function(){
-	expect(5);
+	expect(4);
 
 	visit('/').then(function() {
 		ok(exists("#courses"), "View has courses link.");
@@ -18,8 +18,7 @@ test("successfully", function(){
 				equal(find("#new-course-name").val(), "A new course", "Name field has the string 'A new course.' in it");
 				click("#save-course");
 				andThen(function() {
-					ok(exists(".course-link"), "New course added.");
-					ok(find("a:contains('A new course')").length, "View has a link to newly created course.");
+					ok(exists("h2:contains('A new course')", "New course added."));
 				});
 			});
 		});

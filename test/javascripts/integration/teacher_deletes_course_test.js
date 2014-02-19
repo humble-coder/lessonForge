@@ -15,16 +15,13 @@ test("successfully", function(){
 			andThen(function() {
 				click("#save-course");
 				andThen(function() {
-					click("a:contains('Course to Delete')");
+					ok(exists("#delete-course"), "Course has delete-course link.");
+					click("#delete-course");
 					andThen(function() {
-						ok(exists("#delete-course"), "Course has delete-course link.");
-						click("#delete-course");
-						andThen(function() {
-							ok(!exists("a:contains('Course to Delete')"), "Course has no link.");
-						});
+						ok(!exists("a:contains('Course to Delete')"), "Course has no link.");
 					});
-				});	
-			});
+				});
+			});	
 		});
 	});
 });

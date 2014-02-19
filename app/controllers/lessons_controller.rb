@@ -32,6 +32,13 @@ class LessonsController < ApplicationController
   end
 
   def destroy
+    lesson = Lesson.find(params[:id])
+
+    if lesson.destroy
+      render json: nil, status: :ok
+    else
+      render json: { errors: lesson.errors.messages }, status: 404
+    end
   end
 
   private
