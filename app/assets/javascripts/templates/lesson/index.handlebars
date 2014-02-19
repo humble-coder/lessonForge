@@ -1,3 +1,16 @@
+{{#each question in questions}}
+  <h4>{{content}}</h4>
+  {{#each answer in answers}}
+  	<input type="radio" value="response">{{content}}<br>
+  {{else}}
+    There are no answers to this question.
+  {{/each}}
+{{else}}
+  This lesson has no questions.
+{{/each}}
+
+<br>
+
 {{#link-to "lesson.edit" this class="edit-lesson"}}Edit{{/link-to}}
 <button {{action "delete" this}} id="delete-lesson">Delete</button>
 
