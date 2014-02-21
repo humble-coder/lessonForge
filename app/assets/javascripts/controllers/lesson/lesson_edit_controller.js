@@ -5,9 +5,10 @@ App.LessonEditController = Ember.ObjectController.extend({
 	actions: {
 		addAnswer: function(question) {
 			answers = question.get('answers');
-			answer = this.store.createRecord('answer', {
-				question: question,
-				content: ''
+			answer = this.store.createRecord('answer');
+			this.store.find('question', question.id).then(function(question) {
+				answer.set('question_id', question.id);
+				answer.set('question', question);
 			});
 			answers.pushObject(answer);
 		},
@@ -22,14 +23,20 @@ App.LessonEditController = Ember.ObjectController.extend({
 			questions.pushObject(question);
 		},
 
-		submit: function(lesson) {
-			// var course = this.get('controllers.course').get('model');
-			// this.store.find('course', course.id).then(function(course) {
-			// 	lesson.set('course_id', course.id);
-			// 	lesson.set('course', course);
-			// });
-			lesson.save();
+		done: function(lesson) {
 			this.transitionToRoute('lesson.index');
+		},
+
+		saveQuestion: function(question) {
+			question.save();
+		},
+
+		saveAnswer: function(answer) {
+			answer.save();
+		},
+
+		removeAnswer: function(answer) {
+			answer.destroyRecord();
 		}
 	}
 });

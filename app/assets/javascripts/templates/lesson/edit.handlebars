@@ -1,11 +1,16 @@
 {{#each question in questions}}
-  {{input type="text" placeholder=question.content value=question.content}}
+  {{input type="text" placeholder=question.content value=question.content class="question-content"}}
+  <button {{action 'saveQuestion' question}} class="save-question">Save</button>
+  <button {{action 'removeQuestion' question}} class="remove-question">Remove</button>
+  <br>
     {{#each answer in question.answers}}
-      {{input type="text" placeholder=answer.content value=answer.content}}<br>
+      {{input type="text" placeholder=answer.content value=answer.content}}
       Correct? {{input type="checkbox" checked=answer.correct}}
+      <button {{action 'saveAnswer' answer}}>Save Answer</button>
       <button {{action 'removeAnswer' answer}}>Remove Answer</button>
       <br>
     {{/each}}
+  <br>
   <button {{action 'addAnswer' question}}>Add Answer</button>
   <br>
 {{else}}
@@ -13,8 +18,8 @@
 {{/each}}
 
 <br>
-<button {{action 'addQuestion' this}}>Add Question</button>
-<button {{action 'submit' this}}>Save</button>
+<button {{action 'addQuestion' this}} id="new-question">Add Question</button>
+<button {{action 'done'}} id="done">Done</button>
 
 
 

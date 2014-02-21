@@ -4,7 +4,7 @@ module("Teacher multiple-choice question to lesson", {
 	}
 });
 
-test("successfully", function(){
+test("successfully", function() {
 	visit('/').then(function() {
 		click("#courses");
 		andThen(function() {
@@ -18,17 +18,23 @@ test("successfully", function(){
 						click("#new-lesson");
 						andThen(function() {
 							fillIn("#new-lesson-name", "Lesson with a Question");
-								ok(exists("#add-question"), "View has add-question button.");
-								click("#add-question");
-								ok(exists("#question-content"), "View has title-box input.");
-								fillIn("#question-content", "A question!");
-								ok(exists("#add-answer"));
-								click("#add_answer");
-								ok(exists(".answer-content"), "View has answer-content input.");
-								fillIn(".answer-content", "An answer!");
-								click("#save-lesson");
-								});
-							});
+							click("#save-lesson");
+							andThen(function() {
+								ok(exists("#edit-lesson"), "Lesson view has edit-lesson button.");
+								click("#edit-lesson");
+								andThen(function() {
+									ok(exists("#new-question"), "Lesson-edit view has new-question button.");
+									click("#new-question");
+									ok(exists(".question-content"), "Lesson-edit view has new-question input box.");
+									fillIn(".question-content", "New Question");
+									ok(exists(".save-question"), "Lesson-edit view has save-question button.");
+									click(".save-question")
+									click("#done");
+									andThen(function() {
+										ok(exists("span:contains('New Question')"), "Question content is displayed.");
+									})
+								})
+							})
 						});
 					});
 				});

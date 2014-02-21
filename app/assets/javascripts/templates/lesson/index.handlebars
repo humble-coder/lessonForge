@@ -1,5 +1,5 @@
 {{#each question in questions}}
-  {{question.content}}
+  <span class="question-content">{{question.content}}</span>
   <br>
   {{#each answer in question.answers}}
   	<input type="radio">{{answer.content}}
