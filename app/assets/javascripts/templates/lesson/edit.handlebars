@@ -1,0 +1,21 @@
+{{#each question in questions}}
+  {{input type="text" placeholder=question.content value=question.content}}
+    {{#each answer in question.answers}}
+      {{input type="text" placeholder=answer.content value=answer.content}}<br>
+      Correct? {{input type="checkbox" checked=answer.correct}}
+      <button {{action 'removeAnswer' answer}}>Remove Answer</button>
+      <br>
+    {{/each}}
+  <button {{action 'addAnswer' question}}>Add Answer</button>
+  <br>
+{{else}}
+    <b>This lesson has no questions.</b>
+{{/each}}
+
+<br>
+<button {{action 'addQuestion' this}}>Add Question</button>
+<button {{action 'submit' this}}>Save</button>
+
+
+
+

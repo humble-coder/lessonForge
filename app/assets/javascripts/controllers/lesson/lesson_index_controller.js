@@ -1,7 +1,5 @@
 App.LessonIndexController = Ember.ObjectController.extend({
 
-	needs: ['course'],
-
 	actions: {
 		delete: function(lesson) {
 			var userConfirm = confirm("Are you sure you want to delete the lesson '" + lesson.get('name') + "'?");
@@ -14,10 +12,8 @@ App.LessonIndexController = Ember.ObjectController.extend({
 			}
 		},
 
-		addQuestion: function(lesson) {
-			var question = this.store.createRecord('question', {
-				
-			})
+		edit: function() {
+			this.transitionToRoute('lesson.edit');
 		}
 	}
 });

@@ -44,7 +44,7 @@ class LessonsController < ApplicationController
   private
 
   def lesson_params
-		lp = params.require(:lesson).permit(:name, :course_id, :questions)
+		lp = params.require(:lesson).permit(:name, :course_id, :id, :questions)
     lp[:questions] = [] unless lp[:questions]
     lp
 	end

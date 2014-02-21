@@ -1,5 +1,5 @@
-App.LessonRoute = Ember.Route.extend({
+App.LessonEditRoute = Ember.Route.extend({
 	model: function() {
-		return this.modelFor('lesson');
+		return this.modelFor('lesson.index');
 	}
 });

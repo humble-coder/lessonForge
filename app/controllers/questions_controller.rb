@@ -26,7 +26,8 @@ class QuestionsController < ApplicationController
 	private
 
 	def question_params
-		params.require(:question).permit(:content, :lesson_id, :answers) if params[:question]
+		params.require(:question).permit(:content, :lesson_id, answers_attributes: [:id, :question_id, :content, :correct])
+		# qp[:answers] = [] unless qp[:answers]
+		# qp
 	end
-
 end
