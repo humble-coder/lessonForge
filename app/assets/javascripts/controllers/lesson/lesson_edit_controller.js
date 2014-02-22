@@ -31,6 +31,10 @@ App.LessonEditController = Ember.ObjectController.extend({
 			question.save();
 		},
 
+		removeQuestion: function(question) {
+			question.destroyRecord();
+		},
+
 		saveAnswer: function(answer) {
 			answer.save();
 		},

@@ -21,6 +21,13 @@ class QuestionsController < ApplicationController
 	end
 
 	def destroy
+		question = Question.find(params[:id])
+
+		if question.destroy
+			render json: nil, status: :ok
+		else
+			render json: { errors: question.errors.messages }, status: 404
+		end
 	end
 
 	private

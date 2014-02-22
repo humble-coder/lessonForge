@@ -1,9 +1,11 @@
 {{#each question in questions}}
   <span class="question-content">{{question.content}}</span>
   <br>
-  {{#each answer in question.answers}}
-  	<input type="radio">{{answer.content}}
-  {{/each}}
+  <form>
+  	{{#each answer in question.answers}}
+  		{{answer-select value=answer name=question.id}}
+  	{{/each}}
+  </form>
   <br>
 {{/each}}
 

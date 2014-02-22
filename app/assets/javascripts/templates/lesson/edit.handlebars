@@ -6,8 +6,8 @@
     {{#each answer in question.answers}}
       {{input type="text" placeholder=answer.content value=answer.content}}
       Correct? {{input type="checkbox" checked=answer.correct}}
-      <button {{action 'saveAnswer' answer}}>Save Answer</button>
-      <button {{action 'removeAnswer' answer}}>Remove Answer</button>
+      <button {{action 'saveAnswer' answer}}>Save</button>
+      <button {{action 'removeAnswer' answer}}>Remove</button>
       <br>
     {{/each}}
   <br>
