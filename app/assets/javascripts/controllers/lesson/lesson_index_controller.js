@@ -1,5 +1,7 @@
 App.LessonIndexController = Ember.ObjectController.extend({
 
+	confirm: '',
+
 	actions: {
 		delete: function(lesson) {
 			var userConfirm = confirm("Are you sure you want to delete the lesson '" + lesson.get('name') + "'?");

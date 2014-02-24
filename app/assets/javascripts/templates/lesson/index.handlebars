@@ -2,9 +2,7 @@
   <span class="question-content">{{question.content}}</span>
   <br>
   <form>
-  	{{#each answer in question.answers}}
-  		{{answer-select value=answer name=question.id}}
-  	{{/each}}
+    {{answer-select answers=question.answers question=question}}
   </form>
   <br>
 {{/each}}

@@ -35,30 +35,27 @@ test("successfully", function() {
 	});
 });
 
-// test("without saving (cancelling)", function() {
-// 	visit('/').then(function() {
-// 		click("#courses");
-// 		andThen(function() {
-// 			click("#new-course");
-// 			fillIn("#new-course-name", "Course with a Canceled Lession");
-// 			click("#save-course");
-// 			andThen(function() {
-// 				ok(exists("#view-lessons"), "Course has view-lessons button.");
-// 				click("#view-lessons");
-// 				andThen(function() {
-// 					click("#new-lesson");
-// 					andThen(function() {
-// 						fillIn("#new-lesson-name", "Changed my mind");
-// 						click("#cancel-new-lesson");
-// 						andThen(function() {
-// 							click("#view-lessons");
-// 							andThen(function() {
-// 								ok(!exists("a:contains('Changed my mind')"), "New lesson link not present.");
-// 							});
-// 						});
-// 					});
-// 				});
-// 			});
-// 		});
-// 	});
-// });
+test("without saving (cancelling)", function() {
+	visit('/').then(function() {
+		click("#courses");
+		andThen(function() {
+			click("#new-course");
+			fillIn("#new-course-name", "Course with a Canceled Lession");
+			click("#save-course");
+			andThen(function() {
+				ok(exists("#view-lessons"), "Course has view-lessons button.");
+				click("#view-lessons");
+				andThen(function() {
+					click("#new-lesson");
+					andThen(function() {
+						fillIn("#new-lesson-name", "Changed my mind");
+						click("#cancel-new-lesson");
+						andThen(function() {
+							ok(!exists("a:contains('Changed my mind')"), "New lesson link not present.");
+						});
+					});
+				});
+			});
+		});
+	});
+});

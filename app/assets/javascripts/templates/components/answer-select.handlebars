@@ -1,5 +1,6 @@
-<input type="radio" name=name {{action "checkAnswer" value.correct}}> {{value.content}}
-{{#if confirmAnswer}}
-  <b>Correct!</b>
-{{/if}}
+{{#each answer in answers}}
+	{{radio-button value=answer.correct name=question.id selection=confirm}} {{answer.content}}
+	<br>
+{{/each}}
+{{confirm}}
 
