@@ -22,3 +22,4 @@
 
 // for more details see: http://emberjs.com/guides/application/
 App = Ember.Application.create();
+App.AuthManager = AuthManager.create();

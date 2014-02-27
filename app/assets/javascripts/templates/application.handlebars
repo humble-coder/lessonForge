@@ -4,10 +4,10 @@
   <nav>
     <ul>
       {{#link-to "courses" id="courses"}}Courses{{/link-to}}
+      {{#link-to "users.new"}}Register{{/link-to}}
+      {{#link-to "sessions.new"}}Login{{/link-to}}
     </ul>
   </nav>
 </header>
 
-<div id="content">
-  {{outlet}}
-</div>
+{{outlet}}

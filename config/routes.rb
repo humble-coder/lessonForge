@@ -3,6 +3,9 @@ LessonForge::Application.routes.draw do
   resources :lessons, except: [:index]
   resources :questions, except: [:index]
   resources :answers, except: [:index]
+
+  resources :users, except: [:new, :edit, :destroy]
+  post 'session' => 'session#create'
  
   root "assets#index"
   # The priority is based upon order of creation: first created -> highest priority.
