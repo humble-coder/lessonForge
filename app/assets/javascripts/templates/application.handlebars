@@ -4,10 +4,20 @@
   <nav>
     <ul>
       {{#link-to "courses" id="courses"}}Courses{{/link-to}}
-      {{#link-to "users.new"}}Register{{/link-to}}
-      {{#link-to "sessions.new"}}Login{{/link-to}}
     </ul>
   </nav>
+  <br>
+  {{#if isAuthenticated}}
+    <ul>
+      <a href="#">{{currentUser.email}}</a>
+      <a href="#" {{action 'logout'}}>Logout</a>
+    </ul>
+  {{else}}
+   	<ul>
+   		{{#link-to "users.new"}}Register{{/link-to}}
+   		{{#link-to "sessions.new"}}Login{{/link-to}}
+   	</ul>
+  {{/if}}
 </header>
 
 {{outlet}}
