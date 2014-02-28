@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
   respond_to :json
-  before_filter :ensure_authenticated_user, only: [:index]
+  #before_filter :ensure_authenticated_user, only: [:index]
 
-  # Returns list of users. This requires authorization
   def index
     render json: User.all
   end
@@ -16,7 +15,7 @@ class UsersController < ApplicationController
     if user.new_record?
       render json: { errors: user.errors.messages }, status: 422
     else
-      render json: user.session_api_key, status: 201
+      render json: [user, user.session_api_key], status: 201
     end
   end
 
