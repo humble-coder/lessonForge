@@ -2,6 +2,7 @@ App.UsersNewController = Ember.ObjectController.extend({
 
 	actions: {
 		submit: function(user) {
+
     	var data = this.getProperties('name', 'email', 'username', 'password', 'password_confirmation');
 
     	$.ajax({
