@@ -1,10 +1,14 @@
 <h2>Register</h2>
 
 {{#form-for this}}
-  {{input name label="Full Name"}}
-  {{input email label="Email Address"}}
-  {{input username label="Username"}}
-  {{input password label="Password"}}
-  {{input password_confirmation label="Confirm Password"}}
-  <button {{action 'submit' this}}>Submit</button>
+  {{input name label="Full Name" id="full-name"}}
+  {{input email label="Email Address" id="email-address"}}
+  {{input username label="Username" id="username"}}
+  {{input password label="Password" id="password"}}
+  {{input password_confirmation label="Confirm Password" id="password-confirmation"}}
+  {{#if all_present}}
+  	<button {{action 'submit' this}} id="create-user">Submit</button>
+  {{else}}
+    <button disabled=true>Submit</button>
+  {{/if}}
 {{/form-for}}
