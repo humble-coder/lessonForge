@@ -9,15 +9,16 @@ test("successfully", function() {
 	visit('/').then(function() {
 		click("#new-user");
 		andThen(function() {
-			fillIn("#full-name", "Teacher");
-			fillIn("#email-address", "teacher@example.com");
-			fillIn("#username", "Teach");
+			fillIn("#full-name", "Mark");
+			fillIn("#email-address", "mark.philosophe@gmail.com");
+			fillIn("#username", "mb");
 			fillIn("#password", "password");
-			fillIn("#password_confirmation", "password");
+			fillIn("#password-confirmation", "password");
 			click("#new-teacher");
-			click("create-user");
-			ok(exists("a:contains('teacher@example.com')"), "View has teacher email displayed.");
-			ok(exists("a:contains('Logout')"), "View has logout link displayed.");
+			click("#create-user");
+			andThen(function() {
+				ok(exists("a:contains('Logout')"), "View has logout link displayed.");
+			});
 		});
 	});
 });

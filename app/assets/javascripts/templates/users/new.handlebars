@@ -1,12 +1,35 @@
 <h2>Register</h2>
 
 {{#form-for this}}
-  {{input name label="Full Name" id="full-name"}}
-  {{input email label="Email Address" id="email-address"}}
-  {{input username label="Username" id="username"}}
-  {{input password label="Password" id="password"}}
-  {{input password_confirmation label="Confirm Password" id="password-confirmation"}}
-  {{#if all_present}}
+  {{#input name}}
+    {{input-field name id="full-name"}}{{label-field "Full Name"}}
+    <br/>
+    {{error-field name}}
+  {{/input}}
+  {{#input email}}
+    {{input-field email id="email-address"}}{{label-field "Email Address"}}
+    <br/>
+    {{error-field email}}
+  {{/input}}
+  {{#input username}}
+    {{input-field username id="username"}}{{label-field "Username"}}
+    <br/>
+    {{error-field username}}
+  {{/input}}
+  {{#input password}}
+    {{input-field password id="password"}}{{label-field "Password"}}
+    <br/>
+    {{error-field password}}
+  {{/input}}
+  {{#input password_confirmation}}
+    {{input-field password_confirmation id="password-confirmation"}}{{label-field "Confirm Password"}}
+    <br/>
+    {{error-field password_confirmation}}
+  {{/input}}
+  {{#input teacher}}
+    {{input-field teacher as="checkbox" id="new-teacher"}}{{label-field "I want to teach."}}
+  {{/input}}
+  {{#if required_present}}
   	<button {{action 'submit' this}} id="create-user">Submit</button>
   {{else}}
     <button disabled=true>Submit</button>
