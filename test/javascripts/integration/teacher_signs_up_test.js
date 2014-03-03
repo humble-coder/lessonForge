@@ -18,6 +18,7 @@ test("successfully", function() {
 			click("#create-user");
 			andThen(function() {
 				ok(exists("a:contains('Logout')"), "View has logout link displayed.");
+				click("a:contains('Logout')");
 			});
 		});
 	});
