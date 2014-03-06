@@ -18,6 +18,13 @@ class AnswersController < ApplicationController
 	end
 
 	def update
+		answer = Answer.find(params[:id])
+
+		if answer.update_attributes(answer_params)
+			render json: answer, status: :ok
+		else
+			render json: {errors: answer.errors.messages }, status: 422
+		end
 	end
 
 	def destroy

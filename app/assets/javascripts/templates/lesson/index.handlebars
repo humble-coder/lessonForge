@@ -5,6 +5,8 @@
     {{answer-select answers=question.answers question=question}}
   </form>
   <br>
+{{else}}
+   <b>This lesson has no questions.</b><br/>
 {{/each}}
 
 <button {{action "edit" this}} id="edit-lesson">Edit</button>
