@@ -12,6 +12,8 @@ App.Router.map(function() {
 			});
 		});
 	});
+	this.resource("question");
+	this.resource("answer");
 	this.resource("sessions", function() {
 		this.route('new');
 	});

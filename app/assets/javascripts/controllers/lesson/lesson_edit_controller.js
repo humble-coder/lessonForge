@@ -1,6 +1,6 @@
 App.LessonEditController = Ember.ObjectController.extend({
 
-	needs: ['course'],
+	needs: ['course', 'question', 'answer'],
 
 	actions: {
 		addAnswer: function(question) {
@@ -11,6 +11,7 @@ App.LessonEditController = Ember.ObjectController.extend({
 				answer.set('question', question);
 			});
 			answers.pushObject(answer);
+			this.get('controllers.answer').set('isEditing', true);
 		},
 
 		addQuestion: function(lesson) {
@@ -21,14 +22,20 @@ App.LessonEditController = Ember.ObjectController.extend({
 				question.set('lesson', lesson);
 			});
 			questions.pushObject(question);
+			this.get('controllers.question').set('isEditing', true);
 		},
 
-		done: function(lesson) {
+		done: function() {
 			this.transitionToRoute('lesson.index');
 		},
 
 		saveQuestion: function(question) {
 			question.save();
+			this.get('controllers.question').set('isEditing', false);
+		},
+
+		editQuestion: function() {
+			this.get('controllers.question').set('isEditing', true);
 		},
 
 		removeQuestion: function(question) {
@@ -37,6 +44,11 @@ App.LessonEditController = Ember.ObjectController.extend({
 
 		saveAnswer: function(answer) {
 			answer.save();
+			this.get('controllers.answer').set('isEditing', false);
+		},
+
+		editAnswer: function() {
+			this.get('controllers.answer').set('isEditing', true);
 		},
 
 		removeAnswer: function(answer) {

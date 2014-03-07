@@ -1,14 +1,29 @@
 {{#each question in questions}}
-  {{input type="text" placeholder=question.content value=question.content class="question-content"}}
-  <button {{action 'saveQuestion' question}} class="save-question">Save</button>
-  <button {{action 'removeQuestion' question}} class="remove-question">Remove</button>
+  {{#if controllers.question.isEditing}}
+    {{input type="text" placeholder=question.content value=question.content class="question-content"}}
+    <button {{action 'saveQuestion' question}} class="save-question">Save Question</button>
+    <button {{action 'removeQuestion' question}} class="remove-question">Remove Question</button>
+    <br/>
+  {{else}}
+    {{question.content}}
+    <button {{action 'editQuestion'}}>Edit Question</button>
+    <button {{action 'removeQuestion' question}}>Remove Question</button>
+    <br/> 
+  {{/if}}
   <br>
     {{#each answer in question.answers}}
-      {{input type="text" placeholder=answer.content value=answer.content}}
-      Correct? {{input type="checkbox" checked=answer.correct}}
-      <button {{action 'saveAnswer' answer}}>Save</button>
-      <button {{action 'removeAnswer' answer}}>Remove</button>
-      <br>
+      {{#if controllers.answer.isEditing}}
+        {{input type="text" placeholder=answer.content value=answer.content}}
+        Correct? {{input type="checkbox" checked=answer.correct}}
+        <button {{action 'saveAnswer' answer}}>Save Answer</button>
+        <button {{action 'removeAnswer' answer}}>Remove Answer</button>
+        <br/>
+      {{else}}
+        {{answer.content}}
+        <button {{action 'editAnswer'}}>Edit Answer</button>
+        <button {{action 'removeAnswer' answer}}>Remove Answer</button>
+        <br/>
+      {{/if}}
     {{/each}}
   <br>
   <button {{action 'addAnswer' question}}>Add Answer</button>
