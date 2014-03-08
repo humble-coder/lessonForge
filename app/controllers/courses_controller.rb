@@ -25,7 +25,7 @@ class CoursesController < ApplicationController
 		if course.update_attributes(course_params)
 			render json: course, status: :ok
 		else
-			render json: course.errors, status: 422
+			render json: { errors: course.errors.messages }, status: 422
 		end
 	end
 
@@ -35,7 +35,7 @@ class CoursesController < ApplicationController
 		if course.destroy
 			render json: nil, status: :ok
 		else
-			render json: course.errors, status: 404
+			render json: { errors: course.errors.messages }, status: 404
 		end
 
 	end

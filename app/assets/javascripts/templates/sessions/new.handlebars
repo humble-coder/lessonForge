@@ -3,5 +3,9 @@
 <form {{action "loginUser" on="submit"}}>
   {{input type="text" value=username_or_email placeholder="Username or Email Address" id="username-or-email"}}<br>
   {{input type="password" value=password placeholder="Password" id="login-password"}}
-  <button type="submit" id="new-session">Submit</button>
+  {{#if required_present}}
+  	<button type="submit" id="new-session">Login</button>
+  {{else}}
+    <button disabled=true>Login</button>
+  {{/if}}
 </form>
