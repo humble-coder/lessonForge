@@ -4,7 +4,13 @@ App.ApplicationController = Ember.Controller.extend({
 	}.property('App.AuthManager.apiKey'),
 
 	isAuthenticated: function() {
-		return App.AuthManager.isAuthenticated()
+		if(App.AuthManager.get('apiKey.user.name')) {
+			return App.AuthManager.isAuthenticated();
+		}
+		else {
+			App.AuthManager.reset();
+			this.transitionToRoute('index');
+		}	
 	}.property('App.AuthManager.apiKey'),
 
 	actions: {
@@ -14,3 +20,4 @@ App.ApplicationController = Ember.Controller.extend({
 		}
 	}
 });
+
