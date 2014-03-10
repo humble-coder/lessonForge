@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 
   def create
     user = User.create(user_params)
+
     if user.new_record?
       render json: { errors: user.errors.messages }, status: 422
     else
@@ -19,9 +20,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    user = User.find(params[:id])
+
+    if user.update_attributes(user_params)
+      render json: user, status: :ok
+    else
+      render json: { errors: user.errors.messages }, status: 422
+    end
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:name, :username, :email, :password, :password_confirmation, :teacher)
+    up = params.require(:user).permit(:name, :username, :email, :password, :password_confirmation, :teacher, :courses)
+    up[:courses] = [] unless up[:courses]
+    up
   end
 end

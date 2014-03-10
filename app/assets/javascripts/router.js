@@ -19,5 +19,8 @@ App.Router.map(function() {
 	});
 	this.resource("users", function() {
 		this.route('new');
+		this.resource("user", { path: ":user_id" }, function() {
+			this.route('edit');
+		});
 	});
 });

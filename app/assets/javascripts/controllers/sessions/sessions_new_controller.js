@@ -10,13 +10,18 @@ App.SessionsNewController = Ember.ObjectController.extend(Ember.Validations.Mixi
 		}
 	},
 
+	attemptedTransition: null,
+
 	required_present: function() {
 		return this.get('username_or_email') && this.get('password');
 	},
 
 	actions: {
 		loginUser: function() {
+			var self = this;
+			var router = this.get('target');
 			var data = this.getProperties('username_or_email', 'password');
+			var attemptedTrans = this.get('attemptedTransition');
 
 			$.ajax({
 				type: "POST",
@@ -27,11 +32,17 @@ App.SessionsNewController = Ember.ObjectController.extend(Ember.Validations.Mixi
 						var user = results.session[0];
 						var api_key = results.session[1];
 						App.AuthManager.authenticate(api_key.access_token, user);
+						if (attemptedTrans) {
+							attemptedTrans.retry();
+							self.set('attemptedTransition', null);
+						}
+						else {
+							router.transitionTo('user.index', user);
+						}
 					});
 				},
 				dataType: 'json'
 			});
-			this.transitionToRoute('index');
 		}
 	}
 });

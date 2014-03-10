@@ -4,5 +4,12 @@ App.User = DS.Model.extend({
 	username: 						 DS.attr('string'),
 	password: 						 DS.attr('string'),
 	password_confirmation: DS.attr('string'),
-	teacher: 							 DS.attr('boolean', {defaultValue: false})
+	teacher: 							 DS.attr('boolean', {defaultValue: false}),
+	courses:               DS.hasMany('course', {async: true}), 
+});
+
+App.UserSerializer = DS.ActiveModelSerializer.extend(DS.EmbeddedRecordsMixin, {
+  attrs: {
+    courses: {embedded: 'always'}
+  }
 });

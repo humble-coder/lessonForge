@@ -4,7 +4,7 @@ LessonForge::Application.routes.draw do
   resources :questions, except: [:index]
   resources :answers, except: [:index]
 
-  resources :users, except: [:new, :edit, :destroy]
+  resources :users, except: [:new, :destroy]
   post 'session' => 'session#create'
  
   root "assets#index"

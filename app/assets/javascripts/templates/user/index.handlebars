@@ -1,0 +1,19 @@
+Name: {{name}} <br/>
+Username: {{username}} <br/>
+Email: {{email}} <br/>
+{{#if teacher}}
+  <ul>
+	  {{#each course in courses}}
+		  <li>{{#link-to 'course.index' course}}{{course.name}}{{/link-to}}</li>
+		{{else}}
+		  <b>{{username}} has not created any courses.</b>
+    {{/each}}
+    {{#if isOwner}}
+      <button {{action 'createCourse' this}}>Create a Course</button>
+    {{/if}}
+	</ul>
+{{/if}}
+{{#if isOwner}}
+  <button {{action 'edit' this}}>Edit Profile</button>
+{{/if}}
+
