@@ -10,7 +10,9 @@ App.CoursesNewController = Ember.ObjectController.extend(Ember.Validations.Mixin
 
 	actions: {
 		submit: function(course) {
+			var user = this.get('controllers.user').get('model');
 			course.save();
+			user.get('courses').pushObject(course);
 			Ember.run.later(this, (function() {
 				this.transitionToRoute('course', course);
 			}), 200);

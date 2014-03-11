@@ -1,4 +1,4 @@
-App.CourseEditController = Ember.ObjectController.extend({
+App.CourseEditController = Ember.ObjectController.extend(Ember.Validations.Mixin, {
 	
 	validations: {
 		name: {

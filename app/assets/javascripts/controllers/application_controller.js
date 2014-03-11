@@ -1,6 +1,7 @@
 App.ApplicationController = Ember.Controller.extend({
 	currentUser: function() {
-		return App.AuthManager.get('apiKey.user')
+		var user_id = App.AuthManager.get('apiKey.user.id');
+		return this.store.find('user', user_id);
 	}.property('App.AuthManager.apiKey'),
 
 	isAuthenticated: function() {

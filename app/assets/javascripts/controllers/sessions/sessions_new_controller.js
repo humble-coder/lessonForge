@@ -33,10 +33,12 @@ App.SessionsNewController = Ember.ObjectController.extend(Ember.Validations.Mixi
 						var api_key = results.session[1];
 						App.AuthManager.authenticate(api_key.access_token, user);
 						if (attemptedTrans) {
+							user = self.store.find('user', user.id);
 							attemptedTrans.retry();
 							self.set('attemptedTransition', null);
 						}
 						else {
+							user = self.store.find('user', user.id);
 							router.transitionTo('user.index', user);
 						}
 					});

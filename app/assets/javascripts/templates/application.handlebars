@@ -9,8 +9,8 @@
   <br>
   {{#if isAuthenticated}}
     <ul>
-      <a href="#">{{currentUser.email}}</a>
-      <a href="#" {{action 'logout'}}>Logout</a>
+      {{#link-to 'user.index' currentUser id="user-profile-link"}}{{currentUser.email}}{{/link-to}}
+      <a href="#" {{action 'logout'}} id="logout">Logout</a>
     </ul>
   {{else}}
    	<ul>

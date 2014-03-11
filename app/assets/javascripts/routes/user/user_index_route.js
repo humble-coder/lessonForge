@@ -1,5 +1,5 @@
 App.UserIndexRoute = Ember.Route.extend({
 	model: function() {
-		return this.modelFor('user').reload();
+		return this.modelFor('user');
 	}
 });

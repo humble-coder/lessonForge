@@ -5,23 +5,36 @@ module("Teacher deletes course", {
 });
 
 test("successfully", function(){
-	expect(2);
 
 	visit('/').then(function() {
-		click("#courses");
+		click("#new-user");
 		andThen(function() {
-			click("#new-course");
-			fillIn("#new-course-name", "Course to Delete");
+			fillIn("full-name", "Bob5");
+			fillIn("#email-address", "bob5@something.com");
+			fillIn("#username", "bob5");
+			fillIn("#password", "something");
+			fillIn("#password-confirmation", "something");
+			click("#new-teacher");
+			click("#create-user");
 			andThen(function() {
-				click("#save-course");
+				fillIn("#username-or-password", "bob5");
+				fillIn("#login-password", "something");
+				click("#new-session");
 				andThen(function() {
-					ok(exists("#delete-course"), "Course has delete-course link.");
-					click("#delete-course");
+					click(".new-course-button");
 					andThen(function() {
-						ok(!exists("a:contains('Course to Delete')"), "Course has no link.");
+					  fillIn("#new-course-name", "Course to Delete");
+						click("#save-course");
+						andThen(function() {
+							ok(exists("#delete-course"), "Course has delete-course link.");
+							click("#delete-course");
+							andThen(function() {
+								ok(!exists("a:contains('Course to Delete'"), "Course has no link in courses.index view.");
+							});
+						});
 					});
 				});
-			});	
+			});
 		});
 	});
 });
