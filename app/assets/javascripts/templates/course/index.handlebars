@@ -1,5 +1,7 @@
-<button {{action "edit" this}} id="edit-course">Edit</button>
-<button {{action "delete" this}} id="delete-course">Delete</button>
+{{#if isOwner}}
+  <button {{action "edit" this}} id="edit-course">Edit</button>
+  <button {{action "delete" this}} id="delete-course">Delete</button>
+{{/if}}
 <button {{action "viewLessons" this}} id="view-lessons">View Lessons</button>
 
 {{outlet}}

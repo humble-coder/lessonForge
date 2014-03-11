@@ -30,6 +30,7 @@ test("successfully", function(){
 							click("#delete-course");
 							andThen(function() {
 								ok(!exists("a:contains('Course to Delete'"), "Course has no link in courses.index view.");
+								click("#logout");
 							});
 						});
 					});

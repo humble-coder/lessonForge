@@ -32,9 +32,9 @@ test("successfully", function() {
 									click("#done");
 									andThen(function() {
 										ok(exists("span:contains('New Question')"), "Question content is displayed.");
-									})
-								})
-							})
+									});
+								});
+							});
 						});
 					});
 				});
