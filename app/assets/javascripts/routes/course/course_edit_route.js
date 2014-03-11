@@ -6,11 +6,11 @@ App.CourseEditRoute = Ember.Route.extend({
 			this.redirectToLogin(transition);
 		}
 		else {
-			var course_id = 
-			if(!App.AuthManager.get('apiKey.user.teacher')) {
-			  alert("You must be a teacher to create courses.");
-			  this.transitionTo('index');
-		  }
+			var user_id = this.modelFor('course').get('user_id');
+			if(!(App.AuthManager.get('apiKey.user.id') == user_id) {
+				alert("You must own the course to edit it.");
+				this.transitionTo('courses');
+			}
 		}
 
 	},
