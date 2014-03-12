@@ -9,7 +9,7 @@ test("successfully", function(){
 	visit('/').then(function() {
 		click("#new-user");
 		andThen(function() {
-			fillIn("full-name", "Bob5");
+			fillIn("#full-name", "Bob5");
 			fillIn("#email-address", "bob5@something.com");
 			fillIn("#username", "bob5");
 			fillIn("#password", "something");
@@ -17,7 +17,7 @@ test("successfully", function(){
 			click("#new-teacher");
 			click("#create-user");
 			andThen(function() {
-				fillIn("#username-or-password", "bob5");
+				fillIn("#username-or-email", "bob5");
 				fillIn("#login-password", "something");
 				click("#new-session");
 				andThen(function() {
@@ -29,7 +29,7 @@ test("successfully", function(){
 							ok(exists("#delete-course"), "Course has delete-course link.");
 							click("#delete-course");
 							andThen(function() {
-								ok(!exists("a:contains('Course to Delete'"), "Course has no link in courses.index view.");
+								ok(!exists("a:contains('Course to Delete')"), "Course has no link in courses.index view.");
 								click("#logout");
 							});
 						});

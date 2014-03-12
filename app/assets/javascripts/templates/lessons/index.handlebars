@@ -8,4 +8,6 @@
   {{/each}}
 </ul>
 
-<button {{action "new"}} id="new-lesson">Create a Lesson</button>
+{{#if userIsOwner}}
+  <button {{action "new"}} id="new-lesson">Create a Lesson</button>
+{{/if}}

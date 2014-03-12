@@ -17,7 +17,7 @@ test("successfully", function() {
 			click("#new-teacher");
 			click("#create-user");
 			andThen(function() {
-				fillIn("#username-or-password", "bob3");
+				fillIn("#username-or-email", "bob3");
 				fillIn("#login-password", "something");
 				click("#new-session");
 				andThen(function() {
@@ -59,7 +59,7 @@ test("without a name (unsuccessfully)", function() {
 			click("#new-teacher");
 			click("#create-user");
 			andThen(function() {
-				fillIn("#username-or-password", "bob4");
+				fillIn("#username-or-email", "bob4");
 				fillIn("#login-password", "something");
 				click("#new-session");
 				andThen(function() {
@@ -80,11 +80,8 @@ test("without logging in (unsuccessfully)", function() {
 		ok(!exists("#logout"), "Teacher is not logged in.");
 		click("#courses");
 		andThen(function() {
-			ok(!exists(".new-course-button"), "View does not display new-course-button.");
-			andThen(function() {
-				visit('/courses/new').then(function() {
-					ok(exists("#new-session"), "Teacher redirected to login view after trying to create course by visiting the courses/new route.");
-				});
+			visit('/courses/new').then(function() {
+				ok(exists("#new-session"), "Teacher redirected to login view after trying to create course by visiting the courses/new route.");
 			});
 		});
 	});

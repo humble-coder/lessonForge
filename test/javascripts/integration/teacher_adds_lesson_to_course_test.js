@@ -17,7 +17,7 @@ test("successfully", function() {
 			click("#new-teacher");
 			click("#create-user");
 			andThen(function() {
-				fillIn("#username-or-password", "bob");
+				fillIn("#username-or-email", "bob");
 				fillIn("#login-password", "something");
 				click("#new-session");
 				andThen(function() {
@@ -37,6 +37,7 @@ test("successfully", function() {
 								click("#save-lesson");
 								andThen(function() {
 									ok(exists("h3:contains('New Lesson')"), "Lessons index view has linked to new lesson displayed.");
+									click("#logout");
 								});
 							});
 						});
@@ -50,26 +51,41 @@ test("successfully", function() {
 
 test("without saving (cancelling)", function() {
 	visit('/').then(function() {
-		click("#courses");
+		click("#new-user");
 		andThen(function() {
-			click("#new-course");
-			fillIn("#new-course-name", "Course with a Canceled Lession");
-			click("#save-course");
+			fillIn("#full-name", "Bob1");
+			fillIn("#email-address", "bob1@something.com");
+			fillIn("#username", "bob1");
+			fillIn("#password", "something");
+			fillIn("#password-confirmation", "something");
+			click("#new-teacher");
 			andThen(function() {
-				ok(exists("#view-lessons"), "Course has view-lessons button.");
-				click("#view-lessons");
+				click("#create-user");
 				andThen(function() {
-					click("#new-lesson");
+					fillIn("#username-or-email", "bob1");
+					fillIn("#login-password", "something");
+					click("#new-session");
 					andThen(function() {
-						fillIn("#new-lesson-name", "Changed my mind");
-						click("#cancel-new-lesson");
+					  click(".new-course-button");
+						fillIn("#new-course-name", "Course with a Canceled Lession");
+						click("#save-course");
 						andThen(function() {
-							ok(!exists("a:contains('Changed my mind')"), "New lesson link not present.");
-							click("#logout");
+							click("#view-lessons");
+							andThen(function() {
+								click("#new-lesson");
+								andThen(function() {
+									fillIn("#new-lesson-name", "Changed my mind");
+									click("#cancel-new-lesson");
+									andThen(function() {
+										ok(!exists("a:contains('Changed my mind')"), "New lesson link not present.");
+										click("#logout");
+									});
+								});
+							});
 						});
 					});
 				});
 			});
 		});
-	});
+  });
 });

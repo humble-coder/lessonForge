@@ -9,5 +9,7 @@
    <b>This lesson has no questions.</b><br/>
 {{/each}}
 
-<button {{action "edit" this}} id="edit-lesson">Edit</button>
-<button {{action "delete" this}} id="delete-lesson">Delete</button>
+{{#if userIsOwner}}
+	<button {{action "edit" this}} id="edit-lesson">Edit</button>
+	<button {{action "delete" this}} id="delete-lesson">Delete</button>
+{{/if}}

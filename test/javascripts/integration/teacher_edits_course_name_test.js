@@ -4,12 +4,12 @@ module("Teacher edits course name", {
 	}
 });
 
-test("successfully", function(){
+test("successfully", function() {
 
 	visit('/').then(function() {
 		click("#new-user");
 		andThen(function() {
-			fillIn("full-name", "Bob6");
+			fillIn("#full-name", "Bob6");
 			fillIn("#email-address", "bob6@something.com");
 			fillIn("#username", "bob6");
 			fillIn("#password", "something");
@@ -17,7 +17,7 @@ test("successfully", function(){
 			click("#new-teacher");
 			click("#create-user");
 			andThen(function() {
-				fillIn("#username-or-password", "bob6");
+				fillIn("#username-or-email", "bob6");
 				fillIn("#login-password", "something");
 				click("#new-session");
 				andThen(function() {
@@ -33,6 +33,7 @@ test("successfully", function(){
 								click("#update-course");
 								andThen(function() {
 									ok(exists("h2:contains('Edited Course')"), "Edited course has new header.");
+									click("#logout");
 								});
 							});
 						});
@@ -43,26 +44,42 @@ test("successfully", function(){
 	});
 });
 
-test("without saving the changes (cancelling)", function(){
+test("without saving the changes (cancelling)", function() {
 
 	visit('/').then(function() {
-		click("#courses");
+		click("#new-user");
 		andThen(function() {
-			click("#new-course");
-			fillIn("#new-course-name", "Will not Change");
-			click("#save-course");
+			fillIn("#full-name", "Bob7");
+			fillIn("#email-address", "bob7@something.com");
+			fillIn("#username", "bob7");
+			fillIn("#password", "something");
+			fillIn("#password-confirmation", "something");
+			click("#new-teacher");
+			click("#create-user");
 			andThen(function() {
-				ok(exists("#edit-course"), "Course has edit-course link.");
-				click("#edit-course");
+				fillIn("#username-or-email", "bob7");
+				fillIn("#login-password", "something");
+				click("#new-session");
 				andThen(function() {
-					fillIn("#edit-course-name", "Changed");
-					click("#cancel-update");
+					click(".new-course-button");
 					andThen(function() {
-						ok(exists("h2:contains('Will not Change')"), "Course has same name.");
-						click("#logout");
+						fillIn("#new-course-name", "Will not Change");
+						click("#save-course");
+						andThen(function() {
+							ok(exists("#edit-course"), "Course has edit-course link.");
+							click("#edit-course");
+							andThen(function() {
+								fillIn("#edit-course-name", "Changed");
+								click("#cancel-update");
+								andThen(function() {
+									ok(exists("h2:contains('Will not Change')"), "Course has same name.");
+									click("#logout");
+								});
+							});
+						});
 					});
 				});
 			});
 		});
-	});
+  });
 });

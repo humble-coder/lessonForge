@@ -1,44 +1,62 @@
-module("Teacher multiple-choice question to lesson", {
+module("Teacher adds multiple-choice question to lesson", {
 	setup: function() {
 		App.reset();
 	}
 });
 
+
 test("successfully", function() {
+
 	visit('/').then(function() {
-		click("#courses");
+		click("#new-user");
 		andThen(function() {
-			click("#new-course");
-			fillIn("#new-course-name", "Course Whose Lesson Will Have an MC Question");
+			fillIn("#full-name", "Bob");
+			fillIn("#email-address", "bob2@something.com");
+			fillIn("#username", "bob2");
+			fillIn("#password", "something");
+			fillIn("#password-confirmation", "something");
+			click("#new-teacher");
+			click("#create-user");
 			andThen(function() {
-				click("#save-course");
+				fillIn("#username-or-email", "bob2");
+				fillIn("#login-password", "something");
+				click("#new-session");
 				andThen(function() {
-					click("#view-lessons");
+					click(".new-course-button");
+					fillIn("#new-course-name", "Course with a Lesson");
+					click("#save-course");
 					andThen(function() {
-						click("#new-lesson");
+						click("#view-lessons");
 						andThen(function() {
-							fillIn("#new-lesson-name", "Lesson with a Question");
-							click("#save-lesson");
+							click("#new-lesson");
 							andThen(function() {
-								ok(exists("#edit-lesson"), "Lesson view has edit-lesson button.");
-								click("#edit-lesson");
+								fillIn("#new-lesson-name", "New Lesson");
+								click("#save-lesson");
 								andThen(function() {
-									ok(exists("#new-question"), "Lesson-edit view has new-question button.");
-									click("#new-question");
-									ok(exists(".question-content"), "Lesson-edit view has new-question input box.");
-									fillIn(".question-content", "New Question");
-									ok(exists(".save-question"), "Lesson-edit view has save-question button.");
-									click(".save-question")
-									click("#done");
+									ok(exists("#edit-lesson"), "Lesson view has edit-lesson button.");
+									click("#edit-lesson");
 									andThen(function() {
-										ok(exists("span:contains('New Question')"), "Question content is displayed.");
+										ok(exists("#new-question"), "Lesson-edit view has new-question button.");
+										click("#new-question");
+										andThen(function() {
+											ok(exists(".question-content"), "Lesson-edit view has new-question input box.");
+											fillIn(".question-content", "New Question");
+											andThen(function() {
+												click(".save-question");
+												click("#done");
+												andThen(function() {
+													ok(exists("span:contains('New Question')"), "Lesson view has question displayed.");
+													click("#logout");
+												});
+											});
+										});
 									});
 								});
 							});
 						});
-					});
-				});
-			});
-		});
+        	});
+      	});
+    	});
+  	});
 	});
 });
