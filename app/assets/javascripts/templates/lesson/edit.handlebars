@@ -13,9 +13,9 @@
   <br>
     {{#each answer in question.answers}}
       {{#if controllers.answer.isEditing}}
-        {{input type="text" placeholder=answer.content value=answer.content}}
+        {{input type="text" placeholder=answer.content value=answer.content class="answer-content"}}
         Correct? {{input type="checkbox" checked=answer.correct}}
-        <button {{action 'saveAnswer' answer}}>Save Answer</button>
+        <button {{action 'saveAnswer' answer}} class="save-answer">Save Answer</button>
         <button {{action 'removeAnswer' answer}}>Remove Answer</button>
         <br/>
       {{else}}
@@ -26,7 +26,7 @@
       {{/if}}
     {{/each}}
   <br>
-  <button {{action 'addAnswer' question}}>Add Answer</button>
+  <button {{action 'addAnswer' question}} class="add-answer">Add Answer</button>
   <br>
 {{else}}
     <b>This lesson has no questions.</b>

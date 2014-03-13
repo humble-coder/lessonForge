@@ -1,4 +1,4 @@
-module("Teacher adds multiple-choice question to lesson", {
+module("Teacher adds multiple-choice question and answer to lesson", {
 	setup: function() {
 		App.reset();
 	}
@@ -43,9 +43,13 @@ test("successfully", function() {
 											fillIn(".question-content", "New Question");
 											andThen(function() {
 												click(".save-question");
+												click(".add-answer");
+												fillIn(".answer-content", "New Answer");
+												click(".save-answer");
 												click("#done");
 												andThen(function() {
 													ok(exists("span:contains('New Question')"), "Lesson view has question displayed.");
+													ok(exists("div:contains('New Answer')"), "Lesson view has question's answer displayed.");
 													click("#logout");
 												});
 											});
