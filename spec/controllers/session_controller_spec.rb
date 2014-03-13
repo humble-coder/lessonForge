@@ -6,18 +6,20 @@ describe SessionController do
 			user = create(:user)
 			post 'create', { username_or_email: user.username, password: user.password }
 			results = JSON.parse(response.body)
+			
 
-			expect(results['api_key']['access_token']).to match(/\S{32}/)
-			expect(results['api_key']['user_id']).to eq(user.id)
+			expect(results['session'][1]['access_token']).to match(/\S{32}/)
+			expect(results['session'][1]['user_id']).to eq(user.id)
 		end
 
 		it "authenticates with email" do
 			user = create(:user)
 			post 'create', { username_or_email: user.email, password: user.password }
 			results = JSON.parse(response.body)
+			
 
-			expect(results['api_key']['access_token']).to match(/\S{32}/)
-			expect(results['api_key']['user_id']).to eq(user.id)
+			expect(results['session'][1]['access_token']).to match(/\S{32}/)
+			expect(results['session'][1]['user_id']).to eq(user.id)
 		end
 
 		it "doesn't authenticate with invalid info" do

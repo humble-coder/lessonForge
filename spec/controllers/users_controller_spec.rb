@@ -14,8 +14,10 @@ describe UsersController do
       }
       results = JSON.parse(response.body)
 
-      expect(results['api_key']['access_token']).to match(/\S{32}/)
-      expect(results['api_key']['user_id']).to be > 0
+      expect(results["user"]["name"]).to eq("Billy Blowers")
+      expect(results["user"]["username"]).to eq("billy")
+      expect(results["user"]["email"]).to eq("billy_blowers@example.com")
+      expect(results["user"]["teacher"]).to eq(false)
     end
 
     it "doesn't create a user with invalid data" do
