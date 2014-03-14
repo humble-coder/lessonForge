@@ -29,7 +29,6 @@ test("successfully", function() {
 					fillIn("#username-or-email", "bob8@something.com");
 					ok(exists("#login-password"), "View has password field displayed.");
 					fillIn("#login-password", "something");
-					ok(exists("#new-session"), "View has login button displayed.");
 					click("#new-session");
 					andThen(function() {
 						ok(exists("#logout"), "View has logout link displayed - login successful.");

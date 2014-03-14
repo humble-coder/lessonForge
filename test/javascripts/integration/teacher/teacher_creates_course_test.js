@@ -73,16 +73,3 @@ test("without a name (unsuccessfully)", function() {
 		});
 	});
 });
-
-test("without logging in (unsuccessfully)", function() {
-
-	visit('/').then(function() {
-		ok(!exists("#logout"), "Teacher is not logged in.");
-		click("#courses");
-		andThen(function() {
-			visit('/courses/new').then(function() {
-				ok(exists("#new-session"), "Teacher redirected to login view after trying to create course by visiting the courses/new route.");
-			});
-		});
-	});
-});

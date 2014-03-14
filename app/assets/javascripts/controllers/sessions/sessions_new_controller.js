@@ -14,7 +14,7 @@ App.SessionsNewController = Ember.ObjectController.extend(Ember.Validations.Mixi
 
 	required_present: function() {
 		return this.get('username_or_email') && this.get('password');
-	},
+	}.property('username_or_email', 'password'),
 
 	actions: {
 		loginUser: function() {

@@ -29,8 +29,8 @@ App.UsersNewController = Ember.ObjectController.extend(Ember.Validations.Mixin, 
 
 	actions: {
 		submit: function(user) {
-      user.save();
-      this.transitionToRoute('sessions.new');
+      var self = this;
+      user.save().then(self.transitionToRoute('sessions.new'));
     	// var data = this.getProperties('name', 'email', 'username', 'password', 'password_confirmation', 'teacher');
      //  $.ajax({
      //    type: "POST",

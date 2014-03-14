@@ -3,7 +3,7 @@ App.CourseIndexController = Ember.ObjectController.extend(Ember.Validations.Mixi
 	userIsOwner: function() {
 		var user_id = this.get('model').get('user_id');
 		return (App.AuthManager.isAuthenticated() && (App.AuthManager.get('apiKey.user.id') == user_id));
-	},
+	}.property('App.AuthManager.apiKey'),
 
 	actions: {
 		delete: function(course) {
