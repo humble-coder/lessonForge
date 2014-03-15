@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140309185848) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "answers", force: true do |t|
     t.text     "content"
     t.integer  "question_id"
@@ -21,7 +24,7 @@ ActiveRecord::Schema.define(version: 20140309185848) do
     t.datetime "updated_at"
   end
 
-  add_index "answers", ["question_id"], name: "index_answers_on_question_id"
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
 
   create_table "api_keys", force: true do |t|
     t.integer  "user_id"
@@ -31,8 +34,8 @@ ActiveRecord::Schema.define(version: 20140309185848) do
     t.datetime "created_at"
   end
 
-  add_index "api_keys", ["access_token"], name: "index_api_keys_on_access_token", unique: true
-  add_index "api_keys", ["user_id"], name: "index_api_keys_on_user_id"
+  add_index "api_keys", ["access_token"], name: "index_api_keys_on_access_token", unique: true, using: :btree
+  add_index "api_keys", ["user_id"], name: "index_api_keys_on_user_id", using: :btree
 
   create_table "courses", force: true do |t|
     t.string   "name"
@@ -48,7 +51,7 @@ ActiveRecord::Schema.define(version: 20140309185848) do
     t.datetime "updated_at"
   end
 
-  add_index "lessons", ["course_id"], name: "index_lessons_on_course_id"
+  add_index "lessons", ["course_id"], name: "index_lessons_on_course_id", using: :btree
 
   create_table "questions", force: true do |t|
     t.integer  "lesson_id"
@@ -57,7 +60,7 @@ ActiveRecord::Schema.define(version: 20140309185848) do
     t.text     "content"
   end
 
-  add_index "questions", ["lesson_id"], name: "index_questions_on_lesson_id"
+  add_index "questions", ["lesson_id"], name: "index_questions_on_lesson_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -69,7 +72,7 @@ ActiveRecord::Schema.define(version: 20140309185848) do
     t.boolean  "teacher",         default: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["username"], name: "index_users_on_username", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end

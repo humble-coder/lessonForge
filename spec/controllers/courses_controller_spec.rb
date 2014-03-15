@@ -21,7 +21,10 @@ describe CoursesController do
 
 		it "renders the courses/create response body as JSON" do
 			post :create, course: { name: 'Another Course' }, format: :json
-			expect(response.body).to eq("{\"course\":{\"id\":1,\"name\":\"Another Course\",\"lessons\":[]}}")
+			results = JSON.parse(response.body)
+
+			expect(results["course"]["name"]).to eq("Another Course")
+			expect(results["course"]["lessons"]).to eq([])
 		end
 	end
 

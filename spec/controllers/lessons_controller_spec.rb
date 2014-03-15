@@ -10,30 +10,30 @@ describe LessonsController do
 
     it "renders the response body as JSON" do
       post :create, lesson: { name: 'Another Lesson' }, format: :json
-      expect(response.body).to eq("{\"lesson\":{\"id\":1,\"name\":\"Another Lesson\",\"questions\":[]}}")
+      results = JSON.parse(response.body)
+
+      expect(results["lesson"]["name"]).to eq("Another Lesson")
+      expect(results["lesson"]["questions"]).to eq([])
     end
   end
 
+  describe "PATCH update" do
+    it "has a 200 status code and updates course attributes" do
+      lesson = FactoryGirl.create :lesson
+      patch :update, id: lesson.id, lesson: attributes_for(:lesson, name: "Changed Lesson")
+      lesson.reload
 
-  # describe "GET 'show'" do
-  #   it "returns http success" do
-  #     get 'show'
-  #     response.should be_success
-  #   end
-  # end
+      expect(response.status).to eq(200)
+      expect(lesson.name).to eq("Changed Lesson")
+    end
+  end
 
-  # describe "GET 'new'" do
-  #   it "returns http success" do
-  #     get 'new'
-  #     response.should be_success
-  #   end
-  # end
-
-  # describe "GET 'edit'" do
-  #   it "returns http success" do
-  #     get 'edit'
-  #     response.should be_success
-  #   end
-  # end
-
+  describe "DELETE destroy" do
+    it "has a 200 status code" do
+      lesson = FactoryGirl.create :lesson
+      
+      expect { delete :destroy, id: lesson.id }.to change(Lesson, :count).by(-1)
+      expect(response.status).to eq(200)
+    end
+  end
 end
