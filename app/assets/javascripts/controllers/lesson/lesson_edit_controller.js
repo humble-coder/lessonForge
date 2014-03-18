@@ -2,7 +2,19 @@ App.LessonEditController = Ember.ObjectController.extend({
 
 	needs: ['course', 'question', 'answer'],
 
+	isEditingLessonName: false,
+
 	actions: {
+
+		editLessonName: function() {
+			this.set('isEditingLessonName', true);
+		},
+
+		updateLessonName: function(lesson) {
+			var self = this;
+			lesson.save().then(self.set('isEditingLessonName'), false);
+		},
+		
 		addAnswer: function(question) {
 			answers = question.get('answers');
 			answer = this.store.createRecord('answer');

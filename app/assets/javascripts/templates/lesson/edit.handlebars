@@ -1,3 +1,11 @@
+{{#if isEditingLessonName}}
+  {{input type="text" placeholder=name value=name id="lesson-name"}}<br/>
+  <button {{action 'updateLessonName' this}} id="update-lesson-name">Update Lesson Name</button>
+{{else}}
+  <button {{action 'editLessonName'}} id="edit-lesson-name">Edit Lesson Name</button>
+{{/if}}
+<br/>
+
 {{#each question in questions}}
   {{#if controllers.question.isEditing}}
     {{input type="text" placeholder=question.content value=question.content class="question-content"}}
