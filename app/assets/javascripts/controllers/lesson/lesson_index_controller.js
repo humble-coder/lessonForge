@@ -12,11 +12,15 @@ App.LessonIndexController = Ember.ObjectController.extend({
 
 	actions: {
 		delete: function(lesson) {
+			var self = this;
 			if(this.get('userIsOwner')) {
 				var userConfirm = confirm("Are you sure you want to delete the lesson '" + lesson.get('name') + "'?");
 				if (userConfirm) {
-					lesson.destroyRecord();
-					this.transitionToRoute('lessons');
+					var self = this;
+					var course = this.get('controllers.course').get('model');
+					lessons = course.get('lessons');
+					lessons.removeObject(lesson);
+					lesson.destroyRecord().then(self.transitionToRoute('lessons'));
 				}
 				else {
 					this.transitionToRoute('lesson', lesson);
