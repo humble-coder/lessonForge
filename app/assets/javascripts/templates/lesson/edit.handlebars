@@ -6,8 +6,8 @@
     <br/>
   {{else}}
     {{question.content}}
-    <button {{action 'editQuestion'}}>Edit Question</button>
-    <button {{action 'removeQuestion' question}}>Remove Question</button>
+    <button {{action 'editQuestion'}} class="edit-question">Edit Question</button>
+    <button {{action 'removeQuestion' question}} class="remove-question">Remove Question</button>
     <br/> 
   {{/if}}
   <br>
@@ -16,7 +16,7 @@
         {{input type="text" placeholder=answer.content value=answer.content class="answer-content"}}
         Correct? {{input type="checkbox" checked=answer.correct}}
         <button {{action 'saveAnswer' answer}} class="save-answer">Save Answer</button>
-        <button {{action 'removeAnswer' answer}}>Remove Answer</button>
+        <button {{action 'removeAnswer' answer}} class="remove-answer">Remove Answer</button>
         <br/>
       {{else}}
         {{answer.content}}

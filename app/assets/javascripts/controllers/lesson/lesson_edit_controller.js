@@ -39,7 +39,11 @@ App.LessonEditController = Ember.ObjectController.extend({
 		},
 
 		removeQuestion: function(question) {
-			question.destroyRecord();
+			var self = this;
+			var lesson = this.get('model');
+			questions = lesson.get('questions');
+			questions.removeObject(question);
+			question.destroyRecord().then(self.transitionToRoute('lesson.edit'));
 		},
 
 		saveAnswer: function(answer) {

@@ -36,7 +36,7 @@ test("successfully", function() {
 								equal(find("#new-lesson-name").val(), "New Lesson", "New-lesson-name field has string 'New Lesson.'");
 								click("#save-lesson");
 								andThen(function() {
-									ok(exists("h3:contains('New Lesson')"), "Lessons index view has linked to new lesson displayed.");
+									ok(exists("h3:contains('New Lesson')"), "Lesson index view has title of new displayed.");
 									click("#logout");
 								});
 							});
