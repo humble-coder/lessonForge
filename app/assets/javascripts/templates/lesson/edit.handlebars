@@ -29,7 +29,7 @@
       {{else}}
         {{answer.content}}
         <button {{action 'editAnswer'}}>Edit Answer</button>
-        <button {{action 'removeAnswer' answer}}>Remove Answer</button>
+        <button {{action 'removeAnswer' question answer}}>Remove Answer</button>
         <br/>
       {{/if}}
     {{/each}}
