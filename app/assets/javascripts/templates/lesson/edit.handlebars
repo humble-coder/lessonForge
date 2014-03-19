@@ -28,8 +28,8 @@
         <br/>
       {{else}}
         {{answer.content}}
-        <button {{action 'editAnswer'}}>Edit Answer</button>
-        <button {{action 'removeAnswer' question answer}}>Remove Answer</button>
+        <button {{action 'editAnswer'}} class="edit-answer">Edit Answer</button>
+        <button {{action 'removeAnswer' question answer}} class="remove-answer">Remove Answer</button>
         <br/>
       {{/if}}
     {{/each}}
