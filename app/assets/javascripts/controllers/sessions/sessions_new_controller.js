@@ -38,8 +38,9 @@ App.SessionsNewController = Ember.ObjectController.extend(Ember.Validations.Mixi
 							self.set('attemptedTransition', null);
 						}
 						else {
-							user = self.store.find('user', user.id);
-							router.transitionTo('user.index', user);
+							self.store.find('user', user.id).then(function(user) {
+								router.transitionTo('user', user);
+							});
 						}
 					});
 				},

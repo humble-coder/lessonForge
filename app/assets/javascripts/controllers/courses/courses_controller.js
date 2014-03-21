@@ -1,0 +1,1 @@
+App.CoursesController = Ember.ObjectController.extend();
