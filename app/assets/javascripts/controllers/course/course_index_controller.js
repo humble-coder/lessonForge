@@ -1,21 +1,16 @@
 App.CourseIndexController = Ember.ObjectController.extend(Ember.Validations.Mixin, {
 
-	course: function() {
-		this.get('model');
-	},
-
-	courseUserId: function() {
-		return this.get('model').get('user_id');
-	}.property('course'),
-
 	userIsOwner: function() {
+		var course = this.get('model');
+		var courseUserId = this.get('courseUserId');
+
 		if(App.AuthManager.isAuthenticated()) {
-			return App.AuthManager.get('apiKey.user.id') == this.get('courseUserId');
+			return App.AuthManager.get('apiKey.user.id') == courseUserId;
 		}
 		else {
 			return false;
 		}
-	}.property('App.AuthManager.apiKey'),
+	}.property('App.AuthManager.apiKey', 'courseUserId'),
 
 	actions: {
 		delete: function(course) {
