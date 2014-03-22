@@ -6,11 +6,12 @@ App.LessonEditRoute = Ember.Route.extend({
 			this.redirectToLogin(transition);
 		}
 		else {
-			var course = this.modelFor('course.index');
-			var user_id = course.get('user_id');
-			if(!(App.AuthManager.get('apiKey.user.id') == user_id)) {
-				alert("You must own the lesson to edit it.");
-				this.transitionTo('lesson.index', lesson);
+			var lesson = this.modelFor('lesson');
+			var course = this.modelFor('course');
+			var user = this.modelFor('user');
+			if(!user.get('courses').contains(course)) {
+				alert("You must own the course to edit one of its lessons.");
+				this.transitionTo('lesson', lesson);
 			}
 		}
 
