@@ -6,7 +6,6 @@ FactoryGirl.define do
     username "joe_user"
     email "joe_user@example.com"
     password "$2a$10$wJTPdvpGgzDvkXChrcPyqOQrFFawzGu89B1rZze/lVIcJKWiNeAqS"
-    #password_digest "$2a$10$wJTPdvpGgzDvkXChrcPyqOQrFFawzGu89B1rZze/lVIcJKWiNeAqS"
     password_confirmation "$2a$10$wJTPdvpGgzDvkXChrcPyqOQrFFawzGu89B1rZze/lVIcJKWiNeAqS"
   end
 end

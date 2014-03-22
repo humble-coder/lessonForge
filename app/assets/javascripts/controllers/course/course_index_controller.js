@@ -1,26 +1,31 @@
 App.CourseIndexController = Ember.ObjectController.extend(Ember.Validations.Mixin, {
 
 	userIsOwner: function() {
-		var user_id = this.get('model').get('user_id');
-		return (App.AuthManager.isAuthenticated() && (App.AuthManager.get('apiKey.user.id') == user_id));
-	}.property('App.AuthManager.apiKey'),
+		var course = this.get('model');
+		var user = this.get('user');
+
+		if(App.AuthManager.isAuthenticated()) {
+			if(user) {
+				return user.get('courses').contains(course);
+			}
+		}	
+		else {
+			return false;
+		}
+	}.property('App.AuthManager.apiKey', 'user', 'course'),
 
 	actions: {
 		delete: function(course) {
-			if(this.get('userIsOwner')) {
-				var userConfirm = confirm("Are you sure you want to delete the course '" + course.get('name') + "'?");
-				if(userConfirm) {
-					course.destroyRecord();
-					this.transitionToRoute('courses');
-				} 
-				else {
-					this.transitionToRoute('course', course);
-				}
-			}
+			var userConfirm = confirm("Are you sure you want to delete the course '" + course.get('name') + "'?");
+			if(userConfirm) {
+				var self = this;
+				var user = this.get('user');
+				var courses = user.get('courses');
+				course.destroyRecord().then(courses.removeObject(course)).then(self.transitionToRoute('user', user));
+			} 
 			else {
-				alert("You must own the course to delete it.");
 				this.transitionToRoute('course', course);
-			}	
+			}
 		},
 
 		edit: function(course) {

@@ -20,13 +20,35 @@ describe CoursesController do
 		end
 
 		it "renders the courses/create response body as JSON" do
-			post :create, course: { name: 'Another Course' }, format: :json
+			user = create(:user)
+			post :create, course: { name: 'Another Course', user: user, user_id: user.id }, format: :json
 			results = JSON.parse(response.body)
 
 			expect(results["course"]["name"]).to eq("Another Course")
 			expect(results["course"]["lessons"]).to eq([])
+			expect(results["course"]["user_id"]).to eq(user.id)
 		end
 	end
+
+	describe "GET show" do
+		it "has a 200 status code" do
+			course = create(:course)
+			get :show, id: course.id
+
+			expect(response.status).to eq(200)
+		end
+
+		it "renders the courses/show response body as JSON" do
+			course = create(:course)
+			get :show, id: course.id
+      results = JSON.parse(response.body)
+
+      expect(results["course"]["name"]).to eq(course.name)
+      expect(results["course"]["lessons"]).to eq([])
+      expect(results["course"]["user_id"]).to eq(course.user_id)
+      expect(results["course"]["id"]).to eq(course.id)
+    end
+  end
 
 	describe "PATCH update" do
 		it "has a 200 status code and updates course attributes" do

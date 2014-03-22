@@ -6,7 +6,7 @@ class CoursesController < ApplicationController
 	end
 
 	def show
-		respond_with Course.find(params[:id])
+		render json: Course.find(params[:id])
 	end
 
 	def create

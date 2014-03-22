@@ -6,9 +6,9 @@ App.LessonsNewRoute = Ember.Route.extend({
 			this.redirectToLogin(transition);
 		}
 		else {
-			var course = this.modelFor('course.index');
-			var user_id = course.get('user_id');
-			if(!(App.AuthManager.get('apiKey.user.id') == user_id)) {
+			var course = this.modelFor('course');
+			var user = this.modelFor('user');
+			if(!user.get('courses').contains(course)) {
 				alert("You must own the course to add a lesson to it.");
 				this.transitionTo('course.index', course);
 			}

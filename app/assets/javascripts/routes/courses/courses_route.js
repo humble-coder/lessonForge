@@ -1,0 +1,1 @@
+App.CoursesRoute = Ember.Route.extend();
