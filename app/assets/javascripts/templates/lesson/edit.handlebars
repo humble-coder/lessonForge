@@ -9,9 +9,15 @@
 {{#each question in questions}}
   {{#if controllers.question.isEditing}}
     {{input type="text" placeholder=question.content value=question.content class="question-content"}}
-    <button {{action 'saveQuestion' question}} class="save-question">Save Question</button>
-    <button {{action 'removeQuestion' question}} class="remove-question">Remove Question</button>
-    <br/>
+    {{#if question.content}}
+      <button {{action 'saveQuestion' question}} class="save-question">Save Question</button>
+      <button {{action 'removeQuestion' question}} class="remove-question">Remove Question</button>
+      <br/>
+    {{else}}
+      <button disabled="true">Save Question</button>
+      <button disabled="true">Remove Question</button>
+      <br/>
+    {{/if}}
   {{else}}
     {{question.content}}
     <button {{action 'editQuestion'}} class="edit-question">Edit Question</button>
@@ -23,9 +29,15 @@
       {{#if controllers.answer.isEditing}}
         {{input type="text" placeholder=answer.content value=answer.content class="answer-content"}}
         Correct? {{input type="checkbox" checked=answer.correct}}
-        <button {{action 'saveAnswer' answer}} class="save-answer">Save Answer</button>
-        <button {{action 'removeAnswer' answer}} class="remove-answer">Remove Answer</button>
-        <br/>
+        {{#if answer.content}}
+          <button {{action 'saveAnswer' answer}} class="save-answer">Save Answer</button>
+          <button {{action 'removeAnswer' answer}} class="remove-answer">Remove Answer</button>
+          <br/>
+        {{else}}
+          <button disabled="true">Save Answer</button>
+          <button disabled="true">Remove Answer</button>
+          <br/>
+        {{/if}}
       {{else}}
         {{answer.content}}
         <button {{action 'editAnswer'}} class="edit-answer">Edit Answer</button>

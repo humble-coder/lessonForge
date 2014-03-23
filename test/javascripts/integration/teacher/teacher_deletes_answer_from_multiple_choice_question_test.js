@@ -44,13 +44,15 @@ test("successfully", function() {
 													click(".add-answer")
 													fillIn(".answer-content", "New Answer");
 													click(".save-answer");
-													ok(exists(".remove-answer"), "Remove-answer button is displayed.");
-													click(".remove-answer");
-													click("#done");
 													andThen(function() {
-														ok(exists("span:contains('New Question')"), "Lesson index template has question displayed.");
-														ok(!exists("div:contains('New Answer')"), "Lesson index template has no answers displayed.");
-														click("#logout");
+														ok(exists(".remove-answer"), "Remove-answer button is displayed.");
+														click(".remove-answer");
+														click("#done");
+														andThen(function() {
+															ok(exists("span:contains('New Question')"), "Lesson index template has question displayed.");
+															ok(!exists("div:contains('New Answer')"), "Lesson index template has no answers displayed.");
+															click("#logout");
+														});
 													});
 												});
 											});
