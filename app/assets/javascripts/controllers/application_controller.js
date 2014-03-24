@@ -1,17 +1,19 @@
 App.ApplicationController = Ember.Controller.extend({
 	currentUser: function() {
-		var user_id = App.AuthManager.get('apiKey.user.id');
-		return this.store.find('user', user_id);
+		if(this.get('isAuthenticated')) {
+			if(!App.AuthManager.get('apiKey.user.name')) {
+				var user_id = App.AuthManager.get('apiKey.user');
+				return this.store.find('user', user_id);
+			}
+			else {
+				var user_id = App.AuthManager.get('apiKey.user.id');
+				return this.store.find('user', user_id);
+			}
+		}
 	}.property('App.AuthManager.apiKey'),
 
 	isAuthenticated: function() {
-		if(App.AuthManager.get('apiKey.user.name')) {
-			return App.AuthManager.isAuthenticated();
-		}
-		else {
-			App.AuthManager.reset();
-			this.transitionToRoute('index');
-		}	
+		return App.AuthManager.isAuthenticated();
 	}.property('App.AuthManager.apiKey'),
 
 	actions: {

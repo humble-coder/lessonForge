@@ -6,12 +6,20 @@ App.CoursesNewRoute = Ember.Route.extend({
 			this.redirectToLogin(transition);
 		}
 		else {
-			if(!App.AuthManager.get('apiKey.user.teacher')) {
-			  alert("You must be a teacher to create courses.");
-			  this.transitionTo('index');
+			if(!App.AuthManager.get('apiKey.user.name')) {
+				var user = this.modelFor('user');
+				if(!user.get('teacher')) {
+					alert("You must be a teacher to create courses.");
+			  	this.transitionTo('index');
+				}
+		  }
+		  else {
+		  	if(!App.AuthManager.get('apiKey.user.teacher')) {
+		  		alert("You must be a teacher to create courses.");
+			  	this.transitionTo('index');
+		  	}
 		  }
 		}
-
 	},
   
   // Redirect to the login page and store the current transition so that
