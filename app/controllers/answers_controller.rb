@@ -40,6 +40,6 @@ class AnswersController < ApplicationController
 	private
 
 	def answer_params
-		params.require(:answer).permit(:content, :question_id, :correct) if params[:answer]
+		params.require(:answer).permit(:content, :question_id, :id, :correct) if params[:answer]
 	end
 end
