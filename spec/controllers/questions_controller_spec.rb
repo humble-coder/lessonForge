@@ -12,7 +12,6 @@ describe QuestionsController do
 			results = JSON.parse(response.body)
 
 			expect(results["question"]["content"]).to eq("A question")
-			expect(results["question"]["answers"]).to eq([])
 		end
 	end
 

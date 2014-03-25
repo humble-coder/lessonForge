@@ -32,6 +32,12 @@ App.LessonEditRoute = Ember.Route.extend({
 	},
 	
 	model: function() {
-		return this.modelFor('lesson.index');
+		return this.modelFor('lesson');
+	},
+
+	setupController: function(controller, model) {
+		controller.set('model', model);
+		var course = this.modelFor('course');
+		controller.set('course', course);
 	}
 });

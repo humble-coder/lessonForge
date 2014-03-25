@@ -8,8 +8,8 @@ App.User = DS.Model.extend({
 	courses:               DS.hasMany('course', {async: true}), 
 });
 
-App.UserSerializer = DS.ActiveModelSerializer.extend(DS.EmbeddedRecordsMixin, {
-  attrs: {
-    courses: {embedded: 'always'}
-  }
-});
+// App.UserSerializer = DS.ActiveModelSerializer.extend(DS.EmbeddedRecordsMixin, {
+//   attrs: {
+//     courses: {embedded: 'always'}
+//   }
+// });

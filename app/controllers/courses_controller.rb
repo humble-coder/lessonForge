@@ -22,7 +22,7 @@ class CoursesController < ApplicationController
 	def update
 		course = Course.find(params[:id])
 
-		if course.update_attributes(course_params)
+		if course.update(course_params)
 			render json: course, status: :ok
 		else
 			render json: { errors: course.errors.messages }, status: 422
@@ -43,8 +43,6 @@ class CoursesController < ApplicationController
 	private
 	
 	def course_params
-		cp = params.require(:course).permit(:name, :lessons, :id, :user_id)
-		cp[:lessons] = [] unless cp[:lessons]
-		cp
+		params.require(:course).permit(:name, :id, :user_id, lessons: [:name, :id, :course_id, :questions])
 	end
 end

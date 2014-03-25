@@ -8,8 +8,8 @@ App.CourseEditController = Ember.ObjectController.extend(Ember.Validations.Mixin
 	
 	actions: {
 		update: function(course) {
-			course.save();
-			this.transitionToRoute('course', course);
+			var self = this;
+			course.save().then(self.transitionToRoute('course', course));
 		},
 
 		cancel: function(course) {

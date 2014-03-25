@@ -12,23 +12,27 @@ App.LessonEditController = Ember.ObjectController.extend({
 
 		updateLessonName: function(lesson) {
 			var self = this;
+			var course = this.get('course');
+			lesson.set('course', course);
+			lesson.set('course_id', course.id);
 			lesson.save().then(self.set('isEditingLessonName'), false);
 		},
 		
 		addAnswer: function(question) {
-			answers = question.get('answers');
-			answer = this.store.createRecord('answer');
-			answer.set('question_id', question.id);
+			var answers = question.get('answers');
+			var answer = this.store.createRecord('answer');
 			answer.set('question', question);
+			answer.set('question_id', question.id);
 			answers.pushObject(answer);
 			this.get('controllers.answer').set('isEditing', true);
 		},
 
-		addQuestion: function(lesson) {
-			questions = lesson.get('questions');
-			question = this.store.createRecord('question');
-			question.set('lesson_id', lesson.id);
+		addQuestion: function() {
+			var lesson = this.get('model');
+			var questions = lesson.get('questions');
+			var question = this.store.createRecord('question');
 			question.set('lesson', lesson);
+			question.set('lesson_id', lesson.id);
 			questions.pushObject(question);
 			this.get('controllers.question').set('isEditing', true);
 		},
@@ -39,6 +43,9 @@ App.LessonEditController = Ember.ObjectController.extend({
 
 		saveQuestion: function(question) {
 			var self = this;
+			var lesson = this.get('model');
+			question.set('lesson', lesson);
+			question.set('lesson_id', lesson.id);
 			question.save().then(self.get('controllers.question').set('isEditing', false));
 		},
 

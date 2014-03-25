@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   def update
     user = User.find(params[:id])
 
-    if user.update_attributes(user_params)
+    if user.update(user_params)
       render json: user, status: :ok
     else
       render json: { errors: user.errors.messages }, status: 422
@@ -32,8 +32,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    up = params.require(:user).permit(:name, :username, :email, :password, :password_confirmation, :teacher, :courses)
-    up[:courses] = [] unless up[:courses]
-    up
+    params.require(:user).permit(:name, :username, :email, :password, :password_confirmation, :teacher, courses: [:name, :user_id, :id, :lessons])
   end
 end

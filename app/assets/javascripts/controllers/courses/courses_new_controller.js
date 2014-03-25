@@ -20,8 +20,8 @@ App.CoursesNewController = Ember.ObjectController.extend(Ember.Validations.Mixin
 		},
 
 		cancel: function(course) {
-			var self = this;
-			course.deleteRecord().then(self.transitionToRoute('courses'));
+			var user = this.get('controllers.user').get('model');
+			this.transitionToRoute('user', user);
 		}
 	}
 });

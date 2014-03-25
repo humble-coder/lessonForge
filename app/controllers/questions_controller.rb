@@ -40,8 +40,6 @@ class QuestionsController < ApplicationController
 	private
 
 	def question_params
-		qp = params.require(:question).permit(:content, :lesson_id, :answers)
-		qp[:answers] = [] unless qp[:answers]
-		qp
+		params.require(:question).permit(:content, :lesson_id, :id, answers: [:content, :question_id, :id, :correct])
 	end
 end

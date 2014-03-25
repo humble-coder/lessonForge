@@ -2,7 +2,7 @@ App.LessonIndexController = Ember.ObjectController.extend({
 
 	confirm: '',
 
-	needs: ['course', 'user'],
+	needs: ['course', 'user', 'lessons'],
 
 	userIsOwner: function() {
 		var course = this.get('controllers.course').get('model');

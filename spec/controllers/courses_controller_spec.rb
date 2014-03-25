@@ -25,7 +25,6 @@ describe CoursesController do
 			results = JSON.parse(response.body)
 
 			expect(results["course"]["name"]).to eq("Another Course")
-			expect(results["course"]["lessons"]).to eq([])
 			expect(results["course"]["user_id"]).to eq(user.id)
 		end
 	end
@@ -44,7 +43,6 @@ describe CoursesController do
       results = JSON.parse(response.body)
 
       expect(results["course"]["name"]).to eq(course.name)
-      expect(results["course"]["lessons"]).to eq([])
       expect(results["course"]["user_id"]).to eq(course.user_id)
       expect(results["course"]["id"]).to eq(course.id)
     end

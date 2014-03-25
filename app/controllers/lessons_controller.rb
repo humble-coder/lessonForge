@@ -24,7 +24,7 @@ class LessonsController < ApplicationController
   def update
     lesson = Lesson.find(params[:id])
 
-    if lesson.update_attributes(lesson_params)
+    if lesson.update(lesson_params)
       render json: lesson, status: :ok
     else
       render json: { errors: lesson.errors.messages }, status: 422
@@ -44,9 +44,7 @@ class LessonsController < ApplicationController
   private
 
   def lesson_params
-		lp = params.require(:lesson).permit(:name, :course_id, :id, :questions)
-    lp[:questions] = [] unless lp[:questions]
-    lp
+		params.require(:lesson).permit(:name, :course_id, :id, questions: [:content, :lesson_id, :id, :answers])
 	end
 
 end

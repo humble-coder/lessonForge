@@ -13,7 +13,6 @@ describe LessonsController do
       results = JSON.parse(response.body)
 
       expect(results["lesson"]["name"]).to eq("Another Lesson")
-      expect(results["lesson"]["questions"]).to eq([])
     end
   end
 
