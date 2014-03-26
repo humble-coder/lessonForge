@@ -7,7 +7,7 @@
     </ul>
   </nav>
   <br>
-  {{#if isAuthenticated}}
+  {{#if currentUser}}
     <ul>
       {{#link-to 'user.index' currentUser id="user-profile-link"}}{{currentUser.email}}{{/link-to}}
       <a href="#" {{action 'logout'}} id="logout">Logout</a>

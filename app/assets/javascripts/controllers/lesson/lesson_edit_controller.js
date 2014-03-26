@@ -60,8 +60,10 @@ App.LessonEditController = Ember.ObjectController.extend({
 			question.destroyRecord();
 		},
 
-		saveAnswer: function(answer) {
+		saveAnswer: function(question, answer) {
 			var self = this;
+			answer.set('question', question);
+			answer.set('question_id', question.id);
 			answer.save().then(self.get('controllers.answer').set('isEditing'), false);
 		},
 

@@ -28,7 +28,7 @@
         {{input type="text" placeholder=answer.content value=answer.content class="answer-content"}}
         Correct? {{input type="checkbox" checked=answer.correct}}
         {{#if answer.content}}
-          <button {{action 'saveAnswer' answer}} class="save-answer">Save Answer</button>
+          <button {{action 'saveAnswer' question answer}} class="save-answer">Save Answer</button>
           <br/>
         {{else}}
           <button disabled="true">Save Answer</button>
