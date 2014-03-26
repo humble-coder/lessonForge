@@ -39,3 +39,23 @@ test("successfully", function() {
 		});
 	});
 });
+
+test("without filling in username-or-email field (unsuccessfully)", function() {
+	visit('/').then(function() {
+		click("#login");
+		andThen(function() {
+			fillIn("#login-password", "something");
+			ok(!exists("#new-session"), "Login button not displayed when username-email field empty.");
+		});
+	});
+});
+
+test("without filling in password field (unsuccessfully)", function() {
+	visit('/').then(function() {
+		click("#login");
+		andThen(function() {
+			fillIn("#username-or-email", "bob8@something.com");
+			ok(!exists("new-session"), "Login buttno not displayed when password field empty.");
+		});
+	});
+});
