@@ -83,3 +83,26 @@ test("without saving the changes (cancelling)", function() {
 		});
   });
 });
+
+test("without filling in the course-name field (unsuccessfully)", function() {
+
+	visit('/').then(function() {
+		click("#login");
+		andThen(function() {
+			fillIn("#username-or-email", "bob7");
+			fillIn("#login-password", "something");
+			click("#new-session");
+			andThen(function() {
+				click("a:contains('Will not Change')");
+				andThen(function() {
+					click("#edit-course");
+					andThen(function() {
+						fillIn("#edit-course-name", "");
+						ok(!exists("#update-course"), "Course-edit view doesn't have update button without course name.");
+						click("#logout");
+					});
+				});
+			});
+		});
+	});
+});

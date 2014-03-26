@@ -50,7 +50,15 @@ test("successfully", function() {
 												andThen(function() {
 													ok(exists("span:contains('New Question')"), "Lesson view has question displayed.");
 													ok(exists("div:contains('New Answer')"), "Lesson view has question's answer displayed.");
-													click("#logout");
+													andThen(function() {
+														click("#edit-lesson");
+														andThen(function() {
+															click(".remove-question");
+															andThen(function() {
+																click("#logout");
+															});
+														});
+													});
 												});
 											});
 										});
@@ -62,5 +70,41 @@ test("successfully", function() {
       	});
     	});
   	});
+	});
+});
+
+test("with blank names for question and answer (unsuccessfully)", function() {
+	visit("/").then(function() {
+		click("#login");
+		andThen(function() {
+			fillIn("#username-or-email", "bob2");
+			fillIn("#login-password", "something");
+			click("#new-session");
+			andThen(function() {
+				click("a:contains('Course with a Lesson')");
+				andThen(function() {
+					click("#view-lessons");
+					andThen(function() {
+						click("a:contains('New Lesson')");
+						andThen(function() {
+						  click("#edit-lesson");
+						  andThen(function() {
+						  	click("#new-question");
+						  	andThen(function() {
+						  		fillIn(".question-content", "");
+						  		ok(!exists(".save-question"), "Lesson-edit view doesn't have save-question button when question content is blank.");
+						  		andThen(function() {
+						  			click(".add-answer");
+						  			fillIn(".answer-content", "");
+						  			ok(!exists(".save-answer"), "Lesson-edit view doesn't have save-answer button when answer content is blank.");
+						  			click("#logout");
+						  		});
+						  	});
+						  });
+						});
+					});
+				});
+			});
+		});
 	});
 });

@@ -65,7 +65,7 @@ test("without a name (unsuccessfully)", function() {
 				andThen(function() {
 					click(".new-course-button");
 					andThen(function() {
-						ok(!exists("#save-course"), "New course view does not have save button.");
+						ok(!exists("#save-course"), "New-course view does not have save button.");
 						click("#logout");
 					});
 				});
