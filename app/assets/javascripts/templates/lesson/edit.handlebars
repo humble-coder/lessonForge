@@ -1,6 +1,10 @@
 {{#if isEditingLessonName}}
   {{input type="text" placeholder=name value=name id="lesson-name"}}<br/>
-  <button {{action 'updateLessonName' this}} id="update-lesson-name">Update Lesson Name</button>
+  {{#if name}}
+    <button {{action 'updateLessonName' this}} id="update-lesson-name">Update Lesson Name</button>
+  {{else}}
+    <button disabled="true">Update Lesson Name</button>
+  {{/if}}
 {{else}}
   <button {{action 'editLessonName'}} id="edit-lesson-name">Edit Lesson Name</button>
 {{/if}}

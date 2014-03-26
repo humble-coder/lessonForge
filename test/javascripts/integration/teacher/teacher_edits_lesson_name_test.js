@@ -56,3 +56,35 @@ test("successfully", function() {
     });
   });
 });
+
+test("without filling in lesson-name field (unsuccessfully)", function() {
+
+	visit('/').then(function() {
+		click("#login");
+		andThen(function() {
+			fillIn("#username-or-email", "bob11");
+			fillIn("#login-password", "something");
+			click("#new-session");
+			andThen(function() {
+				click("a:contains('Course with a Lesson')");
+				andThen(function() {
+					click("#view-lessons");
+					andThen(function() {
+						click("a:contains('Updated Lesson')");
+						andThen(function() {
+							click("#edit-lesson");
+							andThen(function() {
+								click("#edit-lesson-name");
+								andThen(function() {
+									fillIn("#lesson-name", "");
+									ok(!exists("#update-lesson-name"), "Update-lesson-name button not shown when lesson name is blank.");
+									click("#logout");
+								});
+							});
+			      });
+					});
+				});
+			});
+		});
+	});
+});
