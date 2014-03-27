@@ -1,19 +1,20 @@
 App.LessonsIndexController = Ember.ArrayController.extend({
 
-	needs: ['course', 'user'],
-
 	userIsOwner: function() {
-		var course = this.get('controllers.course').get('model');
-		var user = this.get('controllers.user').get('model');
 		if(App.AuthManager.isAuthenticated()) {
-			if(user) {
-				return user.get('courses').contains(course);
+			var userId = App.AuthManager.get('apiKey.user.id');
+			if(!userId) {
+				userId = App.AuthManager.get('apiKey.user');
 			}
+			var course = this.get('course');
+			return this.store.find('course', { user_id: userId }).then(function(courses) {
+				return courses.contains(course);
+			});
 		}
 		else {
 			return false;
 		}
-	}.property('App.AuthManager.apiKey'),
+	}.property('App.AuthManager.apiKey', 'course'),
 
 	actions: {
 		new: function() {
