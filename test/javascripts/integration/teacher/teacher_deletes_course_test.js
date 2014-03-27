@@ -21,7 +21,7 @@ test("successfully", function(){
 				fillIn("#login-password", "something");
 				click("#new-session");
 				andThen(function() {
-					click(".new-course-button");
+					click("#new-course");
 					andThen(function() {
 					  fillIn("#new-course-name", "Course to Delete");
 						click("#save-course");

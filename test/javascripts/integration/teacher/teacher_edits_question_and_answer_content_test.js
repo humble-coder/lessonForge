@@ -22,7 +22,7 @@ test("successfully", function() {
 				fillIn("#login-password", "something");
 				click("#new-session");
 				andThen(function() {
-					click(".new-course-button");
+					click("#new-course");
 					fillIn("#new-course-name", "Course with a Lesson");
 					click("#save-course");
 					andThen(function() {
@@ -89,7 +89,7 @@ test("with blank content for both question and answer (unsuccessfully)", functio
 				fillIn("#login-password", "something");
 				click("#new-session");
 				andThen(function() {
-					click(".new-course-button");
+					click("#new-course");
 					fillIn("#new-course-name", "Course with a Lesson");
 					click("#save-course");
 					andThen(function() {

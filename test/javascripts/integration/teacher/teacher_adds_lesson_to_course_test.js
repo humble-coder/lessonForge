@@ -21,7 +21,7 @@ test("successfully", function() {
 				fillIn("#login-password", "something");
 				click("#new-session");
 				andThen(function() {
-					click(".new-course-button");
+					click("#new-course");
 					fillIn("#new-course-name", "Course with a Lesson");
 					click("#save-course");
 					andThen(function() {
@@ -66,7 +66,7 @@ test("without saving (cancelling)", function() {
 					fillIn("#login-password", "something");
 					click("#new-session");
 					andThen(function() {
-					  click(".new-course-button");
+					  click("#new-course");
 						fillIn("#new-course-name", "Course with a Canceled Lession");
 						click("#save-course");
 						andThen(function() {

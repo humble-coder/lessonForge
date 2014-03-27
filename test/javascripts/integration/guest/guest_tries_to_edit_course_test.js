@@ -21,7 +21,7 @@ test("unsuccessfully", function() {
 				fillIn("#login-password", "something");
 				click("#new-session");
 				andThen(function() {
-					click(".new-course-button");
+					click("#new-course");
 					andThen(function() {
 						fillIn("#new-course-name", "Test1 Course");
 						click("#save-course");

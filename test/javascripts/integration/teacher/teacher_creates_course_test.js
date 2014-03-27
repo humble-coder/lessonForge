@@ -21,8 +21,8 @@ test("successfully", function() {
 				fillIn("#login-password", "something");
 				click("#new-session");
 				andThen(function() {
-					ok(exists(".new-course-button"), "User profile view has new-course button.");
-					click(".new-course-button");
+					ok(exists("#new-course"), "User profile view has new-course button.");
+					click("#new-course");
 					andThen(function() {
 						fillIn("#new-course-name", "A new course");
 						equal(find("#new-course-name").val(), "A new course", "Name field contains the string 'A new course.'");
@@ -63,9 +63,32 @@ test("without a name (unsuccessfully)", function() {
 				fillIn("#login-password", "something");
 				click("#new-session");
 				andThen(function() {
-					click(".new-course-button");
+					click("#new-course");
 					andThen(function() {
 						ok(!exists("#save-course"), "New-course view does not have save button.");
+						click("#logout");
+					});
+				});
+			});
+		});
+	});
+});
+
+test("but cancels (unsuccessfully)", function() {
+	visit('/').then(function() {
+		click("#login");
+		andThen(function() {
+			fillIn("#username-or-email", "bob4");
+			fillIn("#login-password", "something");
+			click("#new-session");
+			andThen(function() {
+				click("#new-course");
+				andThen(function() {
+					ok(exists("#cancel-new-course"), "New-course view has cancel-new-course button displayed.");
+					fillIn("#new-course-name", "Another new course");
+					click("#cancel-new-course");
+					andThen(function() {
+						ok(!exists("a:contains('Another new course')"), "User view doesn't have course listed.");
 						click("#logout");
 					});
 				});

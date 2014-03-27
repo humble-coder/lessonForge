@@ -9,7 +9,7 @@ Email: {{email}} <br/>
 		  <b>{{username}} has not created any courses.</b>
     {{/each}}
     {{#if isOwner}}
-      <button {{action 'createCourse' this}} class="new-course-button">Create a Course</button>
+      <button {{action 'createCourse' this}} id="new-course">Create a Course</button>
     {{/if}}
 	</ul>
 {{/if}}
