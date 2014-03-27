@@ -4,7 +4,7 @@ module("Teacher registers and logs in", {
 	}
 });
 
-test("successfully", function() {
+test("successfully (both actions)", function() {
 
 	visit('/').then(function() {
 		click("#new-user");
@@ -31,7 +31,7 @@ test("successfully", function() {
 					fillIn("#login-password", "something");
 					click("#new-session");
 					andThen(function() {
-						ok(exists("#logout"), "View has logout link displayed - login successful.");
+						ok(exists("#logout"), "User view has logout link displayed - login successful.");
 						click("#logout");
 					});
 				});
@@ -40,7 +40,27 @@ test("successfully", function() {
 	});
 });
 
-test("without filling in username-or-email field (unsuccessfully)", function() {
+test("unsuccessful registration (email already taken)", function() {
+	visit('/').then(function() {
+		click("#new-user");
+		andThen(function() {
+			fillIn("#full-name", "Bob8");
+			fillIn("#email-address", "bob8@something.com");
+			fillIn("#username", "bob8");
+			fillIn("#password", "something");
+			fillIn("#password-confirmation", "something");
+			click("#new-teacher");
+			andThen(function() {
+				click("#create-user");
+				andThen(function() {
+					ok(!exists("#new-session"), "User doesn't make it to the login screen.");
+				});
+			});
+		});
+	});
+});
+
+test("without filling in username-or-email field (unsuccessful login)", function() {
 	visit('/').then(function() {
 		click("#login");
 		andThen(function() {
@@ -50,7 +70,7 @@ test("without filling in username-or-email field (unsuccessfully)", function() {
 	});
 });
 
-test("without filling in password field (unsuccessfully)", function() {
+test("without filling in password field (unsuccessful login)", function() {
 	visit('/').then(function() {
 		click("#login");
 		andThen(function() {
