@@ -5,7 +5,15 @@ App.CourseIndexRoute = Ember.Route.extend({
 
 	setupController: function(controller, model) {
 		controller.set('model', model);
-		var user = this.modelFor('user');
-		controller.set('user', user);
+		if(App.AuthManager.isAuthenticated()) {
+			var userId = App.AuthManager.get('apiKey.user.id');
+			if(!userId) {
+			  userId = App.AuthManager.get('apiKey.user');
+			}
+			controller.set('userId', userId);
+		}
+		else {
+			controller.set('userId', null);
+		}
 	}
 });

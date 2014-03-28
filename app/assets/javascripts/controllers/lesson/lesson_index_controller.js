@@ -2,6 +2,8 @@ App.LessonIndexController = Ember.ObjectController.extend({
 
 	confirm: '',
 
+	needs: ['course'],
+
 	userIsOwner: function() {
 		if(App.AuthManager.isAuthenticated()) {
 			var userId = App.AuthManager.get('apiKey.user.id');
