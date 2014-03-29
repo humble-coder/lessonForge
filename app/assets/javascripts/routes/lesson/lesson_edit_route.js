@@ -7,7 +7,6 @@ App.LessonEditRoute = Ember.Route.extend({
 		}
 		else {
 			var lesson = this.modelFor('lesson');
-			// var courseId = this.modelFor('course').id;
 			var course = this.modelFor('course');
 			var userId = App.AuthManager.get('apiKey.user.id');
 			var self = this;
