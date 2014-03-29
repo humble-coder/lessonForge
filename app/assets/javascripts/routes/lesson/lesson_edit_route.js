@@ -7,14 +7,23 @@ App.LessonEditRoute = Ember.Route.extend({
 		}
 		else {
 			var lesson = this.modelFor('lesson');
+			// var courseId = this.modelFor('course').id;
 			var course = this.modelFor('course');
-			var user = this.modelFor('user');
-			if(!user.get('courses').contains(course)) {
-				alert("You must own the course to edit one of its lessons.");
-				this.transitionTo('lesson', lesson);
+			var userId = App.AuthManager.get('apiKey.user.id');
+			var self = this;
+			if(!userId) {
+				userId = App.AuthManager.get('apiKey.user');
 			}
-		}
 
+      this.store.find('user', userId).then(function(user) {
+      	user.get('courses').then(function(courses) {
+      		if(!courses.contains(course)) {
+      			alert("You must own the course to edit one of its lessons.");
+      			self.transitionTo('lesson', lesson);
+      		}
+      	});
+      });
+		}
 	},
   
   // Redirect to the login page and store the current transition so that
@@ -27,6 +36,7 @@ App.LessonEditRoute = Ember.Route.extend({
 
 	actions: {
 		error: function(reason, transition) {
+			console.log(reason);
 			this.redirectToLogin(transition);
 		}
 	},
