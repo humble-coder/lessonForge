@@ -40,7 +40,7 @@ test("successfully (both actions)", function() {
 	});
 });
 
-test("unsuccessful registration (email already taken)", function() {
+test("unsuccessful registration (email and username already taken)", function() {
 	visit('/').then(function() {
 		click("#new-user");
 		andThen(function() {
