@@ -1,10 +1,16 @@
 App.QuestionController = Ember.ObjectController.extend({
 
 	isEditing: function() {
-		return false;
-	},
+		var question = this.get('content');
+		if(!question.get('content')) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}.property('content'),
 
-	needs: ['lesson', 'answer'],
+	needs: ['lesson'],
 
 	actions: {
 
@@ -35,8 +41,8 @@ App.QuestionController = Ember.ObjectController.extend({
 			var answer = this.store.createRecord('answer');
 			answer.set('question', question);
 			answer.set('question_id', question.id);
+			//answer.set('content', 'New Answer');
 			answers.pushObject(answer);
-			this.get('controllers.answer').set('isEditing', true);
 		}
 	}
 });

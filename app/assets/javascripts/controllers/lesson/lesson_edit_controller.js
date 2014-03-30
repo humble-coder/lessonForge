@@ -1,6 +1,6 @@
 App.LessonEditController = Ember.ObjectController.extend({
 
-	needs: ['course', 'question'],
+	needs: ['course'],
 
 	isEditingLessonName: false,
 
@@ -28,19 +28,13 @@ App.LessonEditController = Ember.ObjectController.extend({
 		// },
 
 		addQuestion: function() {
-			var self = this;
 			var lesson = this.get('model');
 			var question = this.store.createRecord('question');
 			question.set('lesson', lesson);
 			question.set('lesson_id', lesson.id);
 			lesson.get('questions').then(function(questions) {
 				questions.pushObject(question);
-				self.get('controllers.question').set('isEditing', true);
 			});
-			// question.set('lesson', lesson);
-			// question.set('lesson_id', lesson.id);
-			// questions.pushObject(question);
-			// this.get('controllers.question').set('isEditing', true);
 		},
 
 		done: function() {
