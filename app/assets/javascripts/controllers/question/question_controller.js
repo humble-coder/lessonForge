@@ -41,7 +41,6 @@ App.QuestionController = Ember.ObjectController.extend({
 			var answer = this.store.createRecord('answer');
 			answer.set('question', question);
 			answer.set('question_id', question.id);
-			//answer.set('content', 'New Answer');
 			answers.pushObject(answer);
 		}
 	}
