@@ -10,25 +10,25 @@
 {{/if}}
 <br/>
 
-{{#each question in questions}}
-  {{#if controllers.question.isEditing}}
-    {{input type="text" placeholder=question.content value=question.content class="question-content"}}
-    {{#if question.content}}
-      <button {{action 'saveQuestion' question}} class="save-question">Save Question</button>
+{{#each question in questions itemController="question"}}
+  {{#if question.isEditing}}
+    {{input type="text" placeholder=content.content value=content.content class="question-content"}}
+    {{#if content}}
+      <button {{action 'saveQuestion'}} class="save-question">Save Question</button>
       <br/>
     {{else}}
       <button disabled="true">Save Question</button>
       <br/>
     {{/if}}
   {{else}}
-    {{question.content}}
+    {{content.content}}
     <button {{action 'editQuestion'}} class="edit-question">Edit Question</button>
-    <button {{action 'removeQuestion' question}} class="remove-question">Remove Question</button>
+    <button {{action 'removeQuestion'}} class="remove-question">Remove Question</button>
     <br/> 
   {{/if}}
   <br>
-    {{#each answer in question.answers}}
-      {{#if controllers.answer.isEditing}}
+    {{#each answer in question.answers itemController="answer"}}
+      {{#if isEditing}}
         {{input type="text" placeholder=answer.content value=answer.content class="answer-content"}}
         Correct? {{input type="checkbox" checked=answer.correct}}
         {{#if answer.content}}
