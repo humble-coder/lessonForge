@@ -1,5 +1,9 @@
 App.QuestionController = Ember.ObjectController.extend({
 
+	questionTypes: ["multiple-choice", "essay"],
+
+	selectedType: "multiple-choice",
+
 	isEditing: function() {
 		var question = this.get('content');
 		if(!question.get('content')) {
@@ -10,6 +14,8 @@ App.QuestionController = Ember.ObjectController.extend({
 		}
 	}.property('content'),
 
+	isMultipleChoice: true,
+
 	needs: ['lesson'],
 
 	actions: {
@@ -18,9 +24,18 @@ App.QuestionController = Ember.ObjectController.extend({
 			var self = this;
 			var lesson = this.get('controllers.lesson').get('model');
 			var question = this.get('content');
+			var type = this.get('selectedType');
 			question.set('lesson', lesson);
 			question.set('lesson_id', lesson.id);
-			question.save().then(self.set('isEditing', false));
+			question.set('category', type);
+			question.save().then(self.set('isEditing', false)).then(function() {
+				if(type == "multiple-choice") {
+					self.set('isMultipleChoice', true);
+				}
+				else {
+					self.set('isMultipleChoice', false);
+				}
+			});
 		},
 
 		editQuestion: function() {

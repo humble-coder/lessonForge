@@ -1,6 +1,10 @@
-{{#each answer in answers}}
-	{{radio-button value=answer.correct name=question.id selection=confirm}} {{answer.content}}
-	<br>
-{{/each}}
-{{confirm}}
+{{#if isMultipleChoice}}
+	{{#each answer in answers}}
+		{{radio-button value=answer.correct name=question.id selection=confirm}} {{answer.content}}
+		<br>
+	{{/each}}
+	{{confirm}}
+{{else}}
+  {{textarea cols="60" rows="10"}}
+{{/if}}
 

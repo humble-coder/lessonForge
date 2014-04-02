@@ -13,6 +13,7 @@
 {{#each question in questions itemController="question"}}
   {{#if question.isEditing}}
     {{input type="text" placeholder=content.content value=content.content class="question-content"}}
+    {{view Ember.Select content=questionTypes value=selectedType}}
     {{#if content.content}}
       <button {{action 'saveQuestion'}} class="save-question">Save Question</button>
       <br/>
@@ -22,32 +23,35 @@
     {{/if}}
   {{else}}
     {{content.content}}
+    {{content.category}}
     <button {{action 'editQuestion'}} class="edit-question">Edit Question</button>
     <button {{action 'removeQuestion'}} class="remove-question">Remove Question</button>
     <br/> 
   {{/if}}
   <br>
-    {{#each answer in answers itemController="answer"}}
-      {{#if answer.isEditing}}
-        {{input type="text" placeholder=content.content value=content.content class="answer-content"}}
-        Correct? {{input type="checkbox" checked=content.correct}}
-        {{#if content.content}}
-          <button {{action 'saveAnswer' question}} class="save-answer">Save Answer</button>
-          <br/>
-        {{else}}
-          <button disabled="true">Save Answer</button>
-          <br/>
-        {{/if}}
-      {{else}}
-        {{content.content}}
-        <button {{action 'editAnswer'}} class="edit-answer">Edit Answer</button>
-        <button {{action 'removeAnswer' question}} class="remove-answer">Remove Answer</button>
-        <br/>
-      {{/if}}
-    {{/each}}
-  <br>
-  <button {{action 'addAnswer' question}} class="add-answer">Add Answer</button>
-  <br>
+    {{#if question.isMultipleChoice}}
+        {{#each answer in answers itemController="answer"}}
+          {{#if answer.isEditing}}
+            {{input type="text" placeholder=content.content value=content.content class="answer-content"}}
+              Correct? {{input type="checkbox" checked=content.correct}}
+              {{#if content.content}}
+                <button {{action 'saveAnswer' question}} class="save-answer">Save Answer</button>
+                <br/>
+              {{else}}
+                <button disabled="true">Save Answer</button>
+                <br/>
+              {{/if}}
+         {{else}}
+            {{content.content}}
+            <button {{action 'editAnswer'}} class="edit-answer">Edit Answer</button>
+            <button {{action 'removeAnswer' question}} class="remove-answer">Remove Answer</button>
+            <br/>
+          {{/if}}
+        {{/each}}
+      <br>
+      <button {{action 'addAnswer' question}} class="add-answer">Add Answer</button>
+      <br>
+    {{/if}}
 {{else}}
     <b>This lesson has no questions.</b>
 {{/each}}
