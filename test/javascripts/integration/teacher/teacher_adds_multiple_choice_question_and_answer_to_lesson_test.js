@@ -41,6 +41,7 @@ test("successfully", function() {
 										andThen(function() {
 											ok(exists(".question-content"), "Lesson-edit view has new-question input box.");
 											fillIn(".question-content", "New Question");
+											ok(exists(".question-category"), "Lesson-edit view has question-category select box.");
 											andThen(function() {
 												click(".save-question");
 												click(".add-answer");
@@ -93,6 +94,8 @@ test("with blank names for question and answer (unsuccessfully)", function() {
 						  	andThen(function() {
 						  		fillIn(".question-content", "");
 						  		ok(!exists(".save-question"), "Lesson-edit view doesn't have save-question button when question content is blank.");
+						  		fillIn(".question-content", "New Question");
+						  		click(".save-question");
 						  		andThen(function() {
 						  			click(".add-answer");
 						  			fillIn(".answer-content", "");

@@ -2,7 +2,16 @@ App.QuestionController = Ember.ObjectController.extend({
 
 	questionTypes: ["multiple-choice", "essay"],
 
-	selectedType: "multiple-choice",
+	selectedType: function() {
+		var question = this.get('content');
+		if(!question.get('content')) {
+			return "multiple-choice";
+		}
+		else {
+			var category = question.get('category');
+			return category;
+		}
+	}.property('content'),
 
 	isEditing: function() {
 		var question = this.get('content');
@@ -14,7 +23,11 @@ App.QuestionController = Ember.ObjectController.extend({
 		}
 	}.property('content'),
 
-	isMultipleChoice: true,
+	isMultipleChoice: function() {
+		var question = this.get('content');
+		var category = question.get('category');
+		return category == "multiple-choice";
+	}.property('content'),
 
 	needs: ['lesson'],
 
