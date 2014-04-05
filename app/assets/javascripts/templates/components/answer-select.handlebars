@@ -1,10 +1,13 @@
 {{#if isMultipleChoice}}
 	{{#each answer in answers}}
-		{{radio-button value=answer.correct name=question.id selection=confirm}} {{answer.content}}
+		{{radio-button value=answer.correct name=question.id selection=response class="mc-answer"}} {{answer.content}}
 		<br>
 	{{/each}}
-	{{confirm}}
+	{{response}}
+	<br/>
 {{else}}
-  {{textarea cols="60" rows="10" class="essay-space"}}
+  {{textarea cols="60" rows="10" class="essay-space" value=response}}
 {{/if}}
-
+<div class="feedback">{{feedback}}</div>
+<br/>
+<button {{action 'saveResponse' question}} class="save-response">Save Response</button>

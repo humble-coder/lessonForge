@@ -4,6 +4,7 @@ LessonForge::Application.routes.draw do
   resources :lessons, except: [:index]
   resources :questions, except: [:index]
   resources :answers, except: [:index]
+  resources :responses
 
   post 'session' => 'session#create'
  

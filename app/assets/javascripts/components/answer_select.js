@@ -6,5 +6,15 @@ App.AnswerSelectComponent = Ember.Component.extend({
 		return category == 'multiple-choice';
 	}.property('question'),
 	
-	confirm: ''
+	response: '',
+
+	feedback: '',
+
+	actions: {
+		saveResponse: function(question) {
+			var responseContent = this.get('response');
+			this.sendAction('action', responseContent, question);
+			this.set('feedback', 'Answer saved!');
+		}
+	}
 });

@@ -2,7 +2,7 @@
   <span class="question-content">{{question.content}}</span>
   <br>
   <form>
-    <div class="answers">{{answer-select answers=question.answers question=question}}</div>
+    <div class="answers">{{answer-select answers=question.answers question=question action="saveResponse"}}</div>
   </form>
   <br>
 {{else}}

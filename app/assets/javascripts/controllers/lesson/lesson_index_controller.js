@@ -1,7 +1,5 @@
 App.LessonIndexController = Ember.ObjectController.extend({
 
-	confirm: '',
-
 	needs: ['course'],
 
 	userIsOwner: function() {
@@ -44,6 +42,22 @@ App.LessonIndexController = Ember.ObjectController.extend({
 
 		edit: function() {
 			this.transitionToRoute('lesson.edit');
+		},
+
+		saveResponse: function(responseContent, question) {
+			var response = this.store.createRecord('response');
+			response.set('content', responseContent);
+			response.set('question', question);
+			response.set('question_id', question.id);
+			var userId = App.AuthManager.get('apiKey.user.id');
+			if(!userId) {
+				userId = App.AuthManager.get('apiKey.user');
+			}
+			this.store.find('user', userId).then(function(user) {
+				response.set('user', user);
+				response.set('user_id', userId);
+				response.save();
+			});
 		}
 	}
 });
