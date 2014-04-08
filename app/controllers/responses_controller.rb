@@ -1,6 +1,12 @@
 class ResponsesController < ApplicationController
 	respond_to :json
 
+	def index
+		responses = Response.where("user_id = ?", params[:user_id])
+
+		render json: responses, each_serializer: ResponseSerializer
+	end
+
 	def create
 		response = Response.new(response_params)
 
@@ -12,7 +18,7 @@ class ResponsesController < ApplicationController
 	end
 
 	def update
-		response = response.find(params[:id])
+		response = Response.find(params[:id])
 
 		if response.update_attributes(response_params)
 			render json: response, status: :ok
@@ -22,7 +28,7 @@ class ResponsesController < ApplicationController
 	end
 
 	def destroy
-		response = response.find(params[:id])
+		response = Response.find(params[:id])
 
 		if response.destroy
 			render json: nil, status: :ok
@@ -34,6 +40,6 @@ class ResponsesController < ApplicationController
 	private
 
 	def response_params
-		params.require(:response).permit(:content, :user_id, :question_id)
+		params.require(:response).permit(:content, :user_id, :lesson_id)
 	end
 end

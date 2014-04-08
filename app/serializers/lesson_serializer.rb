@@ -3,4 +3,5 @@ class LessonSerializer < ActiveModel::Serializer
 	
 	attributes :id, :name
 	has_many :questions
+	has_many :responses
 end

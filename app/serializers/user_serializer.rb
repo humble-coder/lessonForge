@@ -3,4 +3,5 @@ class UserSerializer < ActiveModel::Serializer
 	
   attributes :id, :name, :username, :email, :teacher
   has_many :courses
+  has_many :responses
 end

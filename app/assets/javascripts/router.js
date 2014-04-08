@@ -8,6 +8,7 @@ App.Router.map(function() {
 				this.route('new');
 				this.resource("lesson", { path: ":lesson_id" }, function() {
 					this.route('edit');
+					this.resource("responses");
 				});
 			});
 		});

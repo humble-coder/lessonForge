@@ -19,6 +19,10 @@ App.LessonIndexController = Ember.ObjectController.extend({
 		}
 	}.property('App.AuthManager.apiKey', 'course_id'),
 
+	userIsAuthenticated: function() {
+		return App.AuthManager.isAuthenticated();
+	}.property('App.AuthManager.apiKey'),
+
 	actions: {
 		delete: function(lesson) {
 			var self = this;
@@ -46,9 +50,10 @@ App.LessonIndexController = Ember.ObjectController.extend({
 
 		saveResponse: function(responseContent, question) {
 			var response = this.store.createRecord('response');
-			response.set('content', responseContent);
-			response.set('question', question);
-			response.set('question_id', question.id);
+			var lesson = this.get('model');
+			response.set('content', question.get('content') + ' Your Response: ' + responseContent);
+			response.set('lesson', lesson);
+			response.set('lesson_id', lesson.id);
 			var userId = App.AuthManager.get('apiKey.user.id');
 			if(!userId) {
 				userId = App.AuthManager.get('apiKey.user');
@@ -58,6 +63,10 @@ App.LessonIndexController = Ember.ObjectController.extend({
 				response.set('user_id', userId);
 				response.save();
 			});
+		},
+
+		viewResponses: function() {
+			this.transitionToRoute('responses');
 		}
 	}
 });

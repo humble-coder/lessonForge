@@ -1,5 +1,5 @@
 App.Response = DS.Model.extend({
 	content: DS.attr('string'),
-	question: DS.belongsTo('question'),
-	user: DS.belongsTo('user')
+	user: DS.belongsTo('user'),
+	lesson: DS.belongsTo('lesson')
 });

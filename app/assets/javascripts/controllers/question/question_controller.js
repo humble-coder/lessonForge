@@ -38,6 +38,9 @@ App.QuestionController = Ember.ObjectController.extend({
 			var lesson = this.get('controllers.lesson').get('model');
 			var question = this.get('content');
 			var type = this.get('selectedType');
+			if(type == "essay") {
+				question.set('answers', null);
+			}
 			question.set('lesson', lesson);
 			question.set('lesson_id', lesson.id);
 			question.set('category', type);

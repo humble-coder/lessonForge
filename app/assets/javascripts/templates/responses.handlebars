@@ -1,0 +1,7 @@
+{{#each controller}}
+  <div class="response">{{content}}</div>
+{{else}}
+  <p>You have no responses to this lesson.</p>
+{{/each}}
+
+<button {{action 'backToLesson'}} id="back-to-lesson">Back to Lesson</button>

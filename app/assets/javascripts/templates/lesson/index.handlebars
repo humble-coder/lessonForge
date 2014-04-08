@@ -13,3 +13,7 @@
 	<button {{action "edit" this}} id="edit-lesson">Edit Lesson</button>
 	<button {{action "delete" this}} id="delete-lesson">Delete Lesson</button>
 {{/if}}
+
+{{#if userIsAuthenticated}}
+  <button {{action "viewResponses"}} id="view-responses">View Your Responses</button>
+{{/if}}
