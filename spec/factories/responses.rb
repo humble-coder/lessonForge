@@ -2,7 +2,8 @@
 
 FactoryGirl.define do
   factory :response do
-    user nil
-    question nil
+  	content "Some Response"
+    user
+    lesson
   end
 end

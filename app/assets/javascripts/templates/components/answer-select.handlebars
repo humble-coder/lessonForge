@@ -10,4 +10,8 @@
 {{/if}}
 <div class="feedback">{{feedback}}</div>
 <br/>
-<button {{action 'saveResponse' question}} class="save-response">Save Response</button>
+{{#if canSaveResponse}}
+	<button {{action 'saveResponse' question}} class="save-response">Save Response</button>
+{{else}}
+	<button disabled="true">Save Response</button>
+{{/if}}

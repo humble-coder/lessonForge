@@ -3,4 +3,5 @@ class QuestionSerializer < ActiveModel::Serializer
 	
 	attributes :id, :content, :category
 	has_many :answers
+	has_many :responses
 end

@@ -19,9 +19,22 @@ App.LessonIndexController = Ember.ObjectController.extend({
 		}
 	}.property('App.AuthManager.apiKey', 'course_id'),
 
-	userIsAuthenticated: function() {
-		return App.AuthManager.isAuthenticated();
-	}.property('App.AuthManager.apiKey'),
+	isComplete: function() {
+		if(App.AuthManager.isAuthenticated()) {
+			var userId = App.AuthManager.get('apiKey.user.id');
+			if(!userId) {
+				userId = App.AuthManager.get('apiKey.user');
+			}
+			var lesson = this.get('model');
+			var questions = lesson.get('questions');
+			return this.store.find('response', { user_id: userId, lesson_id: lesson.id }).then(function(responses) {
+					return responses.get('length') == questions.get('length');
+			});
+		}
+		else {
+			return false;
+		}
+	}.property('App.AuthManager.apiKey', 'model'),
 
 	actions: {
 		delete: function(lesson) {
@@ -54,6 +67,8 @@ App.LessonIndexController = Ember.ObjectController.extend({
 			response.set('content', question.get('content') + ' Your Response: ' + responseContent);
 			response.set('lesson', lesson);
 			response.set('lesson_id', lesson.id);
+			response.set('question', question);
+			response.set('question_id', question.id);
 			var userId = App.AuthManager.get('apiKey.user.id');
 			if(!userId) {
 				userId = App.AuthManager.get('apiKey.user');
