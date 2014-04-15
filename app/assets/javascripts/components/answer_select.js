@@ -9,14 +9,14 @@ App.AnswerSelectComponent = Ember.Component.extend({
 	responseSaved: false,
 
 	lessonComplete: function() {
-		var controller = this.get('controller');
-		return controller.get('isComplete');
-	}.property('controller'),
+		return this.get('isComplete');
+	}.property('isComplete'),
 
 	canSaveResponse: function() {
-		var result = !(this.get('responseSaved') || this.get('lessonComplete'));
-		return result;
-	}.property('responseSaved', 'lessonComplete'),
+		// var result = !(this.get('responseSaved') || this.get('lessonComplete'));
+		// return result;
+		return !this.get('responseSaved');
+	}.property('responseSaved'),
 	
 	response: '',
 

@@ -19,22 +19,31 @@ App.LessonIndexController = Ember.ObjectController.extend({
 		}
 	}.property('App.AuthManager.apiKey', 'course_id'),
 
-	isComplete: function() {
-		if(App.AuthManager.isAuthenticated()) {
-			var userId = App.AuthManager.get('apiKey.user.id');
-			if(!userId) {
-				userId = App.AuthManager.get('apiKey.user');
+	isComplete: false,
+
+	isCompleteUpdate: function() {
+		var lesson = this.get('model');
+		var lessonId = lesson.id;
+		var numQuestions = this.get('questionCount');
+		var self = this;
+		console.log(numQuestions);
+		var userId = App.AuthManager.get('apiKey.user.id');
+		if(!userId) {
+			userId = App.AuthManager.get('apiKey.user');
+		}
+		this.store.find('response', { user_id: userId, lesson_id: lessonId }).then(function (responses) {
+			responseCount = responses.get('content').get('length');
+			if(responseCount >= numQuestions) {
+				self.set('isComplete', true);
 			}
-			var lesson = this.get('model');
-			var questions = lesson.get('questions');
-			return this.store.find('response', { user_id: userId, lesson_id: lesson.id }).then(function(responses) {
-					return responses.get('length') == questions.get('length');
-			});
-		}
-		else {
-			return false;
-		}
-	}.property('App.AuthManager.apiKey', 'model'),
+		});
+	}.observes('model', 'App.AuthManager.apiKey', 'questions'),
+
+	questionCount: function() {
+		var lesson = this.get('model');
+		var questionCount = lesson.get('questions').get('length');
+		return questionCount;
+	}.property('model'),
 
 	actions: {
 		delete: function(lesson) {
@@ -59,25 +68,6 @@ App.LessonIndexController = Ember.ObjectController.extend({
 
 		edit: function() {
 			this.transitionToRoute('lesson.edit');
-		},
-
-		saveResponse: function(responseContent, question) {
-			var response = this.store.createRecord('response');
-			var lesson = this.get('model');
-			response.set('content', question.get('content') + ' Your Response: ' + responseContent);
-			response.set('lesson', lesson);
-			response.set('lesson_id', lesson.id);
-			response.set('question', question);
-			response.set('question_id', question.id);
-			var userId = App.AuthManager.get('apiKey.user.id');
-			if(!userId) {
-				userId = App.AuthManager.get('apiKey.user');
-			}
-			this.store.find('user', userId).then(function(user) {
-				response.set('user', user);
-				response.set('user_id', userId);
-				response.save();
-			});
 		},
 
 		viewResponses: function() {

@@ -2,7 +2,7 @@ class ResponsesController < ApplicationController
 	respond_to :json
 
 	def index
-		responses = Response.where("user_id = ?", params[:user_id])
+		responses = Response.where("user_id = ? AND lesson_id = ?", params[:user_id], params[:lesson_id])
 
 		render json: responses, each_serializer: ResponseSerializer
 	end

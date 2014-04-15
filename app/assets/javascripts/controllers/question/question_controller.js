@@ -29,6 +29,11 @@ App.QuestionController = Ember.ObjectController.extend({
 		return category == "multiple-choice";
 	}.property('content'),
 
+	lessonComplete: function() {
+		var lessonController = this.get('parentController');
+		return lessonController.get('isComplete');
+	}.property('parentController'),
+
 	needs: ['lesson'],
 
 	actions: {
@@ -73,6 +78,29 @@ App.QuestionController = Ember.ObjectController.extend({
 			answer.set('question', question);
 			answer.set('question_id', question.id);
 			answers.pushObject(answer);
-		}
+		},
+
+		saveResponse: function() {
+			var response = this.store.createRecord('response');
+			var lesson = this.get('controllers.lesson').get('model');
+			var question = this.get('content');
+			var responseContent = this.get('responseContent');
+			var self = this;
+			response.set('content', question.get('content') + ' Your Response: ' + responseContent);
+			response.set('lesson', lesson);
+			response.set('lesson_id', lesson.id);
+			response.set('question', question);
+			response.set('question_id', question.id);
+			var userId = App.AuthManager.get('apiKey.user.id');
+			if(!userId) {
+				userId = App.AuthManager.get('apiKey.user');
+			}
+		  this.store.find('user', userId).then(function(user) {
+				response.set('user', user);
+				response.set('user_id', userId);
+				response.save();
+				self.set('responseSaved', true);
+			});
+		},
 	}
 });

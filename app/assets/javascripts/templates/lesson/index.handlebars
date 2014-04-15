@@ -1,8 +1,16 @@
-{{#each question in questions}}
-  <span class="question-content">{{question.content}}</span>
+{{#each question in questions itemController="question"}}
+  <span class="question-content">{{content.content}}</span>
   <br>
   <form>
-    <div class="answers">{{answer-select answers=question.answers question=question action="saveResponse"}}</div>
+    {{#if isMultipleChoice}}
+      {{#each answer in answers itemController="answer"}}
+        {{radio-button value=content.correct name=question.content.id selection=question.responseContent class="mc-answer"}} {{content.content}}
+      {{/each}}
+    {{else}}
+      {{textarea cols="60" rows="10" class="essay-space" value=responseContent}}
+    {{/if}}
+    <br/>
+    <button {{action 'saveResponse'}} {{bind-attr disabled=lessonComplete}} class="save-response">Save Response</button>
   </form>
   <br>
 {{else}}
@@ -14,6 +22,4 @@
 	<button {{action "delete" this}} id="delete-lesson">Delete Lesson</button>
 {{/if}}
 
-{{#if isComplete}}
-  <button {{action "viewResponses"}} id="view-responses">View Your Responses</button>
-{{/if}}
+<button {{action "viewResponses"}} id="view-responses">View Your Responses</button>
