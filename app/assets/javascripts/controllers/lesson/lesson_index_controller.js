@@ -2,48 +2,41 @@ App.LessonIndexController = Ember.ObjectController.extend({
 
 	needs: ['course'],
 
-	userIsOwner: function() {
-		if(App.AuthManager.isAuthenticated()) {
-			var userId = App.AuthManager.get('apiKey.user.id');
-			if(!userId) {
-				userId = App.AuthManager.get('apiKey.user');
-			}
-			var course_id = this.get('course_id');
-			var course = this.store.find('course', course_id);
-			return this.store.find('course', { user_id: userId }).then(function(courses) {
-				return courses.contains(course);
-			});
-		}
-		else {
-			return false;
-		}
-	}.property('App.AuthManager.apiKey', 'course_id'),
+	isComplete: function() {
+		var responses = this.get('responseCount');
+		var questions = this.get('questionCount');
+		return responses >= questions;
+	}.property('responseCount', 'questionCount'),
 
-	isComplete: false,
+	responseCount: 0,
 
-	isCompleteUpdate: function() {
+	questionCount: 0,
+
+	questionCountUpdate: function() {
+		var self = this;
 		var lesson = this.get('model');
 		var lessonId = lesson.id;
-		var numQuestions = this.get('questionCount');
+		this.store.find('question', { lesson_id: lessonId }).then(function(questions) {
+			var count = questions.get('content').get('length');
+			console.log(count);
+			self.set('questionCount', count);
+		});
+	}.observes('question'),
+
+	responseCountUpdate: function() {
 		var self = this;
-		console.log(numQuestions);
+		var lesson = this.get('model');
+		var lessonId = lesson.id;
 		var userId = App.AuthManager.get('apiKey.user.id');
 		if(!userId) {
 			userId = App.AuthManager.get('apiKey.user');
 		}
-		this.store.find('response', { user_id: userId, lesson_id: lessonId }).then(function (responses) {
-			responseCount = responses.get('content').get('length');
-			if(responseCount >= numQuestions) {
-				self.set('isComplete', true);
-			}
+		this.store.find('response', { lesson_id: lessonId, user_id: userId }).then(function(responses) {
+			var count = responses.get('content').get('length');
+			console.log(count);
+			self.set('responseCount', count);
 		});
-	}.observes('model', 'App.AuthManager.apiKey', 'questions'),
-
-	questionCount: function() {
-		var lesson = this.get('model');
-		var questionCount = lesson.get('questions').get('length');
-		return questionCount;
-	}.property('model'),
+	}.observes('response'),
 
 	actions: {
 		delete: function(lesson) {

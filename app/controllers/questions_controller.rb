@@ -1,6 +1,12 @@
 class QuestionsController < ApplicationController
 	respond_to :json
 
+	def index
+		questions = Question.where("lesson_id = ?", params[:lesson_id])
+
+		render json: questions, each_serializer: QuestionSerializer
+	end
+
 	def new
 		question = Question.new(question_params)
 

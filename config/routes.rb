@@ -1,9 +1,9 @@
 LessonForge::Application.routes.draw do
   resources :users, except: [:new, :destroy]
   resources :courses
-  resources :lessons, except: [:index]
-  resources :questions, except: [:index]
-  resources :answers, except: [:index]
+  resources :lessons
+  resources :questions
+  resources :answers
   resources :responses
 
   post 'session' => 'session#create'

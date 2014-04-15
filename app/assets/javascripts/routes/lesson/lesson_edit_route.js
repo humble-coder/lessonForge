@@ -13,7 +13,6 @@ App.LessonEditRoute = Ember.Route.extend({
 			if(!userId) {
 				userId = App.AuthManager.get('apiKey.user');
 			}
-
       this.store.find('user', userId).then(function(user) {
       	user.get('courses').then(function(courses) {
       		if(!courses.contains(course)) {

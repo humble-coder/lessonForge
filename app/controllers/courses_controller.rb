@@ -2,7 +2,8 @@ class CoursesController < ApplicationController
 	respond_to :json
 	
 	def index
-		render json: Course.all, each_serializer: CourseSerializer
+		courses = Course.where("user_id = ?", params[:user_id])
+		render json: courses, each_serializer: CourseSerializer
 	end
 
 	def show

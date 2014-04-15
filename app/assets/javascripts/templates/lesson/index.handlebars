@@ -22,4 +22,6 @@
 	<button {{action "delete" this}} id="delete-lesson">Delete Lesson</button>
 {{/if}}
 
-<button {{action "viewResponses"}} id="view-responses">View Your Responses</button>
+{{#if isComplete}}
+  <button {{action "viewResponses"}} id="view-responses">View Your Responses</button>
+{{/if}}
