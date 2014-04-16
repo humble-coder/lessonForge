@@ -11,11 +11,5 @@ App.RadioButtonComponent = Ember.Component.extend({
 		else {
 			this.set("selection", response + " - incorrect!");
 		}
-		// if(this.get("value")) {
-		// 	this.set("selection", "Correct!");
-		// }
-		// else {
-		// 	this.set("selection", "Incorrect!");
-		// }
 	}
 });
