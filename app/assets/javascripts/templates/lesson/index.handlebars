@@ -4,11 +4,12 @@
   <form>
     {{#if isMultipleChoice}}
       {{#each answer in answers itemController="answer"}}
-        {{radio-button value=content.correct name=question.content.id selection=question.responseContent class="mc-answer"}} {{content.content}}
+        {{radio-button value=content name=question.content.id selection=question.responseContent class="mc-answer"}} {{content.content}} <br>
       {{/each}}
     {{else}}
       {{textarea cols="60" rows="10" class="essay-space" value=responseContent}}
     {{/if}}
+    {{saveConfirmation}}
     <br/>
     <button {{action 'saveResponse'}} {{bind-attr disabled=lessonComplete}} class="save-response">Save Response</button>
   </form>

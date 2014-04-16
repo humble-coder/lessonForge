@@ -18,7 +18,6 @@ App.LessonIndexController = Ember.ObjectController.extend({
 		var lessonId = lesson.id;
 		this.store.find('question', { lesson_id: lessonId }).then(function(questions) {
 			var count = questions.get('content').get('length');
-			console.log(count);
 			self.set('questionCount', count);
 		});
 	}.observes('question'),
@@ -33,7 +32,6 @@ App.LessonIndexController = Ember.ObjectController.extend({
 		}
 		this.store.find('response', { lesson_id: lessonId, user_id: userId }).then(function(responses) {
 			var count = responses.get('content').get('length');
-			console.log(count);
 			self.set('responseCount', count);
 		});
 	}.observes('response'),

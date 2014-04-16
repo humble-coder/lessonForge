@@ -34,6 +34,8 @@ App.QuestionController = Ember.ObjectController.extend({
 		return lessonController.get('isComplete');
 	}.property('parentController'),
 
+	saveConfirmation: '',
+
 	needs: ['lesson'],
 
 	actions: {
@@ -81,6 +83,7 @@ App.QuestionController = Ember.ObjectController.extend({
 		},
 
 		saveResponse: function() {
+			this.set('saveConfirmation', 'Saved!');
 			var response = this.store.createRecord('response');
 			var lesson = this.get('controllers.lesson').get('model');
 			var question = this.get('content');
@@ -99,7 +102,6 @@ App.QuestionController = Ember.ObjectController.extend({
 				response.set('user', user);
 				response.set('user_id', userId);
 				response.save();
-				self.set('responseSaved', true);
 			});
 		},
 	}
