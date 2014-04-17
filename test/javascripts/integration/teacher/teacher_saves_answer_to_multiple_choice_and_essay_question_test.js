@@ -49,28 +49,27 @@ test("successfully", function() {
 													click(".save-response");
 													andThen(function() {
 														ok("div:contains('Answer saved!')", "Lesson-index view shows that mc response was saved.");
-														click("#view-responses");
 														andThen(function() {
-															ok("div:contains('Your Response:')", "Responses view shows user response to mc question.");
-															click("#back-to-lesson");
+															click("#edit-lesson");
 															andThen(function() {
-																click("#edit-lesson");
+															  click("#new-question");
+																fillIn(".question-category", "essay");
+																fillIn(".question-content", "Another Question");
+																click(".save-question");
+																click("#done");
 																andThen(function() {
-																	click(".edit-question");
-																	fillIn(".question-category", "essay");
-																	click(".save-question");
-																	click("#done");
+																	fillIn(".essay-space", "Some Answer");
+																	click(".save-response");
+																	ok("div:contains('Answer saved!')", "Lesson-index view shows that mc response was saved.");
 																	andThen(function() {
-																		fillIn(".essay-space", "Some Answer");
-																		click(".save-response");
+																		click("#finish-lesson");
 																		andThen(function() {
-																			ok("div:contains('Answer saved!')", "Lesson-index view shows that essay response was saved.");
 																			click("#view-responses");
 																			andThen(function() {
 																				ok("div:contains('Your Response: Some Answer')", "Responses view shows user response to essay question.");
 																				click("#logout");
 																			});
-																		})
+																		});
 																	});
 																});
 															});

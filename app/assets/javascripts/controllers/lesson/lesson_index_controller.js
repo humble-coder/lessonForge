@@ -5,7 +5,12 @@ App.LessonIndexController = Ember.ObjectController.extend({
 	isComplete: function() {
 		var responses = this.get('responseCount');
 		var questions = this.get('questionCount');
-		return responses >= questions;
+		if(responses) {
+			return responses >= questions;
+		}
+		else {
+			return false;
+		}
 	}.property('responseCount', 'questionCount'),
 
 	responseCount: 0,
@@ -63,6 +68,10 @@ App.LessonIndexController = Ember.ObjectController.extend({
 
 		viewResponses: function() {
 			this.transitionToRoute('responses');
+		},
+
+		finishLesson: function() {
+			location.reload();
 		}
 	}
 });

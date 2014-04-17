@@ -25,4 +25,7 @@
 
 {{#if isComplete}}
   <button {{action "viewResponses"}} id="view-responses">View Your Responses</button>
+{{else}}
+  <button {{action "finishLesson"}} id="finish-lesson">Finish Lesson</button>
+  (This button will be here until you respond to every question)
 {{/if}}
