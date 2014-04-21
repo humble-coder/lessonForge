@@ -12,3 +12,53 @@ App.injectTestHelpers();
 function exists(selector) {
   return !!find(selector).length;
 }
+
+function createUser(id) {
+	visit('/').then(function() {
+		click("#new-user");
+		fillIn("#full-name", "Bob" + id);
+		fillIn("#email-address", "bob" + id + "@something.com");
+		fillIn("#username", "bob" + id);
+		fillIn("#password", "something");
+		fillIn("#password-confirmation", "something");
+		click("#new-teacher");
+		click("#create-user");
+	});
+}
+
+function login(id) {
+	fillIn("#username-or-email", "bob" + id);
+	fillIn("#login-password", "something");
+	click("#new-session");
+}
+
+function createCourse() {
+	click("#new-course");
+	fillIn("#new-course-name", "Course with a Lesson");
+	click("#save-course");
+}
+
+function createLesson() {
+	click("#view-lessons");
+	click("#new-lesson");
+	fillIn("#new-lesson-name", "New Lesson");
+	click("#save-lesson");
+}
+
+function addQuestion(type, feedback) {
+	feedback = feedback || "";
+	click("#new-question");
+	fillIn(".question-content", "New Question");
+	fillIn(".question-category", type);
+	fillIn(".question-feedback", feedback)
+	click(".save-question");
+}
+
+function addAnswer(correct) {
+	click(".add-answer")
+	fillIn(".answer-content", "New Answer");
+	if(correct) {
+		click(".mark-correct");
+	}
+	click(".save-answer");
+}

@@ -14,6 +14,7 @@
   {{#if question.isEditing}}
     {{input type="text" placeholder=content.content value=content.content class="question-content"}}
     {{view Ember.Select content=questionTypes value=selectedType class="question-category"}}
+    Feedback: {{input type="text" placeholder=content.feedback value=content.feedback class="question-feedback"}}
     {{#if content.content}}
       <button {{action 'saveQuestion'}} class="save-question">Save Question</button>
       <br/>
@@ -24,6 +25,8 @@
   {{else}}
     {{content.content}}
     {{content.category}}
+    Feedback: {{content.feedback}}
+    <br/>
     <button {{action 'editQuestion'}} class="edit-question">Edit Question</button>
     <button {{action 'removeQuestion'}} class="remove-question">Remove Question</button>
     <br/> 
@@ -33,7 +36,7 @@
         {{#each answer in answers itemController="answer"}}
           {{#if answer.isEditing}}
             {{input type="text" placeholder=content.content value=content.content class="answer-content"}}
-              Correct? {{input type="checkbox" checked=content.correct}}
+              Correct? {{input type="checkbox" checked=content.correct class="mark-correct"}}
               {{#if content.content}}
                 <button {{action 'saveAnswer' question}} class="save-answer">Save Answer</button>
                 <br/>

@@ -4,36 +4,18 @@ module("Teacher deletes course", {
 	}
 });
 
-test("successfully", function(){
-
-	visit('/').then(function() {
-		click("#new-user");
+test("successfully", function() {
+	createUser("7");
+	andThen(function() {
+		login("7");
 		andThen(function() {
-			fillIn("#full-name", "Bob5");
-			fillIn("#email-address", "bob5@something.com");
-			fillIn("#username", "bob5");
-			fillIn("#password", "something");
-			fillIn("#password-confirmation", "something");
-			click("#new-teacher");
-			click("#create-user");
+			createCourse();
 			andThen(function() {
-				fillIn("#username-or-email", "bob5");
-				fillIn("#login-password", "something");
-				click("#new-session");
+				ok(exists("#delete-course"), "Course has delete-course link.");
+				click("#delete-course");
 				andThen(function() {
-					click("#new-course");
-					andThen(function() {
-					  fillIn("#new-course-name", "Course to Delete");
-						click("#save-course");
-						andThen(function() {
-							ok(exists("#delete-course"), "Course has delete-course link.");
-							click("#delete-course");
-							andThen(function() {
-								ok(!exists("a:contains('Course to Delete')"), "Course has no link in courses.index view.");
-								click("#logout");
-							});
-						});
-					});
+					ok(!exists("a:contains('Course to Delete')"), "Course has no link in courses.index view.");
+					click("#logout");
 				});
 			});
 		});

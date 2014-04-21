@@ -1,4 +1,4 @@
-module("Teacher adds essay question to lesson", {
+module("Teacher adds feedback to question", {
 	setup: function() {
 		App.reset();
 	}
@@ -6,9 +6,9 @@ module("Teacher adds essay question to lesson", {
 
 
 test("successfully", function() {
-	createUser("1");
+	createUser("2");
 	andThen(function() {
-		login("1");
+		login("2");
 		andThen(function() {
 			createCourse();
 			andThen(function() {
@@ -16,13 +16,14 @@ test("successfully", function() {
 				andThen(function() {
 					click("#edit-lesson");
 					andThen(function() {
-						addQuestion("essay");
+						addQuestion("essay", "feedback");
 						andThen(function() {
 							click("#done");
 							andThen(function() {
-								ok(exists("span:contains('New Question')"), "Lesson view has question displayed.");
-								ok(exists(".essay-space"), "Lesson view has essay question's text area displayed.");
+								fillIn(".essay-space", "response");
+								click(".save-response");
 								andThen(function() {
+									ok(exists(".response-area:contains('feedback')"), "Question shows feedback after response is saved.");
 									click("#logout");
 								});
 							});

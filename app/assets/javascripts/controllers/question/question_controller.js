@@ -83,13 +83,13 @@ App.QuestionController = Ember.ObjectController.extend({
 		},
 
 		saveResponse: function() {
-			this.set('saveConfirmation', 'Saved!');
+			var question = this.get('content');
+			this.set('saveConfirmation', 'Saved!' + question.get('feedback'));
 			var response = this.store.createRecord('response');
 			var lesson = this.get('controllers.lesson').get('model');
-			var question = this.get('content');
 			var responseContent = this.get('responseContent');
 			var self = this;
-			response.set('content', question.get('content') + ' Your Response: ' + responseContent);
+			response.set('content', question.get('content') + ' Your Response: ' + responseContent + ' ' + question.get('feedback'));
 			response.set('lesson', lesson);
 			response.set('lesson_id', lesson.id);
 			response.set('question', question);

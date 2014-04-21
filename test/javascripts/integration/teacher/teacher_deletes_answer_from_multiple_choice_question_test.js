@@ -6,58 +6,27 @@ module("Teacher deletes answer from multiple-choice question", {
 
 
 test("successfully", function() {
-
-	visit('/').then(function() {
-		click("#new-user");
+	createUser("6");
+	andThen(function() {
+		login("6");
 		andThen(function() {
-			fillIn("#full-name", "Bob");
-			fillIn("#email-address", "bob12@something.com");
-			fillIn("#username", "bob12");
-			fillIn("#password", "something");
-			fillIn("#password-confirmation", "something");
-			click("#new-teacher");
-			click("#create-user");
+			createCourse();
 			andThen(function() {
-				fillIn("#username-or-email", "bob12");
-				fillIn("#login-password", "something");
-				click("#new-session");
+				createLesson();
 				andThen(function() {
-					click("#new-course");
-					fillIn("#new-course-name", "Course with a Lesson");
-					click("#save-course");
+					click("#edit-lesson");
 					andThen(function() {
-						click("#view-lessons");
+						addQuestion("multiple-choice");
 						andThen(function() {
-							click("#new-lesson");
+							addAnswer(true);
 							andThen(function() {
-								fillIn("#new-lesson-name", "New Lesson");
-								click("#save-lesson");
+								ok(exists(".remove-answer"), "Remove-answer button is displayed.");
+								click(".remove-answer");
+								click("#done");
 								andThen(function() {
-									click("#edit-lesson");
-									andThen(function() {
-										click("#new-question");
-										andThen(function() {
-											fillIn(".question-content", "New Question");
-											andThen(function() {
-												click(".save-question");
-												andThen(function() {
-													click(".add-answer")
-													fillIn(".answer-content", "New Answer");
-													click(".save-answer");
-													andThen(function() {
-														ok(exists(".remove-answer"), "Remove-answer button is displayed.");
-														click(".remove-answer");
-														click("#done");
-														andThen(function() {
-															ok(exists("span:contains('New Question')"), "Lesson index template has question displayed.");
-															ok(!exists("div:contains('New Answer')"), "Lesson index template has no answers displayed.");
-															click("#logout");
-														});
-													});
-												});
-											});
-										});
-									});
+									ok(exists("span:contains('New Question')"), "Lesson index template has question displayed.");
+									ok(!exists("div:contains('New Answer')"), "Lesson index template has no answers displayed.");
+									click("#logout");
 								});
 							});
 						});

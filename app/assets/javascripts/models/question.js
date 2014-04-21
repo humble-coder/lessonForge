@@ -3,5 +3,6 @@ App.Question = DS.Model.extend({
 	lesson: DS.belongsTo('lesson'),
 	answers: DS.hasMany('answer', {async: true}),
 	responses: DS.hasMany('response', {async: true}),
-	category: DS.attr('string')
+	category: DS.attr('string'),
+	feedback: DS.attr('string')
 });

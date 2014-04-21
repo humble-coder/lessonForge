@@ -10,11 +10,11 @@ test("successfully (both actions)", function() {
 		click("#new-user");
 		andThen(function() {
 			ok(exists("#full-name"), "View has full-name field displayed.");
-			fillIn("#full-name", "Bob8");
+			fillIn("#full-name", "Bob");
 			ok(exists("#email-address"), "View has email-address field displayed.");
-			fillIn("#email-address", "bob8@something.com");
+			fillIn("#email-address", "bob@something.com");
 			ok(exists("#username"), "View has username field displayed.");
-			fillIn("#username", "bob8");
+			fillIn("#username", "bob");
 			ok(exists("#password"), "View has password field displayed.");
 			fillIn("#password", "something");
 			ok(exists("#password-confirmation"), "View has password-confirmation field displayed.");
@@ -26,7 +26,7 @@ test("successfully (both actions)", function() {
 				click("#create-user");
 				andThen(function() {
 					ok(exists("#username-or-email"), "Login view has username-or-email field displayed.");
-					fillIn("#username-or-email", "bob8@something.com");
+					fillIn("#username-or-email", "bob@something.com");
 					ok(exists("#login-password"), "View has password field displayed.");
 					fillIn("#login-password", "something");
 					click("#new-session");
@@ -44,9 +44,9 @@ test("unsuccessful registration (email and username already taken)", function() 
 	visit('/').then(function() {
 		click("#new-user");
 		andThen(function() {
-			fillIn("#full-name", "Bob8");
-			fillIn("#email-address", "bob8@something.com");
-			fillIn("#username", "bob8");
+			fillIn("#full-name", "Bob");
+			fillIn("#email-address", "bob@something.com");
+			fillIn("#username", "bob");
 			fillIn("#password", "something");
 			fillIn("#password-confirmation", "something");
 			click("#new-teacher");
@@ -74,8 +74,8 @@ test("without filling in password field (unsuccessful login)", function() {
 	visit('/').then(function() {
 		click("#login");
 		andThen(function() {
-			fillIn("#username-or-email", "bob8@something.com");
-			ok(!exists("new-session"), "Login buttno not displayed when password field empty.");
+			fillIn("#username-or-email", "bob@something.com");
+			ok(!exists("new-session"), "Login button not displayed when password field empty.");
 		});
 	});
 });

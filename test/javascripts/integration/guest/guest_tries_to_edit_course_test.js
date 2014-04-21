@@ -5,66 +5,35 @@ module("Guest tries to edit course", {
 });
 
 test("unsuccessfully", function() {
-	
-	visit('/').then(function() {
-		click("#new-user");
+	createUser("14");
+	andThen(function() {
+		login("14");
 		andThen(function() {
-			fillIn("#full-name", "test1");
-			fillIn("#email-address", "test1@something.com");
-			fillIn("#username", "test1");
-			fillIn("#password", "something");
-			fillIn("#password-confirmation", "something");
-			click("#new-teacher");
-			click("#create-user");
+			createCourse();
 			andThen(function() {
-				fillIn("#username-or-email", "test1");
-				fillIn("#login-password", "something");
-				click("#new-session");
+				createLesson();
 				andThen(function() {
-					click("#new-course");
+					click("#edit-lesson");
 					andThen(function() {
-						fillIn("#new-course-name", "Test1 Course");
-						click("#save-course");
+						addQuestion("multiple-choice");
 						andThen(function() {
-							click("#view-lessons");
+				  		addAnswer();
+							click("#done");
 							andThen(function() {
-								click("#new-lesson");
+								click("#logout");
 								andThen(function() {
-									fillIn("#new-lesson-name", "Test1 Lesson");
-									click("#save-lesson");
+									click("#courses");
 									andThen(function() {
-										click("#edit-lesson");
+										click("a:contains('Course with a Lesson')");
+										ok(!exists("#edit-course"), "Edit-course button not displayed to user.");
 										andThen(function() {
-											click("#new-question");
-											andThen(function() {
-												fillIn(".question-content", "Test1 Question");
-												andThen(function() {
-													click(".save-question");
-													click(".add-answer");
-													fillIn(".answer-content", "Test1 Answer");
-													click(".save-answer");
-													click("#done");
-													andThen(function() {
-														click("#logout");
-														andThen(function() {
-															click("#courses");
-															andThen(function() {
-																click("a:contains('Test1 Course')");
-																ok(!exists("#edit-course"), "Edit-course button not displayed to user.");
-																andThen(function() {
-																	visit('/courses/1/edit').then(function() {
-																			ok(!exists("#edit-course-name"), "Edit course-name-field not displayed to guest.");
-																			ok(exists("#username-or-email"), "Username-or-email login field displayed to guest.");
-																			ok(exists("#login-password"), "Login-password field displayed to guest.");
-																	});
-																});
-															});
-														});
-													});
-												});
+											visit('/courses/1/edit').then(function() {
+												ok(!exists("#edit-course-name"), "Edit course-name-field not displayed to guest.");
+												ok(exists("#username-or-email"), "Username-or-email login field displayed to guest.");
+												ok(exists("#login-password"), "Login-password field displayed to guest.");
 											});
-                    });
-                  });
+										});
+									});
                 });
               });
             });

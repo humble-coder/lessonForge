@@ -9,7 +9,7 @@
     {{else}}
       {{textarea cols="60" rows="10" class="essay-space" value=responseContent}}
     {{/if}}
-    {{saveConfirmation}}
+    <span class="response-area">{{saveConfirmation}}</span>
     <br/>
     <button {{action 'saveResponse'}} {{bind-attr disabled=lessonComplete}} class="save-response">Save Response</button>
   </form>

@@ -6,71 +6,48 @@ module("Teacher adds multiple-choice question and answer to lesson", {
 
 
 test("successfully", function() {
-
-	visit('/').then(function() {
-		click("#new-user");
+	createUser("4");
+	andThen(function() {
+		login("4");
 		andThen(function() {
-			fillIn("#full-name", "Bob");
-			fillIn("#email-address", "bob2@something.com");
-			fillIn("#username", "bob2");
-			fillIn("#password", "something");
-			fillIn("#password-confirmation", "something");
-			click("#new-teacher");
-			click("#create-user");
+			createCourse();
 			andThen(function() {
-				fillIn("#username-or-email", "bob2");
-				fillIn("#login-password", "something");
-				click("#new-session");
+				createLesson();
 				andThen(function() {
-					click("#new-course");
-					fillIn("#new-course-name", "Course with a Lesson");
-					click("#save-course");
+					ok(exists("#edit-lesson"), "Lesson view has edit-lesson button.");
+					click("#edit-lesson");
 					andThen(function() {
-						click("#view-lessons");
+						ok(exists("#new-question"), "Lesson-edit view has new-question button.");
+						click("#new-question");
 						andThen(function() {
-							click("#new-lesson");
+							ok(exists(".question-content"), "Lesson-edit view has new-question input box.");
+							fillIn(".question-content", "New Question");
+							ok(exists(".question-category"), "Lesson-edit view has question-category select box.");
 							andThen(function() {
-								fillIn("#new-lesson-name", "New Lesson");
-								click("#save-lesson");
+								click(".save-question");
+								click(".add-answer");
+								fillIn(".answer-content", "New Answer");
+								click(".save-answer");
+								click("#done");
 								andThen(function() {
-									ok(exists("#edit-lesson"), "Lesson view has edit-lesson button.");
-									click("#edit-lesson");
+									ok(exists("span:contains('New Question')"), "Lesson view has question displayed.");
+									ok(exists("div:contains('New Answer')"), "Lesson view has question's answer displayed.");
 									andThen(function() {
-										ok(exists("#new-question"), "Lesson-edit view has new-question button.");
-										click("#new-question");
+										click("#edit-lesson");
 										andThen(function() {
-											ok(exists(".question-content"), "Lesson-edit view has new-question input box.");
-											fillIn(".question-content", "New Question");
-											ok(exists(".question-category"), "Lesson-edit view has question-category select box.");
+											click(".remove-question");
 											andThen(function() {
-												click(".save-question");
-												click(".add-answer");
-												fillIn(".answer-content", "New Answer");
-												click(".save-answer");
-												click("#done");
-												andThen(function() {
-													ok(exists("span:contains('New Question')"), "Lesson view has question displayed.");
-													ok(exists("div:contains('New Answer')"), "Lesson view has question's answer displayed.");
-													andThen(function() {
-														click("#edit-lesson");
-														andThen(function() {
-															click(".remove-question");
-															andThen(function() {
-																click("#logout");
-															});
-														});
-													});
-												});
+												click("#logout");						
 											});
 										});
 									});
 								});
 							});
 						});
-        	});
-      	});
-    	});
-  	});
+					});
+				});
+			});
+		});
 	});
 });
 
@@ -78,9 +55,7 @@ test("with blank names for question and answer (unsuccessfully)", function() {
 	visit("/").then(function() {
 		click("#login");
 		andThen(function() {
-			fillIn("#username-or-email", "bob2");
-			fillIn("#login-password", "something");
-			click("#new-session");
+			login("4");
 			andThen(function() {
 				click("a:contains('Course with a Lesson')");
 				andThen(function() {
