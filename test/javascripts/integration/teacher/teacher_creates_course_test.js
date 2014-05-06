@@ -14,16 +14,20 @@ test("successfully", function() {
 			andThen(function() {
 				fillIn("#new-course-name", "A new course");
 				equal(find("#new-course-name").val(), "A new course", "Name field contains the string 'A new course.'");
-				click("#save-course");
 				andThen(function() {
-					ok(exists("h2:contains('A new course')", "Course view has name of new course."));
-					click("#user-profile-link");
+					fillIn("#new-course-summary", "Summary");
+					equal(find("#new-course-summary").val(), "Summary", "Summary field contains the string 'Summary.'");
+					click("#save-course");
 					andThen(function() {
-						ok(exists("a:contains('A new course')"), "Teacher profile view has link to teacher's new course.");
-		        click("a:contains('A new course')");
-		        andThen(function() {
-		          ok(exists("h2:contains('A new course')"), "And the link works.");
-		          click("#logout");
+						ok(exists("h2:contains('A new course')", "Course view has name of new course."));
+						click("#user-profile-link");
+						andThen(function() {
+							ok(exists("a:contains('A new course')"), "Teacher profile view has link to teacher's new course.");
+		        	click("a:contains('A new course')");
+		        	andThen(function() {
+		          	ok(exists("h2:contains('A new course')"), "And the link works.");
+		          	click("#logout");
+		          });
 						});
 					});
 			  });

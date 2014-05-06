@@ -6,6 +6,13 @@
     <br/>
     {{error-field name}}
   {{/input}}
+  <br/>
+
+  {{#input summary}}
+    {{input-field summary as="text" cols="80" rows="6" id="new-course-summary"}}{{label-field "Course summary"}}
+    <br/>
+    {{error-field summary}}
+  {{/input}}
 
   {{#if name}}
   	<button {{action "submit" this}} id="save-course">Create</button>

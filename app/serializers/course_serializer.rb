@@ -1,6 +1,6 @@
 class CourseSerializer < ActiveModel::Serializer
 	embed :ids, include: true
 	
-	attributes :id, :name, :user_id
+	attributes :id, :name, :summary, :user_id
 	has_many :lessons
 end
