@@ -25,8 +25,11 @@ test("successfully", function() {
 							ok(exists("a:contains('A new course')"), "Teacher profile view has link to teacher's new course.");
 		        	click("a:contains('A new course')");
 		        	andThen(function() {
-		          	ok(exists("h2:contains('A new course')"), "And the link works.");
-		          	click("#logout");
+		          	ok(exists("h2:contains('A new course')"), "The course's name displays after clicking the link.");
+		          	andThen(function() {
+		          		ok(exists("p:contains('Summary')"), "And its summary displays too.");
+		          		click("#logout");
+		          	});
 		          });
 						});
 					});

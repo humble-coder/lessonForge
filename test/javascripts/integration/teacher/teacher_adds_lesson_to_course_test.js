@@ -27,7 +27,10 @@ test("successfully", function() {
 								click("#save-lesson");
 								andThen(function() {
 									ok(exists("h3:contains('New Lesson')"), "Lesson index view has title of new displayed.");
-									click("#logout");
+									andThen(function() {
+										ok(exists("p:contains('Summary')"), "Lesson index view has new lesson's summary displayed.");
+										click("#logout");
+									});
 								})
 							});
 						});
