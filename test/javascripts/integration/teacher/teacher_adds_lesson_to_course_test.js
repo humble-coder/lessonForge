@@ -20,10 +20,16 @@ test("successfully", function() {
 						ok(exists("#new-lesson-name"), "New-lesson view has input field for lesson name.");
 						fillIn("#new-lesson-name", "New Lesson");
 						equal(find("#new-lesson-name").val(), "New Lesson", "New-lesson-name field has string 'New Lesson.'");
-						click("#save-lesson");
 						andThen(function() {
-							ok(exists("h3:contains('New Lesson')"), "Lesson index view has title of new displayed.");
-							click("#logout");
+							fillIn("#new-lesson-summary", "Summary");
+							equal(find("#new-lesson-summary").val(), "Summary", "New-lesson-summary field has string 'Summary.'");
+							andThen(function() {
+								click("#save-lesson");
+								andThen(function() {
+									ok(exists("h3:contains('New Lesson')"), "Lesson index view has title of new displayed.");
+									click("#logout");
+								})
+							});
 						});
 					});
 				});
