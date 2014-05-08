@@ -1,12 +1,13 @@
-{{#if isEditingLessonName}}
+{{#if isEditing}}
   {{input type="text" placeholder=name value=name id="lesson-name"}}<br/>
+  {{textarea value=summary cols="80" rows="6" id="lesson-summary"}}<br/>
   {{#if name}}
-    <button {{action 'updateLessonName' this}} id="update-lesson-name">Update Lesson Name</button>
+    <button {{action 'updateLessonSummaryOrName' this}} id="update-lesson-name">Update</button>
   {{else}}
-    <button disabled="true">Update Lesson Name</button>
+    <button disabled="true">Update</button>
   {{/if}}
 {{else}}
-  <button {{action 'editLessonName'}} id="edit-lesson-name">Edit Lesson Name</button>
+  <button {{action 'editLessonSummaryOrName'}} id="edit-lesson-name">Edit</button>
 {{/if}}
 <br/>
 

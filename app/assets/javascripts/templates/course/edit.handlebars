@@ -2,7 +2,9 @@
 
 <h2>Update Course Name</h2>
 {{input type="text" value=name id="edit-course-name" placeholder=this.name}}
-{{textarea value=summary cols="80" rows="6"}}
+<br/>
+<h2>Update Course Summary</h2>
+{{textarea value=summary cols="80" rows="6" id="edit-course-summary"}}
 
 {{#if name}}
 	<button {{action "update" this}} id="update-course">Update</button>

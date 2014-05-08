@@ -1,4 +1,4 @@
-module("Teacher edits lesson name", {
+module("Teacher edits lesson name and summary", {
 	setup: function() {
 		App.reset();
 	}
@@ -20,11 +20,20 @@ test("successfully", function() {
 						andThen(function() {
 							ok(exists("#lesson-name"), "Lesson-edit template shows input field for lesson name.");
 							fillIn("#lesson-name", "Updated Lesson");
-							ok(exists("#update-lesson-name"), "Lesson-edit template shows update-lesson-name button.");
-							click("#update-lesson-name");
 							andThen(function() {
-								ok(exists("h3:contains('Updated Lesson')"), "Lesson name updated.");
-								click("#logout");
+								ok(exists("#lesson-summary"), "Lesson-edit template shows input field for lesson summary.");
+								fillIn("#lesson-summary", "Updated Summary");
+								andThen(function() {
+									ok(exists("#update-lesson-name"), "Lesson-edit template shows update-lesson-name button.");
+									click("#update-lesson-name");
+									andThen(function() {
+										ok(exists("h3:contains('Updated Lesson')"), "Lesson name updated.");
+										andThen(function() {
+											ok(exists("p:contains('Updated Summary')"), "Lesson summary updated.");
+											click("#logout");
+										});
+									});
+								});
 							});
 						});
 					});

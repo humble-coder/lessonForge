@@ -12,6 +12,8 @@ App.SessionsNewController = Ember.ObjectController.extend(Ember.Validations.Mixi
 
 	attemptedTransition: null,
 
+	error: '',
+
 	required_present: function() {
 		return this.get('username_or_email') && this.get('password');
 	}.property('username_or_email', 'password'),
@@ -43,6 +45,9 @@ App.SessionsNewController = Ember.ObjectController.extend(Ember.Validations.Mixi
 							});
 						}
 					});
+				},
+				error: function(results) {
+					self.set('error', results.responseText);
 				},
 				dataType: 'json'
 			});

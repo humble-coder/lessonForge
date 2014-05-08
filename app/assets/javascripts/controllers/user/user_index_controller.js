@@ -1,12 +1,13 @@
 App.UserIndexController = Ember.ObjectController.extend({
+
 	isOwner: function() {
-		var user_id = this.get('model').id;
+		var userId = this.get('model').id;
 		if(App.AuthManager.isAuthenticated()) {
 			if(!App.AuthManager.get('apiKey.user.name')) {
-				return user_id == App.AuthManager.get('apiKey.user');
+				return userId == App.AuthManager.get('apiKey.user');
 			}
 			else {
-				return user_id == App.AuthManager.get('apiKey.user.id');
+				return userId == App.AuthManager.get('apiKey.user.id');
 			}
 		}
 		else {
@@ -15,7 +16,6 @@ App.UserIndexController = Ember.ObjectController.extend({
 	}.property('App.AuthManager.apiKey'),
 
 	actions: {
-
 		edit: function(user) {
 		  this.transitionToRoute('user.edit', user);
 		},

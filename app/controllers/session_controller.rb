@@ -6,7 +6,7 @@ class SessionController < ApplicationController
     if user && user.authenticate(params[:password])
       render json: [user, user.session_api_key], status: 201
     else
-      render json: {}, status: 401
+      render json: "Login failed. Please try again.", status: 401
     end
   end
 end

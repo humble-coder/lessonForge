@@ -1,4 +1,4 @@
-module("Teacher edits course name", {
+module("Teacher edits course name and summary", {
 	setup: function() {
 		App.reset();
 	}
@@ -15,10 +15,14 @@ test("successfully", function() {
 				click("#edit-course");
 				andThen(function() {
 					fillIn("#edit-course-name", "Edited Course");
-					click("#update-course");
 					andThen(function() {
-						ok(exists("h2:contains('Edited Course')"), "Edited course has new header.");
-						click("#logout");
+						fillIn("#edit-course-summary", "Updated Summary");
+						click("#update-course");
+						andThen(function() {
+							ok(exists("h2:contains('Edited Course')"), "Edited course has new header.");
+							ok(exists("p:contains('Updated Summary')"), "Edited course has new summary.");
+							click("#logout");
+						});
 					});
 				});
 			});
