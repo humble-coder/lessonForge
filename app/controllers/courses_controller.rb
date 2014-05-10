@@ -14,7 +14,7 @@ class CoursesController < ApplicationController
 		course = Course.new(course_params)
 
 		if course.save
-			 render json: course
+			render json: course
 		else
 			render json: { errors: course.errors.messages }, status: 422
 		end
