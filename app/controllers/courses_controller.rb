@@ -1,9 +1,15 @@
 class CoursesController < ApplicationController
 	respond_to :json
-	
+
 	def index
-		courses = Course.where("user_id = ?", params[:user_id])
-		render json: courses, each_serializer: CourseSerializer
+		if params[:ids]
+			user_id = params[:ids][0]
+			courses = Course.joins("join courses_users on courses.id = courses_users.course_id").where(["courses_users.user_id = ?", user_id])
+			render json: courses, each_serializer: CourseSerializer
+		else
+			courses = Course.all
+			render json: courses, each_serializer: CourseSerializer
+		end
 	end
 
 	def show
@@ -44,6 +50,6 @@ class CoursesController < ApplicationController
 	private
 	
 	def course_params
-		params.require(:course).permit(:name, :summary, :id, :user_id, lessons: [:name, :id, :course_id, :questions])
+		params.require(:course).permit(:name, :summary, :id, :user_ids => [], lessons: [:name, :id, :course_id, :questions])
 	end
 end

@@ -8,10 +8,12 @@ App.LessonsNewRoute = Ember.Route.extend({
 		else {
 			var course = this.modelFor('course');
 			var user = this.modelFor('user');
-			if(!user.get('courses').contains(course)) {
-				alert("You must own the course to add a lesson to it.");
-				this.transitionTo('course.index', course);
-			}
+			user.get('courses').then(function(courses) {
+				if(!courses.contains(course)) {
+					alert("You must own the course to add a lesson to it.");
+					this.transitionTo('course.index', course);
+				}
+		  });
 		}
 	},
   

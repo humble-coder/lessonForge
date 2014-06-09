@@ -1,7 +1,19 @@
 {{#if userIsOwner}}
   <button {{action "edit" this}} id="edit-course">Edit</button>
   <button {{action "delete" this}} id="delete-course">Delete Course</button>
+  <button {{action "viewLessons" this}} id="view-lessons">View Lessons</button>
+{{else}}
+  {{#if userIsRegistered}}
+    <button {{action "viewLessons" this}} id="view-lessons">View Lessons</button>
+    {{registrationSuccess}}
+  {{else}}
+    {{#if user}}
+      <button {{action "register" this}} id="register-for-course">Register for Course</button>
+      <p>{{registrationSuccess}}</p>
+    {{else}}
+      <button disabled=true>Register for Course</button>
+    {{/if}}
+  {{/if}}
 {{/if}}
-<button {{action "viewLessons" this}} id="view-lessons">View Lessons</button>
 
 {{outlet}}

@@ -1,4 +1,9 @@
-App.CourseIndexController = Ember.ObjectController.extend(Ember.Validations.Mixin, {
+App.CourseIndexController = Ember.ObjectController.extend({
+
+	userIsRegistered: function() {
+		var user = this.get('user');
+		return !this.get('userIsOwner') && this.get('users').contains(user);
+	}.property('userIsOwner', 'user'),
 
 	actions: {
 		delete: function(course) {
@@ -24,6 +29,25 @@ App.CourseIndexController = Ember.ObjectController.extend(Ember.Validations.Mixi
 
 		viewLessons: function() {
 			this.transitionToRoute('lessons.index');
+		},
+
+		register: function(course) {
+			var user = this.get('user');
+			if(user) {
+				var self = this;
+				user.get('courses').then(function(courses) {
+					courses.pushObject(course);
+					course.get('users').then(function(users) {
+						users.pushObject(user);
+						course.save().then(self.set('registrationSuccess', 'You have registered for '  + course.get('name') + '!')).
+						then(self.set('userIsRegistered', true));
+					});
+				});
+			}
+			else {
+				alert("You must be signed in to register.")
+				this.transitionToRoute('sessions.new');
+			}
 		}
 	}
 });

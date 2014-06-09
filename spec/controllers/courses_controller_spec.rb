@@ -21,11 +21,11 @@ describe CoursesController do
 
 		it "renders the courses/create response body as JSON" do
 			user = create(:user)
-			post :create, course: { name: 'Another Course', user: user, user_id: user.id }, format: :json
+			post :create, course: { name: 'Another Course', user_ids: [user.id] }, format: :json
 			results = JSON.parse(response.body)
 
 			expect(results["course"]["name"]).to eq("Another Course")
-			expect(results["course"]["user_id"]).to eq(user.id)
+			expect(results["course"]["user_ids"].first).to eq(user.id)
 		end
 	end
 
@@ -43,7 +43,7 @@ describe CoursesController do
       results = JSON.parse(response.body)
 
       expect(results["course"]["name"]).to eq(course.name)
-      expect(results["course"]["user_id"]).to eq(course.user_id)
+      expect(results["course"]["user_ids"].first).to eq(course.user_ids.first)
       expect(results["course"]["id"]).to eq(course.id)
     end
   end

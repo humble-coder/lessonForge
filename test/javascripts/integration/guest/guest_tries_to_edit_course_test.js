@@ -25,12 +25,14 @@ test("unsuccessfully", function() {
 									click("#courses");
 									andThen(function() {
 										click("a:contains('Course with a Lesson')");
-										ok(!exists("#edit-course"), "Edit-course button not displayed to user.");
 										andThen(function() {
-											visit('/courses/1/edit').then(function() {
-												ok(!exists("#edit-course-name"), "Edit course-name-field not displayed to guest.");
-												ok(exists("#username-or-email"), "Username-or-email login field displayed to guest.");
-												ok(exists("#login-password"), "Login-password field displayed to guest.");
+											ok(!exists("#edit-course"), "Edit-course button not displayed to user.");
+											andThen(function() {
+												visit('/courses/1/edit').then(function() {
+													ok(!exists("#edit-course-name"), "Edit course-name-field not displayed to guest.");
+													ok(exists("#username-or-email"), "Username-or-email login field displayed to guest.");
+													ok(exists("#login-password"), "Login-password field displayed to guest.");
+												});
 											});
 										});
 									});

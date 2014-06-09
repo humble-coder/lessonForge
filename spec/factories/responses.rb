@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :response do
   	content "Some Response"
-    user
+    users { |response_user| [response_user.association(:user)] }
     lesson
   end
 end

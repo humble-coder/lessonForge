@@ -11,7 +11,7 @@ describe ResponsesController do
 
     it "renders the courses/create response body as JSON" do
 			lesson = create(:lesson)
-			user = lesson.course.user
+			user = lesson.course.users.first
 			post :create, response: { content: 'New Response', user_id: user.id, lesson_id: lesson.id }, format: :json
 			results = JSON.parse(response.body)
 

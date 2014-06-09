@@ -1,4 +1,4 @@
-module("Guest views public course and its content", {
+module("Guest views public course", {
 	setup: function() {
 		App.reset();
 	}
@@ -28,16 +28,6 @@ test("successfully", function() {
 							  		click("a:contains('Course with a Lesson')");
 							  		andThen(function() {
 							  			ok(exists("h2:contains('Course with a Lesson')"), "Guest user sees course after clicking on it.");
-							  			click("#view-lessons");
-							  			andThen(function() {
-							  				ok(exists("a:contains('New Lesson')"), "Guest user sees link to course's lesson.");
-							  				click("a:contains('New Lesson')");
-							  				andThen(function() {
-							  					ok(exists("h3:contains('New Lesson')"), "Guest user sees lesson.");
-							  					ok(exists("span:contains('New Question')"), "Guest user sees question.");
-													ok(exists("div:contains('New Answer')"), "Guest user sees question's answer.");
-												});
-											});
                   	});
                 	});
               	});

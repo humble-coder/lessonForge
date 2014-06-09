@@ -1,6 +1,6 @@
 FactoryGirl.define do
 	factory :course do
 		name "Some course"
-		user
+		users { |course_user| [course_user.association(:user)] }
 	end
 end

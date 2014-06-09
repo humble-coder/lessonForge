@@ -37,11 +37,10 @@ App.CoursesNewRoute = Ember.Route.extend({
 	},
 
 	model: function() {
-		var user_id = this.modelFor('user').id;
+		var user = this.modelFor('user');
 		var course = this.store.createRecord('course');
-		this.store.find('user', user_id).then(function(user) {
-			course.set('user_id', user_id);
-			course.set('user', user);
+		course.get('users').then(function(users) {
+			users.pushObject(user);
 		});
 		return course;
 	}

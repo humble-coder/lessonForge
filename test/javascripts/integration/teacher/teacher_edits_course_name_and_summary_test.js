@@ -12,16 +12,18 @@ test("successfully", function() {
 			createCourse();
 			andThen(function() {
 				ok(exists("#edit-course"), "Course has edit-course link.");
-				click("#edit-course");
 				andThen(function() {
-					fillIn("#edit-course-name", "Edited Course");
+					click("#edit-course");
 					andThen(function() {
-						fillIn("#edit-course-summary", "Updated Summary");
-						click("#update-course");
+						fillIn("#edit-course-name", "Edited Course");
 						andThen(function() {
-							ok(exists("h2:contains('Edited Course')"), "Edited course has new header.");
-							ok(exists("p:contains('Updated Summary')"), "Edited course has new summary.");
-							click("#logout");
+							fillIn("#edit-course-summary", "Updated Summary");
+							click("#update-course");
+							andThen(function() {
+								ok(exists("h2:contains('Edited Course')"), "Edited course has new header.");
+								ok(exists("p:contains('Updated Summary')"), "Edited course has new summary.");
+								click("#logout");
+							});
 						});
 					});
 				});
