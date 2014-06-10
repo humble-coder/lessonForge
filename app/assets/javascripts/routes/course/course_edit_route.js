@@ -16,17 +16,6 @@ App.CourseEditRoute = Ember.Route.extend({
 					transition.abort();
 				}
 			});
-
-			// user.get('courses').then(function(courses) {
-			// 	if (!user.get('teacher') || !courses.contains(course)) {
-			// 		console.log(user.get('teacher'));
-			// 		console.log(courses.contains(course));
-			// 		console.log(course);
-			// 		console.log(courses);
-			// 		alert("You must own the course to edit it.");
-			// 		self.transitionTo('course.index', course);
-			// 	}
-			// });
 		}
 
 	},
