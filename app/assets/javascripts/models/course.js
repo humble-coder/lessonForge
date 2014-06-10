@@ -1,4 +1,4 @@
-App.CourseSerializer = DS.ActiveModelSerializer.extend(DS.EmbeddedRecordsMixin, {
+App.CourseSerializer = DS.ActiveModelSerializer.extend({
 
 	serialize: function(course, options) {
 		var json = {};

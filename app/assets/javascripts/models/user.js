@@ -1,4 +1,4 @@
-App.UserSerializer = DS.ActiveModelSerializer.extend(DS.EmbeddedRecordsMixin, {
+App.UserSerializer = DS.ActiveModelSerializer.extend({
 
 	serialize: function(user, options) {
 		var json = {};
