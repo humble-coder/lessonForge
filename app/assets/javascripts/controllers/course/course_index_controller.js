@@ -5,6 +5,12 @@ App.CourseIndexController = Ember.ObjectController.extend({
 		return !this.get('userIsOwner') && this.get('users').contains(user);
 	}.property('userIsOwner', 'user'),
 
+	students: function() {
+		var course = this.get('model');
+		var users = course.get('users');
+		return users.filterBy('teacher', false);
+	}.property(),
+
 	actions: {
 		delete: function(course) {
 			var userConfirm = confirm("Are you sure you want to delete the course '" + course.get('name') + "'?");

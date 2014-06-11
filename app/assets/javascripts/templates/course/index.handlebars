@@ -2,6 +2,11 @@
   <button {{action "edit" this}} id="edit-course">Edit</button>
   <button {{action "delete" this}} id="delete-course">Delete Course</button>
   <button {{action "viewLessons" this}} id="view-lessons">View Lessons</button>
+  {{#each student in students}}
+    {{#link-to "user" student}}{{student.username}}{{/link-to}}
+  {{else}}
+    <p>No one has registered for this course yet.</p>
+  {{/each}}
 {{else}}
   {{#if userIsRegistered}}
     <button {{action "viewLessons" this}} id="view-lessons">View Lessons</button>
