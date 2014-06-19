@@ -1,1 +1,2 @@
-App.CoursesController = Ember.ArrayController.extend({});
+App.CoursesController = Ember.ArrayController.extend({
+});

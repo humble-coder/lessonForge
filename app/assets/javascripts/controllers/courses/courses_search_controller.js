@@ -1,0 +1,1 @@
+App.CoursesSearchController = Ember.ArrayController.extend({});

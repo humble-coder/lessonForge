@@ -5,8 +5,9 @@
     	<li class="course-link">{{#link-to "course" this}}{{name}}{{/link-to}}</li>
   	{{/if}}
   {{else}}
-    <li>There are no courses.</li>
+    <li>No courses found.</li>
   {{/each}}
+  {{input type="text" value=search id="course-search" size="50" action="query" placeholder="Search for courses by name"}}<br/>
 </ul>
 
 {{outlet}}
