@@ -5,17 +5,17 @@ module("Student registers for course", {
 });
 
 test("successfully", function() {
-	createUser("16");
+	createUser("17");
 	andThen(function() {
-		login("16");
+		login("17");
 		andThen(function() {
 			createCourse();
 			andThen(function() {
 				click("#logout");
 				andThen(function() {
-					createUser("17", teacher = false);
+					createUser("18", teacher = false);
 					andThen(function() {
-						login("17");
+						login("18");
 						andThen(function() {
 						  click("#courses");
 						  andThen(function() {
