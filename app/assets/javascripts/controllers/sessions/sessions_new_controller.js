@@ -17,7 +17,7 @@ App.SessionsNewController = Ember.ObjectController.extend(Ember.Validations.Mixi
 	}.property('username_or_email', 'password'),
 
 	actions: {
-		loginUser: function(session) {
+		loginUser: function() {
 			var self = this;
 			var router = this.get('target');
 			var data = this.getProperties('username_or_email', 'password');

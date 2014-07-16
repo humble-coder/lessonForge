@@ -1,6 +1,6 @@
 // For more information see: http://emberjs.com/guides/routing/
 App.Router.map(function() {
-	this.route('catchAll', {path: '*:' });
+	this.route('catchAll', { path: '*:' });
 	this.resource("courses", function() {
 		this.route('new');
 		this.resource("course", { path: ":course_id" }, function() {
@@ -17,6 +17,9 @@ App.Router.map(function() {
 	this.resource("question");
 	this.resource("answer");
 	this.resource("sessions", function() {
+		this.route('new');
+	});
+	this.resource("resets", function() {
 		this.route('new');
 	});
 	this.resource("users", function() {

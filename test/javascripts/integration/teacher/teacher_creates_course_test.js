@@ -17,18 +17,24 @@ test("successfully", function() {
 				andThen(function() {
 					fillIn("#new-course-summary", "Summary");
 					equal(find("#new-course-summary").val(), "Summary", "Summary field contains the string 'Summary.'");
-					click("#save-course");
 					andThen(function() {
-						ok(exists("h2:contains('A new course')", "Course view has name of new course."));
-						click("#user-profile-link");
+						click("#save-course");
 						andThen(function() {
-							ok(exists("a:contains('A new course')"), "Teacher profile view has link to teacher's new course.");
-		        	click("a:contains('A new course')");
-		        	andThen(function() {
-		          	ok(exists("h2:contains('A new course')"), "The course's name displays after clicking the link.");
-		          	andThen(function() {
-		          		ok(exists("p:contains('Summary')"), "And its summary displays too.");
-		          		click("#logout");
+							ok(exists("h2:contains('A new course')", "Course view has name of new course."));
+							andThen(function() {
+								click("#user-profile-link");
+								andThen(function() {
+									ok(exists("a:contains('A new course')"), "Teacher profile view has link to teacher's new course.");
+									andThen(function() {
+										click("a:contains('A new course')");
+		        				andThen(function() {
+		          				ok(exists("h2:contains('A new course')"), "The course's name displays after clicking the link.");
+		          				andThen(function() {
+		          					ok(exists("p:contains('Summary')"), "And its summary displays too.");
+		          					click("#logout");
+		          				});
+		          			});
+		          		});
 		          	});
 		          });
 						});

@@ -6,6 +6,7 @@ LessonForge::Application.routes.draw do
   resources :answers
   resources :responses
 
+  post 'password_reset' => 'password_reset#create'
   post 'session' => 'session#create'
  
   root "assets#index"

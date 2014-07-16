@@ -13,7 +13,7 @@ function exists(selector) {
   return !!find(selector).length;
 }
 
-function createUser(id) {
+function createUser(id, student) {
 	visit('/').then(function() {
 		click("#new-user");
 		fillIn("#full-name", "Bob" + id);
@@ -21,13 +21,35 @@ function createUser(id) {
 		fillIn("#username", "bob" + id);
 		fillIn("#password", "something");
 		fillIn("#password-confirmation", "something");
-		click("#new-teacher");
+		if (!student) {
+			click("#new-teacher");
+		}
+		click("#create-user");
+	});
+}
+
+function createUserWithMyInfo(student) {
+	visit('/').then(function() {
+		click("#new-user");
+		fillIn("#full-name", "Mark");
+		fillIn("#email-address", "mark.philosophe@gmail.com");
+		fillIn("#username", "mb");
+		fillIn("#password", "something");
+		fillIn("#password-confirmation", "something");
+		if (!student) {
+			click("#new-teacher");
+		}
 		click("#create-user");
 	});
 }
 
 function login(id) {
-	fillIn("#username-or-email", "bob" + id);
+	if (id) {
+		fillIn("#username-or-email", "bob" + id);
+	}
+	else {
+		fillIn("#username-or-email", "mb");
+	}
 	fillIn("#login-password", "something");
 	click("#new-session");
 }

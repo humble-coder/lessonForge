@@ -1,0 +1,10 @@
+<h2>Password Reset</h2>
+<form {{action "resetPassword" on="submit"}}>
+  {{input type="text" value=username_or_email width=100 placeholder="Username or Email Address" id="username-or-email"}}<br>
+  {{#if username_or_email}}
+    <button type="submit" id="reset-password">Reset Password</button>
+  {{else}}
+    <button disabled=true>Reset Password</button>
+  {{/if}}
+  <b id="reset-message">{{message}}</b>
+</form>
