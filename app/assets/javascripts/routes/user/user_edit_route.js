@@ -1,5 +1,5 @@
 App.UserEditRoute = Ember.Route.extend({
 	model: function() {
-		return this.modelFor('user.index');
+		return this.modelFor('user');
 	}
 });

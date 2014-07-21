@@ -62,4 +62,4 @@ gem 'sprockets-rails', :require => 'sprockets/railtie'
 
 gem 'rails_12factor', group: :production
 
-ruby "2.0.0"
+ruby "2.1.2"

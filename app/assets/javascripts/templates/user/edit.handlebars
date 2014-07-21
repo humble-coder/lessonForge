@@ -1,0 +1,15 @@
+<h1>Edit Your Profile</h1>
+
+{{input type="text" value=name placeholder=this.name}}
+{{input type="text" value=email placeholder=this.email}}
+{{input type="text" value=username placeholder=this.username}}
+{{input type="password" value=password}}
+{{input type="password" value=password_confirmation}}
+
+{{#if required_present}}
+	<button {{action "update" this}} id="update-user">Update</button>
+{{else}}
+  <button disabled=true>Update</button>
+{{/if}}
+<button {{action "cancel" this}} id="cancel-user-update">Cancel</button>
+
