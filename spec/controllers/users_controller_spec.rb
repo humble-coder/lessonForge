@@ -36,4 +36,25 @@ describe UsersController do
     end
   end
 
+  describe "#update" do
+    it "updates a user successfully" do
+      user = create(:user)
+      put :update, id: user.id, user: attributes_for(:user, name: "changed", username: "changed", email: "new@example.com", password: "new", password_confirmation: "new")
+      user.reload
+
+      expect(response.status).to eq(200)
+      expect(user.name).to eq("changed")
+      expect(user.username).to eq("changed")
+      expect(user.email).to eq("new@example.com")
+    end
+
+    it "does not allow a user to update with invalid data" do
+      user = create(:user)
+      put :update, id: user.id, user: attributes_for(:user, name: "changed", username: "", email: "", password: "something", password: "something else")
+
+      results = JSON.parse(response.body)
+
+      expect(results['errors'].size).to eq(3)
+    end
+  end
 end
